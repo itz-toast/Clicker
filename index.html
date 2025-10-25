@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret Clicker</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        .game-container {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .score {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .click-button {
+            background: transparent;
+            border: 2px solid #fff;
+            color: #fff;
+            font-size: 1.5rem;
+            padding: 1rem 2rem;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            transition: all 0.2s ease;
+        }
+
+        .click-button:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        .multiplier {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            opacity: 0.8;
+        }
+
+        .secret-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 5px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            max-width: 300px;
+        }
+
+        .secret-notification.show {
+            opacity: 1;
+        }
+
+        .secrets-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            overflow-y: auto;
+            padding: 2rem;
+            z-index: 1000;
+        }
+
+        .secrets-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .secrets-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .secret-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem;
+            border-bottom: 1px solid #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .secret-combo {
+            font-weight: bold;
+        }
+
+        .secret-unlocked {
+            color: #0f0;
+        }
+
+        .secret-locked {
+            color: #666;
+        }
+
+        .close-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: 2px solid #fff;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+        }
+
+        .stats {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .secrets-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: transparent;
+            border: 2px solid #fff;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .secrets-button:hover {
+            background: #fff;
+            color: #000;
+        }
+    </style>
+
+<meta name="NetsparkQuiltingResult" total-length="34587" removed="0" rules-found="w2655,w3390,w3012,w6565,w6563,w3194,w7502,w6863,w6284,w9901,w2577" />
+</head>
+<body>
+    <div class="game-container">
+        <div class="score" id="score">0</div>
+        <button class="click-button" id="clickButton">CLICK</button>
+        <div class="multiplier" id="multiplier">Multiplier: 1x</div>
+        <div class="stats">
+            <div>Secrets Found: <span id="secretsFound">0</span>/200</div>
+            <div>Total Clicks: <span id="totalClicks">0</span></div>
+        </div>
+    </div>
+
+    <div class="secret-notification" id="notification"></div>
+
+    <button class="secrets-button" onclick="showSecretsModal()">SECRETS</button>
+
+    <div class="secrets-modal" id="secretsModal">
+        <button class="close-button" onclick="closeSecretsModal()">CLOSE</button>
+        <div class="secrets-content">
+            <div class="secrets-header">DISCOVERED SECRETS</div>
+            <div id="secretsList"></div>
+        </div>
+    </div>
+
+    <div class="secrets-modal" id="adminModal">
+        <button class="close-button" onclick="closeAdminModal()">CLOSE</button>
+        <div class="secrets-content">
+            <div class="secrets-header">ADMIN PANEL - ALL SECRETS</div>
+            <div id="adminSecretsList"></div>
+        </div>
+    </div>
+
+    <script>
+        let score = 0;
+        let multiplier = 1;
+        let totalClicks = 0;
+        let currentKeys = new Set();
+        let tildeCount = 0;
+        let lastTildeTime = 0;
+        let unlockedSecrets = new Set();
+        let activeEffects = new Map();
+        let pressedKeys = new Set(); // Track which keys are currently pressed
+        let capsLockCount = 0;
+        let lastCapsLockTime = 0;
+        let pressHoldMode = false;
+        let pressHoldEndTime = 0;
+        let adminTildeCount = 0;
+        let lastAdminTildeTime = 0;
+
+        // Generate 200 secrets with various key combinations
+        const secrets = [
+            // Special rainbow combination
+            { keys: ['6', '7'], effect: 'rainbow', value: 30000, description: 'Rainbow Mode', color: 'rainbow' },
+            
+            // Basic letter combinations
+            { keys: ['q', 'w', 'e', 'r', 't', 'y'], effect: 'multiplier', value: 2, duration: 30000, description: '2x Click Bonus', color: '#ff1744' },
+            { keys: ['a', 's', 'd', 'f'], effect: 'multiplier', value: 1.5, duration: 20000, description: '1.5x Click Bonus', color: '#00e676' },
+            { keys: ['z', 'x', 'c', 'v'], effect: 'points', value: 100, description: '+100 Points', color: '#2196f3' },
+            { keys: ['q', 'a', 'z'], effect: 'multiplier', value: 3, duration: 15000, description: '3x Click Bonus', color: '#ff9800' },
+            { keys: ['w', 's', 'x'], effect: 'points', value: 250, description: '+250 Points', color: '#9c27b0' },
+            { keys: ['e', 'd', 'c'], effect: 'multiplier', value: 1.8, duration: 25000, description: '1.8x Click Bonus', color: '#e91e63' },
+            { keys: ['r', 'f', 'v'], effect: 'points', value: 500, description: '+500 Points', color: '#00bcd4' },
+            { keys: ['t', 'g', 'b'], effect: 'multiplier', value: 2.5, duration: 20000, description: '2.5x Click Bonus', color: '#8bc34a' },
+            { keys: ['y', 'h', 'n'], effect: 'points', value: 1000, description: '+1000 Points', color: '#ffc107' },
+            { keys: ['u', 'j', 'm'], effect: 'multiplier', value: 4, duration: 10000, description: '4x Click Bonus', color: '#f44336' },
+            
+            // Number combinations
+            { keys: ['1', '2', '3'], effect: 'points', value: 123, description: '+123 Points', color: '#673ab7' },
+            { keys: ['4', '5', '6'], effect: 'multiplier', value: 1.4, duration: 15000, description: '1.4x Click Bonus', color: '#795548' },
+            { keys: ['7', '8', '9'], effect: 'points', value: 789, description: '+789 Points', color: '#607d8b' },
+            { keys: ['1', '4', '7'], effect: 'multiplier', value: 2.2, duration: 18000, description: '2.2x Click Bonus', color: '#ff5722' },
+            { keys: ['2', '5', '8'], effect: 'points', value: 258, description: '+258 Points', color: '#3f51b5' },
+            { keys: ['3', '6', '9'], effect: 'multiplier', value: 3.6, duration: 12000, description: '3.6x Click Bonus', color: '#009688' },
+            { keys: ['0', '1', '2'], effect: 'points', value: 12, description: '+12 Points', color: '#4caf50' },
+            { keys: ['8', '9', '0'], effect: 'multiplier', value: 1.9, duration: 22000, description: '1.9x Click Bonus', color: '#cddc39' },
+            
+            // Mixed combinations
+            { keys: ['q', '1', 'a'], effect: 'points', value: 300, description: '+300 Points', color: '#ff6b35' },
+            { keys: ['w', '2', 's'], effect: 'multiplier', value: 2.1, duration: 16000, description: '2.1x Click Bonus', color: '#f7931e' },
+            { keys: ['e', '3', 'd'], effect: 'points', value: 333, description: '+333 Points', color: '#ffd23f' },
+            { keys: ['r', '4', 'f'], effect: 'multiplier', value: 1.7, duration: 19000, description: '1.7x Click Bonus', color: '#06ffa5' },
+            { keys: ['t', '5', 'g'], effect: 'points', value: 555, description: '+555 Points', color: '#4ecdc4' },
+            { keys: ['y', '6', 'h'], effect: 'multiplier', value: 2.6, duration: 14000, description: '2.6x Click Bonus', color: '#45b7d1' },
+            { keys: ['u', '7', 'j'], effect: 'points', value: 777, description: '+777 Points', color: '#96ceb4' },
+            { keys: ['i', '8', 'k'], effect: 'multiplier', value: 1.8, duration: 21000, description: '1.8x Click Bonus', color: '#feca57' },
+            { keys: ['o', '9', 'l'], effect: 'points', value: 999, description: '+999 Points', color: '#ff9ff3' },
+            { keys: ['p', '0', ';'], effect: 'multiplier', value: 5, duration: 8000, description: '5x Click Bonus', color: '#54a0ff' },
+            
+            // Arrow key combinations
+            { keys: ['ArrowUp', 'ArrowDown'], effect: 'points', value: 200, description: '+200 Points', color: '#5f27cd' },
+            { keys: ['ArrowLeft', 'ArrowRight'], effect: 'multiplier', value: 1.6, duration: 17000, description: '1.6x Click Bonus', color: '#00d2d3' },
+            { keys: ['ArrowUp', 'ArrowRight'], effect: 'points', value: 400, description: '+400 Points', color: '#ff6348' },
+            { keys: ['ArrowDown', 'ArrowLeft'], effect: 'multiplier', value: 2.3, duration: 13000, description: '2.3x Click Bonus', color: '#ff4757' },
+            
+            // Function key combinations
+            { keys: ['F1', 'F2'], effect: 'points', value: 150, description: '+150 Points', color: '#3742fa' },
+            { keys: ['F3', 'F4'], effect: 'multiplier', value: 1.3, duration: 24000, description: '1.3x Click Bonus', color: '#2f3542' },
+            { keys: ['F5', 'F6'], effect: 'points', value: 600, description: '+600 Points', color: '#ff3838' },
+            { keys: ['F7', 'F8'], effect: 'multiplier', value: 2.7, duration: 11000, description: '2.7x Click Bonus', color: '#ff9500' },
+            
+            // Special character combinations
+            { keys: ['-', '='], effect: 'points', value: 180, description: '+180 Points', color: '#ffdd59' },
+            { keys: ['[', ']'], effect: 'multiplier', value: 1.9, duration: 20000, description: '1.9x Click Bonus', color: '#32ff7e' },
+            { keys: [';', "'"], effect: 'points', value: 320, description: '+320 Points', color: '#7bed9f' },
+            { keys: [',', '.'], effect: 'multiplier', value: 2.4, duration: 15000, description: '2.4x Click Bonus', color: '#70a1ff' },
+            { keys: ['/', '\\'], effect: 'points', value: 450, description: '+450 Points', color: '#5352ed' },
+            
+            // Long combinations (5+ keys)
+            { keys: ['h', 'e', 'l', 'l', 'o'], effect: 'multiplier', value: 3.5, duration: 25000, description: '3.5x Hello Bonus', color: '#ff6b81' },
+            { keys: ['w', 'o', 'r', 'l', 'd'], effect: 'points', value: 1500, description: '+1500 World Points', color: '#fd79a8' },
+            { keys: ['c', 'l', 'i', 'c', 'k'], effect: 'multiplier', value: 6, duration: 15000, description: '6x Click Master', color: '#fdcb6e' },
+            { keys: ['s', 'e', 'c', 'r', 'e', 't'], effect: 'points', value: 2000, description: '+2000 Secret Points', color: '#e17055' },
+            { keys: ['b', 'o', 'n', 'u', 's'], effect: 'multiplier', value: 4.5, duration: 20000, description: '4.5x Bonus Power', color: '#81ecec' },
+            { keys: ['p', 'o', 'w', 'e', 'r'], effect: 'points', value: 2500, description: '+2500 Power Points', color: '#fab1a0' },
+            { keys: ['m', 'a', 'g', 'i', 'c'], effect: 'multiplier', value: 7, duration: 12000, description: '7x Magic Boost', color: '#ff7675' },
+            { keys: ['s', 'u', 'p', 'e', 'r'], effect: 'points', value: 3000, description: '+3000 Super Points', color: '#74b9ff' },
+            
+            // Keyboard patterns
+            { keys: ['q', 'w', 'e'], effect: 'points', value: 75, description: '+75 Points', color: '#0984e3' },
+            { keys: ['a', 's', 'd'], effect: 'multiplier', value: 1.2, duration: 30000, description: '1.2x Click Bonus', color: '#00b894' },
+            { keys: ['z', 'x', 'c'], effect: 'points', value: 90, description: '+90 Points', color: '#00cec9' },
+            { keys: ['u', 'i', 'o'], effect: 'multiplier', value: 1.4, duration: 25000, description: '1.4x Click Bonus', color: '#6c5ce7' },
+            { keys: ['j', 'k', 'l'], effect: 'points', value: 120, description: '+120 Points', color: '#a29bfe' },
+            { keys: ['n', 'm', ','], effect: 'multiplier', value: 1.6, duration: 20000, description: '1.6x Click Bonus', color: '#fd79a8' },
+            
+            // Diagonal patterns
+            { keys: ['q', 's', 'c'], effect: 'points', value: 200, description: '+200 Diagonal Points', color: '#fdcb6e' },
+            { keys: ['w', 'd', 'v'], effect: 'multiplier', value: 2.1, duration: 18000, description: '2.1x Diagonal Bonus', color: '#e17055' },
+            { keys: ['e', 'f', 'b'], effect: 'points', value: 350, description: '+350 Diagonal Points', color: '#81ecec' },
+            { keys: ['r', 'g', 'n'], effect: 'multiplier', value: 2.8, duration: 16000, description: '2.8x Diagonal Bonus', color: '#fab1a0' },
+            
+            // Number sequences
+            { keys: ['1', '2', '3', '4'], effect: 'points', value: 1234, description: '+1234 Sequence Points', color: '#ff7675' },
+            { keys: ['5', '6', '7', '8'], effect: 'multiplier', value: 5.6, duration: 14000, description: '5.6x Sequence Bonus', color: '#74b9ff' },
+            { keys: ['9', '8', '7', '6'], effect: 'points', value: 9876, description: '+9876 Reverse Points', color: '#0984e3' },
+            { keys: ['2', '4', '6', '8'], effect: 'multiplier', value: 2.4, duration: 22000, description: '2.4x Even Bonus', color: '#00b894' },
+            { keys: ['1', '3', '5', '7'], effect: 'points', value: 1357, description: '+1357 Odd Points', color: '#00cec9' },
+            
+            // Alphabet sequences
+            { keys: ['a', 'b', 'c', 'd'], effect: 'multiplier', value: 3.2, duration: 19000, description: '3.2x Alphabet Bonus', color: '#6c5ce7' },
+            { keys: ['x', 'y', 'z'], effect: 'points', value: 2600, description: '+2600 End Points', color: '#a29bfe' },
+            { keys: ['m', 'n', 'o', 'p'], effect: 'multiplier', value: 4.1, duration: 17000, description: '4.1x Middle Bonus', color: '#fd79a8' },
+            
+            // Gaming references
+            { keys: ['w', 'a', 's', 'd'], effect: 'multiplier', value: 8, duration: 10000, description: '8x Gamer Bonus', color: '#fdcb6e' },
+            { keys: ['Escape'], effect: 'points', value: 500, description: '+500 Escape Points', color: '#e17055' },
+            { keys: ['Enter'], effect: 'multiplier', value: 1.5, duration: 30000, description: '1.5x Enter Bonus', color: '#81ecec' },
+            { keys: ['Space'], effect: 'points', value: 100, description: '+100 Space Points', color: '#fab1a0' },
+            { keys: ['Tab'], effect: 'multiplier', value: 1.3, duration: 35000, description: '1.3x Tab Bonus', color: '#ff7675' },
+            
+            // More complex patterns
+            { keys: ['q', 'e', 'r', 't'], effect: 'points', value: 800, description: '+800 Pattern Points', color: '#74b9ff' },
+            { keys: ['a', 'd', 'f', 'g'], effect: 'multiplier', value: 2.9, duration: 21000, description: '2.9x Pattern Bonus', color: '#0984e3' },
+            { keys: ['z', 'c', 'v', 'b'], effect: 'points', value: 1200, description: '+1200 Pattern Points', color: '#00b894' },
+            { keys: ['y', 'u', 'i'], effect: 'multiplier', value: 3.7, duration: 13000, description: '3.7x Top Row Bonus', color: '#00cec9' },
+            { keys: ['h', 'j', 'k'], effect: 'points', value: 900, description: '+900 Home Row Points', color: '#6c5ce7' },
+            
+            // Special sequences
+            { keys: ['Shift', 'a'], effect: 'multiplier', value: 1.8, duration: 25000, description: '1.8x Shift Bonus', color: '#a29bfe' },
+            { keys: ['Control', 's'], effect: 'points', value: 600, description: '+600 Save Points', color: '#fd79a8' },
+            { keys: ['Alt', 'f'], effect: 'multiplier', value: 2.2, duration: 18000, description: '2.2x Alt Bonus', color: '#fdcb6e' },
+            
+            // Continue generating more combinations...
+            // I'll add more varied combinations to reach 200
+        ];
+
+        // Generate additional secrets to reach 200
+        const additionalSecrets = [];
+        const letters = 'abcdefghijklmnopqrstuvwxyz'.split('');
+        const numbers = '0123456789'.split('');
+        
+        // Generate more random combinations with unique colors
+        const uniqueColors = [
+            '#e53e3e', '#dd6b20', '#d69e2e', '#38a169', '#319795', '#3182ce', '#553c9a', '#b83280',
+            '#e53e3e', '#fd7f6f', '#7eb0d3', '#b2e061', '#bd7ebe', '#ffb55a', '#ffee65', '#beb9db',
+            '#fdcce5', '#8bd3c7', '#b3de69', '#fccde5', '#d9d9d9', '#bc80bd', '#ccebc5', '#ffed6f',
+            '#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3', '#54a0ff', '#5f27cd',
+            '#ff7675', '#74b9ff', '#0984e3', '#00b894', '#00cec9', '#6c5ce7', '#a29bfe', '#fd79a8',
+            '#fdcb6e', '#e17055', '#81ecec', '#fab1a0', '#ff7675', '#fd79a8', '#fdcb6e', '#6c5ce7',
+            '#e84393', '#00cec9', '#00b894', '#74b9ff', '#0984e3', '#6c5ce7', '#a29bfe', '#fd79a8'
+        ];
+        
+        for (let i = secrets.length; i < 200; i++) {
+            const comboLength = Math.floor(Math.random() * 4) + 2; // 2-5 keys
+            const keys = [];
+            const useNumbers = Math.random() > 0.7;
+            const source = useNumbers ? numbers : letters;
+            
+            for (let j = 0; j < comboLength; j++) {
+                let key;
+                do {
+                    key = source[Math.floor(Math.random() * source.length)];
+                } while (keys.includes(key));
+                keys.push(key);
+            }
+            
+            const isMultiplier = Math.random() > 0.5;
+            const colorIndex = i % uniqueColors.length;
+            
+            additionalSecrets.push({
+                keys: keys,
+                effect: isMultiplier ? 'multiplier' : 'points',
+                value: isMultiplier ? (1.1 + Math.random() * 2) : Math.floor(Math.random() * 1000) + 50,
+                duration: isMultiplier ? Math.floor(Math.random() * 20000) + 10000 : undefined,
+                description: isMultiplier ? `${(1.1 + Math.random() * 2).toFixed(1)}x Random Bonus` : `+${Math.floor(Math.random() * 1000) + 50} Random Points`,
+                color: uniqueColors[colorIndex]
+            });
+        }
+        
+        secrets.push(...additionalSecrets);
+
+        // Event listeners
+        document.addEventListener('keydown', handleKeyDown);
+        document.addEventListener('keyup', handleKeyUp);
+        document.getElementById('clickButton').addEventListener('click', handleClick);
+
+        function handleKeyDown(event) {
+            const key = event.key;
+            
+            // Handle shift sequence for press-hold mode
+            if (key === 'Shift') {
+                const now = Date.now();
+                if (now - lastCapsLockTime < 1000) {
+                    capsLockCount++;
+                } else {
+                    capsLockCount = 1;
+                }
+                lastCapsLockTime = now;
+                
+                if (capsLockCount >= 25) {
+                    activatePressHoldMode();
+                    capsLockCount = 0;
+                    return;
+                }
+            }
+            
+            // Reset shift count on other keys
+            if (key !== 'Shift') {
+                capsLockCount = 0;
+            }
+            
+            // Check if press-hold mode is active
+            if (pressHoldMode && Date.now() < pressHoldEndTime) {
+                // In press-hold mode, allow key repeat
+                if (!pressedKeys.has(key)) {
+                    pressedKeys.add(key);
+                }
+            } else {
+                // Normal mode - prevent key repeat
+                if (pressedKeys.has(key)) {
+                    return;
+                }
+                pressedKeys.add(key);
+                
+                // Turn off press-hold mode if expired
+                if (pressHoldMode && Date.now() >= pressHoldEndTime) {
+                    pressHoldMode = false;
+                }
+            }
+            
+            // Handle tilde sequence for secrets modal
+            if (key === '`' || key === '~') {
+                const now = Date.now();
+                if (now - lastTildeTime < 1000) {
+                    tildeCount++;
+                } else {
+                    tildeCount = 1;
+                }
+                lastTildeTime = now;
+                
+                // Also handle admin tilde sequence
+                if (now - lastAdminTildeTime < 1000) {
+                    adminTildeCount++;
+                } else {
+                    adminTildeCount = 1;
+                }
+                lastAdminTildeTime = now;
+                return;
+            }
+            
+            // Check for shift after 6 tildes (regular secrets)
+            if (key === 'Shift' && tildeCount >= 6) {
+                showSecretsModal();
+                tildeCount = 0;
+                return;
+            }
+            
+            // Check for shift after 5 tildes (admin panel)
+            if (key === 'Shift' && adminTildeCount >= 5) {
+                showAdminModal();
+                adminTildeCount = 0;
+                return;
+            }
+            
+            // Reset tilde counts on other keys
+            if (key !== '`' && key !== '~') {
+                tildeCount = 0;
+                adminTildeCount = 0;
+            }
+            
+            // Any key press triggers a click (except special keys)
+            if (key !== 'Escape' && key !== 'F12' && !key.startsWith('F') && key !== 'Tab') {
+                handleClick();
+            }
+            
+            currentKeys.add(key.toLowerCase());
+            checkSecrets();
+        }
+
+        function handleKeyUp(event) {
+            const key = event.key;
+            pressedKeys.delete(key); // Remove from pressed keys tracking
+            currentKeys.delete(key.toLowerCase());
+        }
+
+        function handleClick() {
+            const points = Math.floor(1 * multiplier);
+            score += points;
+            totalClicks++;
+            updateDisplay();
+            
+            // Add click animation
+            const button = document.getElementById('clickButton');
+            button.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                button.style.transform = 'scale(1)';
+            }, 100);
+        }
+
+        function checkSecrets() {
+            secrets.forEach((secret, index) => {
+                if (unlockedSecrets.has(index)) return;
+                
+                const secretKeys = secret.keys.map(k => k.toLowerCase());
+                const hasAllKeys = secretKeys.every(key => currentKeys.has(key));
+                
+                if (hasAllKeys && secretKeys.length === currentKeys.size) {
+                    unlockSecret(secret, index);
+                }
+            });
+        }
+
+        function unlockSecret(secret, index) {
+            unlockedSecrets.add(index);
+            
+            if (secret.effect === 'multiplier') {
+                const effectId = `multiplier_${Date.now()}`;
+                activeEffects.set(effectId, {
+                    type: 'multiplier',
+                    value: secret.value,
+                    endTime: Date.now() + secret.duration
+                });
+                
+                setTimeout(() => {
+                    activeEffects.delete(effectId);
+                    updateMultiplier();
+                }, secret.duration);
+            } else if (secret.effect === 'points') {
+                score += secret.value;
+            } else if (secret.effect === 'rainbow') {
+                activateRainbowMode(secret.value);
+            }
+            
+            updateMultiplier();
+            updateDisplay();
+            showNotification(secret);
+            
+            // Change text color temporarily (unless rainbow mode)
+            if (secret.color !== 'rainbow') {
+                const scoreElement = document.getElementById('score');
+                const originalColor = scoreElement.style.color;
+                scoreElement.style.color = secret.color;
+                scoreElement.style.textShadow = `0 0 20px ${secret.color}`;
+                
+                setTimeout(() => {
+                    scoreElement.style.color = originalColor;
+                    scoreElement.style.textShadow = 'none';
+                }, 3000);
+            }
+        }
+
+        function activatePressHoldMode() {
+            pressHoldMode = true;
+            pressHoldEndTime = Date.now() + 60000; // 1 minute
+            
+            // Show notification
+            const notification = document.getElementById('notification');
+            notification.innerHTML = `
+                <div style="color: #ffff00; font-weight: bold;">PRESS & HOLD MODE ACTIVATED!</div>
+                <div>Hold keys to click rapidly for 1 minute</div>
+            `;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 4000);
+            
+            // Add visual indicator
+            const button = document.getElementById('clickButton');
+            button.style.boxShadow = '0 0 30px #ffff00';
+            button.style.borderColor = '#ffff00';
+            
+            // Remove visual indicator after 1 minute
+            setTimeout(() => {
+                button.style.boxShadow = 'none';
+                button.style.borderColor = '#fff';
+                pressHoldMode = false;
+            }, 60000);
+        }
+
+        function activateRainbowMode(duration) {
+            const body = document.body;
+            const scoreElement = document.getElementById('score');
+            const button = document.getElementById('clickButton');
+            const multiplierElement = document.getElementById('multiplier');
+            
+            // Add rainbow animation
+            const style = document.createElement('style');
+            style.innerHTML = `
+                @keyframes rainbow {
+                    0% { color: #ff0000; text-shadow: 0 0 20px #ff0000; }
+                    16.66% { color: #ff8000; text-shadow: 0 0 20px #ff8000; }
+                    33.33% { color: #ffff00; text-shadow: 0 0 20px #ffff00; }
+                    50% { color: #00ff00; text-shadow: 0 0 20px #00ff00; }
+                    66.66% { color: #0080ff; text-shadow: 0 0 20px #0080ff; }
+                    83.33% { color: #8000ff; text-shadow: 0 0 20px #8000ff; }
+                    100% { color: #ff0000; text-shadow: 0 0 20px #ff0000; }
+                }
+                @keyframes rainbowBorder {
+                    0% { border-color: #ff0000; box-shadow: 0 0 20px #ff0000; }
+                    16.66% { border-color: #ff8000; box-shadow: 0 0 20px #ff8000; }
+                    33.33% { border-color: #ffff00; box-shadow: 0 0 20px #ffff00; }
+                    50% { border-color: #00ff00; box-shadow: 0 0 20px #00ff00; }
+                    66.66% { border-color: #0080ff; box-shadow: 0 0 20px #0080ff; }
+                    83.33% { border-color: #8000ff; box-shadow: 0 0 20px #8000ff; }
+                    100% { border-color: #ff0000; box-shadow: 0 0 20px #ff0000; }
+                }
+                .rainbow-text {
+                    animation: rainbow 2s linear infinite;
+                }
+                .rainbow-border {
+                    animation: rainbowBorder 2s linear infinite;
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Apply rainbow classes
+            scoreElement.classList.add('rainbow-text');
+            button.classList.add('rainbow-border');
+            multiplierElement.classList.add('rainbow-text');
+            
+            // Remove rainbow effect after duration
+            setTimeout(() => {
+                scoreElement.classList.remove('rainbow-text');
+                button.classList.remove('rainbow-border');
+                multiplierElement.classList.remove('rainbow-text');
+                document.head.removeChild(style);
+            }, duration);
+        }
+
+        function updateMultiplier() {
+            let totalMultiplier = 1;
+            activeEffects.forEach(effect => {
+                if (effect.type === 'multiplier' && Date.now() < effect.endTime) {
+                    totalMultiplier *= effect.value;
+                }
+            });
+            multiplier = totalMultiplier;
+        }
+
+        function updateDisplay() {
+            document.getElementById('score').textContent = Math.floor(score);
+            document.getElementById('multiplier').textContent = `Multiplier: ${multiplier.toFixed(1)}x`;
+            document.getElementById('secretsFound').textContent = unlockedSecrets.size;
+            document.getElementById('totalClicks').textContent = totalClicks;
+        }
+
+        function showNotification(secret) {
+            const notification = document.getElementById('notification');
+            notification.innerHTML = `
+                <div style="color: ${secret.color}; font-weight: bold;">SECRET UNLOCKED!</div>
+                <div>${secret.keys.join(' + ').toUpperCase()}</div>
+                <div>${secret.description}</div>
+            `;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 4000);
+        }
+
+        function showSecretsModal() {
+            const modal = document.getElementById('secretsModal');
+            const secretsList = document.getElementById('secretsList');
+            
+            let html = '';
+            
+            if (unlockedSecrets.size === 0) {
+                html = '<div style="text-align: center; color: #666; padding: 2rem;">No secrets discovered yet. Try pressing different key combinations!</div>';
+            } else {
+                secrets.forEach((secret, index) => {
+                    const isUnlocked = unlockedSecrets.has(index);
+                    if (isUnlocked) { // Only show unlocked secrets
+                        const combo = secret.keys.join(' + ').toUpperCase();
+                        const description = secret.description;
+                        
+                        html += `
+                            <div class="secret-item secret-unlocked">
+                                <span class="secret-combo">${combo}</span>
+                                <span>${description}</span>
+                            </div>
+                        `;
+                    }
+                });
+            }
+            
+            secretsList.innerHTML = html;
+            modal.style.display = 'block';
+        }
+
+        function closeSecretsModal() {
+            document.getElementById('secretsModal').style.display = 'none';
+        }
+
+        function showAdminModal() {
+            const modal = document.getElementById('adminModal');
+            const adminSecretsList = document.getElementById('adminSecretsList');
+            
+            let html = '';
+            secrets.forEach((secret, index) => {
+                const isUnlocked = unlockedSecrets.has(index);
+                const statusClass = isUnlocked ? 'secret-unlocked' : 'secret-locked';
+                const combo = secret.keys.join(' + ').toUpperCase();
+                const description = secret.description;
+                
+                html += `
+                    <div class="secret-item ${statusClass}">
+                        <span class="secret-combo">${combo}</span>
+                        <span>${description}</span>
+                    </div>
+                `;
+            });
+            
+            adminSecretsList.innerHTML = html;
+            modal.style.display = 'block';
+        }
+
+        function closeAdminModal() {
+            document.getElementById('adminModal').style.display = 'none';
+        }
+
+        // Close modal on escape key
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closeSecretsModal();
+                closeAdminModal();
+            }
+        });
+
+        // Initialize display
+        updateDisplay();
+
+        // Clean up expired effects periodically
+        setInterval(() => {
+            const now = Date.now();
+            activeEffects.forEach((effect, id) => {
+                if (effect.type === 'multiplier' && now >= effect.endTime) {
+                    activeEffects.delete(id);
+                }
+            });
+            updateMultiplier();
+            updateDisplay();
+        }, 1000);
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9940159fa5572367',t:'MTc2MTM3ODIyMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
