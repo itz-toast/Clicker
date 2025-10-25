@@ -20,6 +20,147 @@
             overflow: hidden;
         }
 
+        /* Click Effect Animations */
+        @keyframes starTwinkle {
+            0% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 0; transform: scale(0.8); }
+        }
+
+        @keyframes fireRise {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-200px) scale(0.5); opacity: 0; }
+        }
+
+        @keyframes iceFall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes matrixFall {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+
+        @keyframes neonSpark {
+            0% { transform: scale(0); opacity: 1; }
+            50% { transform: scale(3); opacity: 0.8; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+
+        @keyframes leafFloat {
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
+            25% { transform: translateY(25vh) translateX(20px) rotate(90deg); }
+            50% { transform: translateY(50vh) translateX(-10px) rotate(180deg); }
+            75% { transform: translateY(75vh) translateX(15px) rotate(270deg); }
+            100% { transform: translateY(100vh) translateX(0) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes bubbleRise {
+            0% { transform: translateY(0) scale(0.5); opacity: 0.8; }
+            50% { transform: translateY(-50vh) scale(1); opacity: 1; }
+            100% { transform: translateY(-100vh) scale(0.3); opacity: 0; }
+        }
+
+        @keyframes lavaErupt {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            50% { transform: translateY(-150px) scale(1.5); opacity: 0.8; }
+            100% { transform: translateY(-300px) scale(0.5); opacity: 0; }
+        }
+
+        @keyframes lightningFlash {
+            0% { opacity: 0; transform: scale(0.5); }
+            25% { opacity: 1; transform: scale(1.5); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+            75% { opacity: 1; transform: scale(1.8); }
+            100% { opacity: 0; transform: scale(0.3); }
+        }
+
+        @keyframes rainbowSpin {
+            0% { transform: rotate(0deg) scale(0.5); opacity: 1; }
+            50% { transform: rotate(180deg) scale(1.2); opacity: 0.8; }
+            100% { transform: rotate(360deg) scale(0.3); opacity: 0; }
+        }
+
+        @keyframes cyberGlitch {
+            0% { transform: translateX(0) scaleX(1); opacity: 1; }
+            25% { transform: translateX(10px) scaleX(1.5); opacity: 0.8; }
+            50% { transform: translateX(-5px) scaleX(0.8); opacity: 1; }
+            75% { transform: translateX(8px) scaleX(1.3); opacity: 0.6; }
+            100% { transform: translateX(0) scaleX(0); opacity: 0; }
+        }
+
+        @keyframes goldSparkle {
+            0% { transform: scale(0) rotate(0deg); opacity: 1; }
+            25% { transform: scale(1.2) rotate(90deg); opacity: 0.8; }
+            50% { transform: scale(0.8) rotate(180deg); opacity: 1; }
+            75% { transform: scale(1.5) rotate(270deg); opacity: 0.6; }
+            100% { transform: scale(0) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes crystalShine {
+            0% { transform: scale(0.5); opacity: 0; filter: brightness(1); }
+            50% { transform: scale(1.3); opacity: 1; filter: brightness(2); }
+            100% { transform: scale(0.8); opacity: 0; filter: brightness(0.5); }
+        }
+
+        @keyframes shadowPulse {
+            0% { transform: scale(0); opacity: 0.8; }
+            50% { transform: scale(2); opacity: 0.4; }
+            100% { transform: scale(4); opacity: 0; }
+        }
+
+        @keyframes lightBeam {
+            0% { transform: scale(0.5); opacity: 0; filter: brightness(1); }
+            50% { transform: scale(1.5); opacity: 1; filter: brightness(3); }
+            100% { transform: scale(0.3); opacity: 0; filter: brightness(0.5); }
+        }
+
+        @keyframes toxicGlow {
+            0% { transform: scale(0.8); opacity: 1; filter: hue-rotate(0deg); }
+            25% { transform: scale(1.2); opacity: 0.8; filter: hue-rotate(90deg); }
+            50% { transform: scale(1.0); opacity: 1; filter: hue-rotate(180deg); }
+            75% { transform: scale(1.4); opacity: 0.6; filter: hue-rotate(270deg); }
+            100% { transform: scale(0.5); opacity: 0; filter: hue-rotate(360deg); }
+        }
+
+        @keyframes galaxySwirl {
+            0% { transform: rotate(0deg) scale(0.3); opacity: 0; }
+            50% { transform: rotate(180deg) scale(1.2); opacity: 1; }
+            100% { transform: rotate(360deg) scale(0.5); opacity: 0; }
+        }
+
+        @keyframes bloodDrip {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0.3; }
+        }
+
+        @keyframes voidCollapse {
+            0% { transform: scale(2); opacity: 0.8; }
+            50% { transform: scale(0.5); opacity: 1; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+
+        @keyframes effectBurst {
+            0% { transform: scale(0); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.8; }
+            100% { transform: scale(0.3); opacity: 0; }
+        }
+
+        @keyframes screenShake {
+            0% { transform: translate(0); }
+            10% { transform: translate(-1px, -1px); }
+            20% { transform: translate(1px, -1px); }
+            30% { transform: translate(-1px, 1px); }
+            40% { transform: translate(1px, 1px); }
+            50% { transform: translate(-1px, -1px); }
+            60% { transform: translate(1px, -1px); }
+            70% { transform: translate(-1px, 1px); }
+            80% { transform: translate(1px, 1px); }
+            90% { transform: translate(-1px, -1px); }
+            100% { transform: translate(0); }
+        }
+
         html {
             height: 100%;
         }
@@ -153,11 +294,207 @@
             background: #fff;
             color: #000;
         }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 999;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #fff;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .shop-container {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 380px;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            border-left: 2px solid #fff;
+            padding: 1rem;
+            overflow-y: auto;
+            transition: right 0.5s ease;
+            z-index: 1001;
+        }
+
+        .shop-container.open {
+            right: 0;
+        }
+
+        .shop-header {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #333;
+            padding-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .shop-close {
+            position: absolute;
+            top: -0.5rem;
+            right: 0;
+            background: transparent;
+            border: 2px solid #fff;
+            color: #fff;
+            width: 2rem;
+            height: 2rem;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .shop-close:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        .shop-category {
+            margin-bottom: 1.5rem;
+        }
+
+        .category-title {
+            font-size: 1.1rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            border-bottom: 1px solid #444;
+            padding-bottom: 0.3rem;
+        }
+
+        .shop-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #333;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .shop-item:hover {
+            border-color: #fff;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .shop-item.owned {
+            background: rgba(0, 255, 0, 0.1);
+            border-color: #0f0;
+        }
+
+        .shop-item.equipped {
+            background: rgba(255, 255, 0, 0.1);
+            border-color: #ff0;
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-name {
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .item-description {
+            font-size: 0.7rem;
+            color: #aaa;
+            margin-top: 0.2rem;
+        }
+
+        .item-price {
+            color: #fff;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        .shop-toggle {
+            position: fixed;
+            top: 70px;
+            left: 20px;
+            background: transparent;
+            border: 2px solid #fff;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            display: block;
+            transition: all 0.2s ease;
+        }
+
+        .shop-toggle:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        .achievements-button {
+            position: fixed;
+            top: 120px;
+            left: 20px;
+            background: transparent;
+            border: 2px solid #fff;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            display: block;
+            transition: all 0.2s ease;
+        }
+
+        .achievements-button:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        .codes-button {
+            position: fixed;
+            top: 170px;
+            left: 20px;
+            background: transparent;
+            border: 2px solid #fff;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            display: block;
+            transition: all 0.2s ease;
+        }
+
+        .codes-button:hover {
+            background: #fff;
+            color: #000;
+        }
     </style>
 
-<meta name="NetsparkQuiltingResult" total-length="34587" removed="0" rules-found="w2655,w3390,w3012,w6565,w6563,w3194,w7502,w6863,w6284,w9901,w2577" />
+<meta name="NetsparkQuiltingResult" total-length="169970" removed="0" rules-found="w2655,w3390,w4748,w4749,w3012,w2577,w4308,w6565,w7502,w73,w837,w5579,w5580,w11562,w3180,w6893,w3538,w6563,w6785,w4754,w10795,w6284,w3194,w6863,w8767,w9901,w11756,w332,w6223" />
 </head>
 <body>
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+
     <div class="game-container">
         <div class="score" id="score">0</div>
         <button class="click-button" id="clickButton">CLICK</button>
@@ -171,6 +508,17 @@
     <div class="secret-notification" id="notification"></div>
 
     <button class="secrets-button" onclick="showSecretsModal()">SECRETS</button>
+    <button class="shop-toggle" id="shopToggle" onclick="toggleShop()">SHOP</button>
+    <button class="achievements-button" onclick="showAchievementsModal()">ACHIEVEMENTS</button>
+    <button class="codes-button" onclick="showCodesModal()">CODES</button>
+
+    <div class="shop-container" id="shopContainer">
+        <div class="shop-header">
+            SHOP
+            <button class="shop-close" onclick="toggleShop()">×</button>
+        </div>
+        <div id="shopContent"></div>
+    </div>
 
     <div class="secrets-modal" id="secretsModal">
         <button class="close-button" onclick="closeSecretsModal()">CLOSE</button>
@@ -185,6 +533,156 @@
         <div class="secrets-content">
             <div class="secrets-header">ADMIN PANEL - ALL SECRETS</div>
             <div id="adminSecretsList"></div>
+        </div>
+    </div>
+
+    <div class="secrets-modal" id="achievementsModal">
+        <button class="close-button" onclick="closeAchievementsModal()">CLOSE</button>
+        <div class="secrets-content">
+            <div class="secrets-header">ACHIEVEMENTS</div>
+            <div id="achievementsList"></div>
+        </div>
+    </div>
+
+    <div class="secrets-modal" id="codesModal">
+        <button class="close-button" onclick="closeCodesModal()">CLOSE</button>
+        <div class="secrets-content">
+            <div class="secrets-header">EXCLUSIVE CODES</div>
+            <div style="text-align: center; margin: 2rem 0;">
+                <div style="margin-bottom: 1rem; color: #aaa;">Enter exclusive codes for special rewards</div>
+                <input type="text" id="codeRedemptionInput" maxlength="20" style="
+                    background: rgba(0, 0, 0, 0.8);
+                    border: 2px solid #fff;
+                    color: #fff;
+                    font-size: 1.5rem;
+                    padding: 1rem;
+                    text-align: center;
+                    font-family: 'Courier New', monospace;
+                    letter-spacing: 0.2rem;
+                    margin: 1rem 0;
+                    width: 300px;
+                    text-transform: uppercase;
+                " placeholder="ENTER CODE">
+                <div>
+                    <button onclick="redeemCode()" style="
+                        background: transparent;
+                        border: 2px solid #00ff00;
+                        color: #00ff00;
+                        font-size: 1.2rem;
+                        padding: 1rem 2rem;
+                        cursor: pointer;
+                        font-family: 'Courier New', monospace;
+                        margin: 0 1rem;
+                        transition: all 0.2s ease;
+                    " onmouseover="this.style.background='#00ff00'; this.style.color='#000';" onmouseout="this.style.background='transparent'; this.style.color='#00ff00';">REDEEM</button>
+                </div>
+            </div>
+            <div id="redeemedCodesList" style="margin-top: 2rem;">
+                <div style="font-size: 1.1rem; margin-bottom: 1rem; text-align: center; border-bottom: 1px solid #333; padding-bottom: 0.5rem;">REDEEMED CODES</div>
+                <div id="redeemedCodesContent" style="text-align: center; color: #666;">No codes redeemed yet</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="secrets-modal" id="codesListModal">
+        <button class="close-button" onclick="closeCodesListModal()">CLOSE</button>
+        <div class="secrets-content">
+            <div class="secrets-header" style="color: #ffd700; text-shadow: 0 0 20px #ffd700;">CURRENT ACTIVE CODES</div>
+            <div style="text-align: center; margin: 1rem 0; color: #aaa; font-size: 0.9rem;">
+                Administrator Access - All Available Codes
+            </div>
+            <div id="codesListContent"></div>
+        </div>
+    </div>
+
+    <div class="secrets-modal" id="codeEntryModal">
+        <div class="secrets-content" style="text-align: center; padding-top: 5rem;">
+            <div class="secrets-header" style="color: #ff0000; text-shadow: 0 0 20px #ff0000;">SECURITY CHECKPOINT</div>
+            <div style="margin: 2rem 0; font-size: 1.2rem; color: #ffff00;">ENTER ACCESS CODE</div>
+            <input type="text" id="codeInput" maxlength="4" style="
+                background: rgba(0, 0, 0, 0.8);
+                border: 2px solid #fff;
+                color: #fff;
+                font-size: 2rem;
+                padding: 1rem;
+                text-align: center;
+                font-family: 'Courier New', monospace;
+                letter-spacing: 0.5rem;
+                margin: 2rem 0;
+                width: 200px;
+            " placeholder="****">
+            <div>
+                <button onclick="checkCode()" style="
+                    background: transparent;
+                    border: 2px solid #00ff00;
+                    color: #00ff00;
+                    font-size: 1.2rem;
+                    padding: 1rem 2rem;
+                    cursor: pointer;
+                    font-family: 'Courier New', monospace;
+                    margin: 0 1rem;
+                ">SUBMIT</button>
+                <button onclick="closeCodeEntryModal()" style="
+                    background: transparent;
+                    border: 2px solid #ff0000;
+                    color: #ff0000;
+                    font-size: 1.2rem;
+                    padding: 1rem 2rem;
+                    cursor: pointer;
+                    font-family: 'Courier New', monospace;
+                    margin: 0 1rem;
+                ">CANCEL</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="secrets-modal" id="secretAdminModal">
+        <button class="close-button" onclick="closeSecretAdminModal()">CLOSE</button>
+        <div class="secrets-content" style="text-align: center; padding-top: 5rem;">
+            <div class="secrets-header" style="color: #ff0000; text-shadow: 0 0 20px #ff0000;">CLASSIFIED ACCESS</div>
+            <div style="margin: 3rem 0; font-size: 1.2rem; color: #ffff00;">UNAUTHORIZED PERSONNEL WILL BE PROSECUTED</div>
+            <button id="infiniteMultiplierBtn" onclick="activateInfiniteMultiplier()" style="
+                background: linear-gradient(45deg, #ff0000, #ff6600, #ffff00, #00ff00, #0066ff, #6600ff, #ff0066);
+                border: 3px solid #fff;
+                color: #fff;
+                font-size: 1.5rem;
+                padding: 1.5rem 3rem;
+                cursor: pointer;
+                font-family: 'Courier New', monospace;
+                font-weight: bold;
+                text-shadow: 2px 2px 4px #000;
+                box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+                animation: pulse 2s infinite;
+                margin-bottom: 2rem;
+                display: block;
+            ">ACTIVATE INFINITE MULTIPLIER</button>
+            <button onclick="openSecretsDatabase()" style="
+                background: linear-gradient(45deg, #4b0082, #6a0dad, #8a2be2, #9932cc, #ba55d3);
+                border: 3px solid #fff;
+                color: #fff;
+                font-size: 1.2rem;
+                padding: 1rem 2rem;
+                cursor: pointer;
+                font-family: 'Courier New', monospace;
+                font-weight: bold;
+                text-shadow: 2px 2px 4px #000;
+                box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+                animation: pulse 2s infinite;
+                margin-bottom: 1rem;
+            ">VIEW ALL SECRETS DATABASE</button>
+            <button onclick="showCodesListModal()" style="
+                background: linear-gradient(45deg, #ff6b00, #ff8500, #ffa500, #ffb347, #ffd700);
+                border: 3px solid #fff;
+                color: #000;
+                font-size: 1.2rem;
+                padding: 1rem 2rem;
+                cursor: pointer;
+                font-family: 'Courier New', monospace;
+                font-weight: bold;
+                text-shadow: 1px 1px 2px #fff;
+                box-shadow: 0 0 20px rgba(255, 165, 0, 0.5);
+                animation: pulse 2s infinite;
+            ">VIEW CURRENT CODES LIST</button>
         </div>
     </div>
 
@@ -204,6 +702,515 @@
         let pressHoldEndTime = 0;
         let adminTildeCount = 0;
         let lastAdminTildeTime = 0;
+        let secretAdminSequence = [];
+        let secretAdminTarget = ['ArrowUp', 'ArrowLeft', 'ArrowRight', 'ArrowDown'];
+        let shiftHeld = false;
+        let shopUnlocked = true;
+        let ownedItems = new Set();
+        let equippedItems = new Map();
+        let autoClickers = 0;
+        let autoClickerInterval = null;
+        let achievements = new Set();
+        let achievementClickers = new Map();
+        let redeemedCodes = new Set();
+
+        // Permanent exclusive codes
+        const permanentCodes = {
+            'CLICK2024': {
+                type: 'points',
+                value: 50000,
+                description: '+50,000 Points',
+                name: 'New Year Bonus'
+            },
+            'MEGA100X': {
+                type: 'multiplier',
+                value: 100,
+                duration: 300000, // 5 minutes
+                description: '100x Multiplier for 5 minutes',
+                name: 'Mega Multiplier'
+            },
+            'GOLDMINE': {
+                type: 'points',
+                value: 100000,
+                description: '+100,000 Points',
+                name: 'Gold Mine'
+            },
+            'SPEED999': {
+                type: 'auto_clicker',
+                value: 50,
+                description: '+50 Auto Clicks/sec',
+                name: 'Speed Demon'
+            },
+            'RAINBOW7': {
+                type: 'rainbow',
+                value: 120000, // 2 minutes
+                description: 'Rainbow Mode for 2 minutes',
+                name: 'Rainbow Power'
+            },
+            'ULTRA5X': {
+                type: 'multiplier',
+                value: 5,
+                duration: 600000, // 10 minutes
+                description: '5x Multiplier for 10 minutes',
+                name: 'Ultra Boost'
+            },
+            'MILLION1': {
+                type: 'points',
+                value: 1000000,
+                description: '+1,000,000 Points',
+                name: 'Millionaire'
+            },
+            'AUTOMAX': {
+                type: 'auto_clicker',
+                value: 100,
+                description: '+100 Auto Clicks/sec',
+                name: 'Auto Maximum'
+            },
+            'INFINITE': {
+                type: 'multiplier',
+                value: 1000,
+                duration: 180000, // 3 minutes
+                description: '1000x Multiplier for 3 minutes',
+                name: 'Infinite Power'
+            },
+            'SECRET99': {
+                type: 'special',
+                value: 'unlock_all_secrets',
+                description: 'Unlock 25 Random Secrets',
+                name: 'Secret Master'
+            }
+        };
+
+        // Weekly rotating codes (40 codes that change each week)
+        const weeklyCodePool = [
+            // Week 1 codes
+            { code: 'FIRE2024', type: 'multiplier', value: 15, duration: 240000, description: '15x Fire Multiplier for 4 minutes', name: 'Fire Week' },
+            { code: 'ICE2024', type: 'points', value: 75000, description: '+75,000 Ice Points', name: 'Ice Week' },
+            { code: 'STORM24', type: 'auto_clicker', value: 25, description: '+25 Storm Clickers/sec', name: 'Storm Week' },
+            { code: 'LIGHT24', type: 'rainbow', value: 90000, description: 'Light Mode for 1.5 minutes', name: 'Light Week' },
+            { code: 'DARK24', type: 'multiplier', value: 8, duration: 420000, description: '8x Dark Multiplier for 7 minutes', name: 'Dark Week' },
+            { code: 'MAGIC24', type: 'points', value: 150000, description: '+150,000 Magic Points', name: 'Magic Week' },
+            { code: 'CYBER24', type: 'auto_clicker', value: 40, description: '+40 Cyber Clickers/sec', name: 'Cyber Week' },
+            { code: 'SPACE24', type: 'multiplier', value: 20, duration: 180000, description: '20x Space Multiplier for 3 minutes', name: 'Space Week' },
+            
+            // Week 2 codes
+            { code: 'POWER25', type: 'points', value: 200000, description: '+200,000 Power Points', name: 'Power Surge' },
+            { code: 'BOOST25', type: 'multiplier', value: 12, duration: 300000, description: '12x Boost for 5 minutes', name: 'Mega Boost' },
+            { code: 'SPEED25', type: 'auto_clicker', value: 60, description: '+60 Speed Clickers/sec', name: 'Speed Boost' },
+            { code: 'GLOW25', type: 'rainbow', value: 150000, description: 'Glow Mode for 2.5 minutes', name: 'Glow Power' },
+            { code: 'FORCE25', type: 'multiplier', value: 25, duration: 120000, description: '25x Force for 2 minutes', name: 'Force Field' },
+            { code: 'ENERGY25', type: 'points', value: 300000, description: '+300,000 Energy Points', name: 'Energy Blast' },
+            { code: 'TURBO25', type: 'auto_clicker', value: 80, description: '+80 Turbo Clickers/sec', name: 'Turbo Mode' },
+            { code: 'BLAST25', type: 'multiplier', value: 30, duration: 90000, description: '30x Blast for 1.5 minutes', name: 'Blast Wave' },
+            
+            // Week 3 codes
+            { code: 'GOLD25', type: 'points', value: 500000, description: '+500,000 Gold Points', name: 'Gold Rush' },
+            { code: 'SILVER25', type: 'multiplier', value: 18, duration: 240000, description: '18x Silver for 4 minutes', name: 'Silver Storm' },
+            { code: 'BRONZE25', type: 'auto_clicker', value: 35, description: '+35 Bronze Clickers/sec', name: 'Bronze Age' },
+            { code: 'DIAMOND25', type: 'rainbow', value: 180000, description: 'Diamond Mode for 3 minutes', name: 'Diamond Shine' },
+            { code: 'CRYSTAL25', type: 'multiplier', value: 22, duration: 150000, description: '22x Crystal for 2.5 minutes', name: 'Crystal Power' },
+            { code: 'RUBY25', type: 'points', value: 400000, description: '+400,000 Ruby Points', name: 'Ruby Glow' },
+            { code: 'EMERALD25', type: 'auto_clicker', value: 55, description: '+55 Emerald Clickers/sec', name: 'Emerald Force' },
+            { code: 'SAPPHIRE25', type: 'multiplier', value: 28, duration: 120000, description: '28x Sapphire for 2 minutes', name: 'Sapphire Burst' },
+            
+            // Week 4 codes
+            { code: 'THUNDER25', type: 'points', value: 350000, description: '+350,000 Thunder Points', name: 'Thunder Strike' },
+            { code: 'LIGHTNING25', type: 'multiplier', value: 35, duration: 90000, description: '35x Lightning for 1.5 minutes', name: 'Lightning Bolt' },
+            { code: 'WIND25', type: 'auto_clicker', value: 45, description: '+45 Wind Clickers/sec', name: 'Wind Storm' },
+            { code: 'EARTH25', type: 'rainbow', value: 120000, description: 'Earth Mode for 2 minutes', name: 'Earth Power' },
+            { code: 'WATER25', type: 'multiplier', value: 16, duration: 270000, description: '16x Water for 4.5 minutes', name: 'Water Flow' },
+            { code: 'FIRE25', type: 'points', value: 450000, description: '+450,000 Fire Points', name: 'Fire Blast' },
+            { code: 'AIR25', type: 'auto_clicker', value: 70, description: '+70 Air Clickers/sec', name: 'Air Strike' },
+            { code: 'VOID25', type: 'multiplier', value: 40, duration: 75000, description: '40x Void for 1.25 minutes', name: 'Void Collapse' },
+            
+            // Week 5 codes
+            { code: 'NEON25', type: 'points', value: 600000, description: '+600,000 Neon Points', name: 'Neon Glow' },
+            { code: 'PLASMA25', type: 'multiplier', value: 45, duration: 60000, description: '45x Plasma for 1 minute', name: 'Plasma Burst' },
+            { code: 'LASER25', type: 'auto_clicker', value: 90, description: '+90 Laser Clickers/sec', name: 'Laser Array' },
+            { code: 'BEAM25', type: 'rainbow', value: 200000, description: 'Beam Mode for 3.33 minutes', name: 'Beam Focus' },
+            { code: 'PULSE25', type: 'multiplier', value: 50, duration: 45000, description: '50x Pulse for 45 seconds', name: 'Pulse Wave' },
+            { code: 'WAVE25', type: 'points', value: 750000, description: '+750,000 Wave Points', name: 'Wave Crash' },
+            { code: 'SONIC25', type: 'auto_clicker', value: 100, description: '+100 Sonic Clickers/sec', name: 'Sonic Boom' },
+            { code: 'ULTRA25', type: 'multiplier', value: 60, duration: 30000, description: '60x Ultra for 30 seconds', name: 'Ultra Power' }
+        ];
+
+        // Get current week codes (8 codes per week)
+        function getCurrentWeeklyCodes() {
+            const now = new Date();
+            const startOfYear = new Date(now.getFullYear(), 0, 1);
+            const weekNumber = Math.floor((now - startOfYear) / (7 * 24 * 60 * 60 * 1000)) % 5; // 5 week rotation
+            
+            const startIndex = weekNumber * 8;
+            const weekCodes = weeklyCodePool.slice(startIndex, startIndex + 8);
+            
+            const codeObj = {};
+            weekCodes.forEach(codeData => {
+                codeObj[codeData.code] = {
+                    type: codeData.type,
+                    value: codeData.value,
+                    duration: codeData.duration,
+                    description: codeData.description,
+                    name: codeData.name
+                };
+            });
+            
+            return codeObj;
+        }
+
+        // Combine permanent and weekly codes
+        function getAllActiveCodes() {
+            return { ...permanentCodes, ...getCurrentWeeklyCodes() };
+        }
+
+        // Get the current exclusive codes (this replaces the old exclusiveCodes)
+        const exclusiveCodes = getAllActiveCodes();
+
+        // Shop items (100 total)
+        const shopItems = [
+            // Skins (25 items)
+            { id: 'neon_theme', category: 'skins', name: 'Neon Glow', description: 'Bright neon colors with glowing effects', price: 1000, type: 'theme' },
+            { id: 'retro_theme', category: 'skins', name: 'Retro Wave', description: 'Purple and pink 80s aesthetic', price: 1500, type: 'theme' },
+            { id: 'matrix_theme', category: 'skins', name: 'Matrix Code', description: 'Green falling code background', price: 2000, type: 'theme' },
+            { id: 'fire_theme', category: 'skins', name: 'Fire Storm', description: 'Red and orange flame effects', price: 2500, type: 'theme' },
+            { id: 'ice_theme', category: 'skins', name: 'Ice Crystal', description: 'Cool blue crystalline design', price: 3000, type: 'theme' },
+            { id: 'space_theme', category: 'skins', name: 'Deep Space', description: 'Stars and galaxies background', price: 3500, type: 'theme' },
+            { id: 'gold_theme', category: 'skins', name: 'Golden Luxury', description: 'Elegant gold and black theme', price: 4000, type: 'theme' },
+            { id: 'rainbow_theme', category: 'skins', name: 'Rainbow Burst', description: 'Constantly shifting rainbow colors', price: 5000, type: 'theme' },
+            { id: 'cyber_theme', category: 'skins', name: 'Cyberpunk', description: 'Futuristic cyan and magenta', price: 6000, type: 'theme' },
+            { id: 'nature_theme', category: 'skins', name: 'Forest Grove', description: 'Green nature with leaf particles', price: 4500, type: 'theme' },
+            { id: 'ocean_theme', category: 'skins', name: 'Ocean Depths', description: 'Deep blue with wave animations', price: 5500, type: 'theme' },
+            { id: 'lava_theme', category: 'skins', name: 'Molten Lava', description: 'Hot orange lava flow effects', price: 7000, type: 'theme' },
+            { id: 'crystal_theme', category: 'skins', name: 'Crystal Cave', description: 'Sparkling crystal formations', price: 8000, type: 'theme' },
+            { id: 'shadow_theme', category: 'skins', name: 'Shadow Realm', description: 'Dark purple with shadow effects', price: 9000, type: 'theme' },
+            { id: 'light_theme', category: 'skins', name: 'Divine Light', description: 'Bright white with holy glow', price: 10000, type: 'theme' },
+            { id: 'toxic_theme', category: 'skins', name: 'Toxic Waste', description: 'Radioactive green with bubbles', price: 12000, type: 'theme' },
+
+            { id: 'blood_theme', category: 'skins', name: 'Blood Moon', description: 'Dark red with dripping effects', price: 18000, type: 'theme' },
+            { id: 'electric_theme', category: 'skins', name: 'Electric Storm', description: 'Lightning bolts and sparks', price: 20000, type: 'theme' },
+            { id: 'void_theme', category: 'skins', name: 'Void Walker', description: 'Black hole with distortion', price: 25000, type: 'theme' },
+            { id: 'prism_theme', category: 'skins', name: 'Prism Break', description: 'Light refracting through prisms', price: 30000, type: 'theme' },
+            { id: 'quantum_theme', category: 'skins', name: 'Quantum Field', description: 'Particle physics visualization', price: 35000, type: 'theme' },
+            { id: 'dream_theme', category: 'skins', name: 'Lucid Dream', description: 'Surreal floating elements', price: 40000, type: 'theme' },
+            { id: 'ancient_theme', category: 'skins', name: 'Ancient Runes', description: 'Mystical symbols and glyphs', price: 50000, type: 'theme' },
+            { id: 'cosmic_theme', category: 'skins', name: 'Cosmic Entity', description: 'Reality-bending cosmic power', price: 100000, type: 'theme' },
+
+            // Click Effects (25 items)
+            { id: 'spark_effect', category: 'effects', name: 'Spark Burst', description: 'Small sparks fly on click', price: 500, type: 'click_effect' },
+            { id: 'ripple_effect', category: 'effects', name: 'Ripple Wave', description: 'Circular ripples expand outward', price: 750, type: 'click_effect' },
+            { id: 'star_effect', category: 'effects', name: 'Star Shower', description: 'Stars burst from click point', price: 1000, type: 'click_effect' },
+            { id: 'flame_effect', category: 'effects', name: 'Flame Burst', description: 'Fire particles explode upward', price: 1250, type: 'click_effect' },
+            { id: 'ice_effect', category: 'effects', name: 'Ice Shards', description: 'Crystalline shards scatter', price: 1500, type: 'click_effect' },
+            { id: 'lightning_effect', category: 'effects', name: 'Lightning Strike', description: 'Electric bolts flash briefly', price: 2000, type: 'click_effect' },
+            { id: 'heart_effect', category: 'effects', name: 'Heart Pop', description: 'Cute hearts float upward', price: 1750, type: 'click_effect' },
+            { id: 'smoke_effect', category: 'effects', name: 'Smoke Puff', description: 'Gray smoke clouds appear', price: 1200, type: 'click_effect' },
+            { id: 'bubble_effect', category: 'effects', name: 'Bubble Pop', description: 'Colorful bubbles burst', price: 1400, type: 'click_effect' },
+            { id: 'confetti_effect', category: 'effects', name: 'Confetti Blast', description: 'Celebration confetti falls', price: 2500, type: 'click_effect' },
+            { id: 'spiral_effect', category: 'effects', name: 'Spiral Vortex', description: 'Spinning spiral animation', price: 3000, type: 'click_effect' },
+            { id: 'explosion_effect', category: 'effects', name: 'Mini Explosion', description: 'Small explosive burst', price: 3500, type: 'click_effect' },
+            { id: 'portal_effect', category: 'effects', name: 'Portal Rift', description: 'Dimensional portal opens', price: 4000, type: 'click_effect' },
+            { id: 'laser_effect', category: 'effects', name: 'Laser Beam', description: 'Focused laser shoots out', price: 4500, type: 'click_effect' },
+            { id: 'magic_effect', category: 'effects', name: 'Magic Circle', description: 'Mystical runes appear', price: 5000, type: 'click_effect' },
+            { id: 'nuclear_effect', category: 'effects', name: 'Nuclear Blast', description: 'Atomic explosion effect', price: 7500, type: 'click_effect' },
+            { id: 'black_hole_effect', category: 'effects', name: 'Black Hole', description: 'Gravity well distortion', price: 10000, type: 'click_effect' },
+            { id: 'time_effect', category: 'effects', name: 'Time Warp', description: 'Clock hands spin wildly', price: 12500, type: 'click_effect' },
+            { id: 'galaxy_effect', category: 'effects', name: 'Galaxy Birth', description: 'Miniature galaxy forms', price: 15000, type: 'click_effect' },
+            { id: 'reality_effect', category: 'effects', name: 'Reality Crack', description: 'Screen cracks like glass', price: 20000, type: 'click_effect' },
+            { id: 'dimension_effect', category: 'effects', name: 'Dimension Shift', description: 'Reality phases in and out', price: 25000, type: 'click_effect' },
+            { id: 'god_effect', category: 'effects', name: 'Divine Intervention', description: 'Heavenly light descends', price: 35000, type: 'click_effect' },
+            { id: 'chaos_effect', category: 'effects', name: 'Chaos Storm', description: 'Random effects combine', price: 50000, type: 'click_effect' },
+            { id: 'universe_effect', category: 'effects', name: 'Universe Creation', description: 'Big bang in miniature', price: 75000, type: 'click_effect' },
+            { id: 'infinity_effect', category: 'effects', name: 'Infinity Symbol', description: 'Glowing infinity appears', price: 100000, type: 'click_effect' },
+
+            // Auto Clickers (25 items)
+            { id: 'auto_1', category: 'auto', name: 'Basic Auto-Clicker', description: 'Clicks once per second', price: 2000, type: 'auto_clicker', power: 1 },
+            { id: 'auto_2', category: 'auto', name: 'Fast Auto-Clicker', description: 'Clicks twice per second', price: 5000, type: 'auto_clicker', power: 2 },
+            { id: 'auto_3', category: 'auto', name: 'Rapid Auto-Clicker', description: 'Clicks 3 times per second', price: 10000, type: 'auto_clicker', power: 3 },
+            { id: 'auto_4', category: 'auto', name: 'Turbo Auto-Clicker', description: 'Clicks 5 times per second', price: 20000, type: 'auto_clicker', power: 5 },
+            { id: 'auto_5', category: 'auto', name: 'Hyper Auto-Clicker', description: 'Clicks 8 times per second', price: 40000, type: 'auto_clicker', power: 8 },
+            { id: 'auto_6', category: 'auto', name: 'Ultra Auto-Clicker', description: 'Clicks 12 times per second', price: 80000, type: 'auto_clicker', power: 12 },
+            { id: 'auto_7', category: 'auto', name: 'Mega Auto-Clicker', description: 'Clicks 20 times per second', price: 150000, type: 'auto_clicker', power: 20 },
+            { id: 'auto_8', category: 'auto', name: 'Giga Auto-Clicker', description: 'Clicks 30 times per second', price: 300000, type: 'auto_clicker', power: 30 },
+            { id: 'auto_9', category: 'auto', name: 'Tera Auto-Clicker', description: 'Clicks 50 times per second', price: 600000, type: 'auto_clicker', power: 50 },
+            { id: 'auto_10', category: 'auto', name: 'Quantum Clicker', description: 'Clicks 100 times per second', price: 1000000, type: 'auto_clicker', power: 100 },
+            { id: 'robot_1', category: 'auto', name: 'Click Robot', description: 'Mechanical clicking assistant', price: 25000, type: 'auto_clicker', power: 15 },
+            { id: 'robot_2', category: 'auto', name: 'AI Clicker', description: 'Smart clicking algorithm', price: 75000, type: 'auto_clicker', power: 25 },
+            { id: 'robot_3', category: 'auto', name: 'Cyber Clicker', description: 'Cybernetic enhancement', price: 200000, type: 'auto_clicker', power: 40 },
+            { id: 'magic_1', category: 'auto', name: 'Magic Finger', description: 'Enchanted clicking spell', price: 50000, type: 'auto_clicker', power: 18 },
+            { id: 'magic_2', category: 'auto', name: 'Wizard Staff', description: 'Mystical clicking power', price: 125000, type: 'auto_clicker', power: 35 },
+            { id: 'magic_3', category: 'auto', name: 'Arcane Orb', description: 'Pure magical energy', price: 350000, type: 'auto_clicker', power: 60 },
+            { id: 'alien_1', category: 'auto', name: 'Alien Tech', description: 'Extraterrestrial clicking', price: 100000, type: 'auto_clicker', power: 28 },
+            { id: 'alien_2', category: 'auto', name: 'UFO Beam', description: 'Abduction ray clicking', price: 250000, type: 'auto_clicker', power: 45 },
+            { id: 'alien_3', category: 'auto', name: 'Mothership', description: 'Massive alien vessel', price: 500000, type: 'auto_clicker', power: 80 },
+            { id: 'time_1', category: 'auto', name: 'Time Loop', description: 'Clicks from the future', price: 400000, type: 'auto_clicker', power: 70 },
+            { id: 'time_2', category: 'auto', name: 'Temporal Rift', description: 'Clicks across dimensions', price: 800000, type: 'auto_clicker', power: 120 },
+            { id: 'god_1', category: 'auto', name: 'Divine Hand', description: 'Blessed clicking power', price: 1500000, type: 'auto_clicker', power: 200 },
+            { id: 'god_2', category: 'auto', name: 'Celestial Force', description: 'Heavenly clicking army', price: 3000000, type: 'auto_clicker', power: 400 },
+            { id: 'universe_1', category: 'auto', name: 'Big Bang Clicker', description: 'Universe-creating power', price: 10000000, type: 'auto_clicker', power: 1000 },
+            { id: 'infinity_1', category: 'auto', name: 'Infinity Engine', description: 'Limitless clicking potential', price: 50000000, type: 'auto_clicker', power: 5000 },
+
+            // Upgrades (25 items)
+            { id: 'mult_2x', category: 'upgrades', name: '2x Multiplier', description: 'Permanent 2x click multiplier', price: 10000, type: 'multiplier', value: 2 },
+            { id: 'mult_3x', category: 'upgrades', name: '3x Multiplier', description: 'Permanent 3x click multiplier', price: 30000, type: 'multiplier', value: 3 },
+            { id: 'mult_5x', category: 'upgrades', name: '5x Multiplier', description: 'Permanent 5x click multiplier', price: 100000, type: 'multiplier', value: 5 },
+            { id: 'mult_10x', category: 'upgrades', name: '10x Multiplier', description: 'Permanent 10x click multiplier', price: 500000, type: 'multiplier', value: 10 },
+            { id: 'mult_25x', category: 'upgrades', name: '25x Multiplier', description: 'Permanent 25x click multiplier', price: 2000000, type: 'multiplier', value: 25 },
+            { id: 'crit_10', category: 'upgrades', name: '10% Critical', description: '10% chance for 5x damage', price: 15000, type: 'critical', chance: 0.1, multiplier: 5 },
+            { id: 'crit_25', category: 'upgrades', name: '25% Critical', description: '25% chance for 5x damage', price: 50000, type: 'critical', chance: 0.25, multiplier: 5 },
+            { id: 'crit_50', category: 'upgrades', name: '50% Critical', description: '50% chance for 10x damage', price: 200000, type: 'critical', chance: 0.5, multiplier: 10 },
+            { id: 'luck_boost', category: 'upgrades', name: 'Lucky Charm', description: 'Better secret discovery rate', price: 25000, type: 'luck' },
+            { id: 'speed_boost', category: 'upgrades', name: 'Speed Demon', description: 'Faster key recognition', price: 35000, type: 'speed' },
+            { id: 'combo_master', category: 'upgrades', name: 'Combo Master', description: 'Longer combo windows', price: 45000, type: 'combo' },
+            { id: 'secret_radar', category: 'upgrades', name: 'Secret Radar', description: 'Hints for undiscovered secrets', price: 75000, type: 'radar' },
+            { id: 'auto_save', category: 'upgrades', name: 'Auto Save', description: 'Progress saves automatically', price: 20000, type: 'save' },
+            { id: 'click_magnet', category: 'upgrades', name: 'Click Magnet', description: 'Attracts bonus points', price: 60000, type: 'magnet' },
+            { id: 'time_warp', category: 'upgrades', name: 'Time Warp', description: 'Multipliers last longer', price: 100000, type: 'time' },
+            { id: 'rainbow_mode', category: 'upgrades', name: 'Rainbow Mode', description: 'Permanent rainbow effects', price: 150000, type: 'rainbow' },
+            { id: 'ghost_clicks', category: 'upgrades', name: 'Ghost Clicks', description: 'Phantom clicks after real ones', price: 200000, type: 'ghost' },
+            { id: 'chain_reaction', category: 'upgrades', name: 'Chain Reaction', description: 'Clicks trigger more clicks', price: 300000, type: 'chain' },
+            { id: 'quantum_tunnel', category: 'upgrades', name: 'Quantum Tunnel', description: 'Clicks phase through reality', price: 500000, type: 'quantum' },
+            { id: 'reality_break', category: 'upgrades', name: 'Reality Break', description: 'Break the laws of physics', price: 1000000, type: 'reality' },
+            { id: 'god_mode', category: 'upgrades', name: 'God Mode', description: 'Transcend mortal clicking', price: 2500000, type: 'god' },
+            { id: 'universe_hack', category: 'upgrades', name: 'Universe Hack', description: 'Hack the universe code', price: 5000000, type: 'hack' },
+            { id: 'infinity_stone', category: 'upgrades', name: 'Infinity Stone', description: 'Infinite power source', price: 10000000, type: 'infinity' },
+            { id: 'omnipotence', category: 'upgrades', name: 'Omnipotence', description: 'Ultimate cosmic power', price: 25000000, type: 'omni' },
+            { id: 'transcendence', category: 'upgrades', name: 'Transcendence', description: 'Beyond all understanding', price: 100000000, type: 'transcend' }
+        ];
+
+        // Achievement definitions with exclusive clickers
+        const achievementList = [
+            {
+                id: 'first_click',
+                name: 'First Steps',
+                description: 'Make your first click',
+                requirement: () => totalClicks >= 1,
+                reward: { type: 'clicker', name: 'Starter Bot', power: 1, description: 'Your first automated helper' },
+                completed: false
+            },
+            {
+                id: 'hundred_clicks',
+                name: 'Getting Started',
+                description: 'Reach 100 clicks',
+                requirement: () => totalClicks >= 100,
+                reward: { type: 'clicker', name: 'Persistence Engine', power: 3, description: 'Rewards dedication' },
+                completed: false
+            },
+            {
+                id: 'thousand_clicks',
+                name: 'Click Warrior',
+                description: 'Reach 1,000 clicks',
+                requirement: () => totalClicks >= 1000,
+                reward: { type: 'clicker', name: 'Battle Clicker', power: 8, description: 'Forged in the fires of clicking' },
+                completed: false
+            },
+            {
+                id: 'ten_thousand_clicks',
+                name: 'Click Master',
+                description: 'Reach 10,000 clicks',
+                requirement: () => totalClicks >= 10000,
+                reward: { type: 'clicker', name: 'Master\'s Touch', power: 25, description: 'The mark of a true master' },
+                completed: false
+            },
+            {
+                id: 'hundred_thousand_clicks',
+                name: 'Click Legend',
+                description: 'Reach 100,000 clicks',
+                requirement: () => totalClicks >= 100000,
+                reward: { type: 'clicker', name: 'Legendary Automaton', power: 100, description: 'Legends speak of its power' },
+                completed: false
+            },
+            {
+                id: 'million_clicks',
+                name: 'Click God',
+                description: 'Reach 1,000,000 clicks',
+                requirement: () => totalClicks >= 1000000,
+                reward: { type: 'clicker', name: 'Divine Clicker', power: 500, description: 'Blessed by the click gods' },
+                completed: false
+            },
+            {
+                id: 'first_secret',
+                name: 'Secret Seeker',
+                description: 'Discover your first secret',
+                requirement: () => unlockedSecrets.size >= 1,
+                reward: { type: 'clicker', name: 'Mystery Solver', power: 5, description: 'Unravels hidden combinations' },
+                completed: false
+            },
+            {
+                id: 'ten_secrets',
+                name: 'Code Breaker',
+                description: 'Discover 10 secrets',
+                requirement: () => unlockedSecrets.size >= 10,
+                reward: { type: 'clicker', name: 'Cipher Machine', power: 15, description: 'Decodes reality itself' },
+                completed: false
+            },
+            {
+                id: 'fifty_secrets',
+                name: 'Secret Master',
+                description: 'Discover 50 secrets',
+                requirement: () => unlockedSecrets.size >= 50,
+                reward: { type: 'clicker', name: 'Enigma Engine', power: 50, description: 'Masters all hidden knowledge' },
+                completed: false
+            },
+            {
+                id: 'all_secrets',
+                name: 'Omniscient',
+                description: 'Discover all 200 secrets',
+                requirement: () => unlockedSecrets.size >= 200,
+                reward: { type: 'clicker', name: 'All-Knowing Oracle', power: 1000, description: 'Knows every secret of existence' },
+                completed: false
+            },
+            {
+                id: 'thousand_points',
+                name: 'Point Collector',
+                description: 'Reach 1,000 points',
+                requirement: () => score >= 1000,
+                reward: { type: 'clicker', name: 'Point Harvester', power: 4, description: 'Efficiently gathers points' },
+                completed: false
+            },
+            {
+                id: 'million_points',
+                name: 'Point Millionaire',
+                description: 'Reach 1,000,000 points',
+                requirement: () => score >= 1000000,
+                reward: { type: 'clicker', name: 'Wealth Generator', power: 75, description: 'Creates abundance from nothing' },
+                completed: false
+            },
+            {
+                id: 'billion_points',
+                name: 'Point Billionaire',
+                description: 'Reach 1,000,000,000 points',
+                requirement: () => score >= 1000000000,
+                reward: { type: 'clicker', name: 'Fortune Engine', power: 300, description: 'Generates unimaginable wealth' },
+                completed: false
+            },
+            {
+                id: 'first_purchase',
+                name: 'First Purchase',
+                description: 'Buy your first shop item',
+                requirement: () => ownedItems.size >= 1,
+                reward: { type: 'clicker', name: 'Shopping Assistant', power: 6, description: 'Helps with future purchases' },
+                completed: false
+            },
+            {
+                id: 'big_spender',
+                name: 'Big Spender',
+                description: 'Buy 10 shop items',
+                requirement: () => ownedItems.size >= 10,
+                reward: { type: 'clicker', name: 'Luxury Clicker', power: 20, description: 'Only the finest clicking technology' },
+                completed: false
+            },
+            {
+                id: 'collector',
+                name: 'Collector',
+                description: 'Buy 25 shop items',
+                requirement: () => ownedItems.size >= 25,
+                reward: { type: 'clicker', name: 'Collection Curator', power: 60, description: 'Manages vast collections' },
+                completed: false
+            },
+            {
+                id: 'completionist',
+                name: 'Completionist',
+                description: 'Buy all 100 shop items',
+                requirement: () => ownedItems.size >= 100,
+                reward: { type: 'clicker', name: 'Perfect Completion Bot', power: 250, description: 'Achieves 100% in everything' },
+                completed: false
+            },
+            {
+                id: 'multiplier_master',
+                name: 'Multiplier Master',
+                description: 'Reach a 10x multiplier',
+                requirement: () => multiplier >= 10,
+                reward: { type: 'clicker', name: 'Amplification Unit', power: 30, description: 'Multiplies its own effectiveness' },
+                completed: false
+            },
+            {
+                id: 'speed_demon',
+                name: 'Speed Demon',
+                description: 'Reach 1000 clicks in under 5 minutes',
+                requirement: () => {
+                    // This would need time tracking, simplified for now
+                    return totalClicks >= 1000;
+                },
+                reward: { type: 'clicker', name: 'Lightning Clicker', power: 40, description: 'Strikes with the speed of lightning' },
+                completed: false
+            },
+            {
+                id: 'rainbow_master',
+                name: 'Rainbow Master',
+                description: 'Activate rainbow mode 5 times',
+                requirement: () => {
+                    // This would need rainbow activation tracking, simplified for now
+                    return unlockedSecrets.has(0); // Rainbow secret
+                },
+                reward: { type: 'clicker', name: 'Prismatic Clicker', power: 35, description: 'Clicks in all colors of the spectrum' },
+                completed: false
+            },
+            {
+                id: 'theme_collector',
+                name: 'Theme Collector',
+                description: 'Own 5 different themes',
+                requirement: () => {
+                    const themes = Array.from(ownedItems).filter(id => shopItems.find(item => item.id === id && item.category === 'skins'));
+                    return themes.length >= 5;
+                },
+                reward: { type: 'clicker', name: 'Style Synthesizer', power: 45, description: 'Adapts to any aesthetic' },
+                completed: false
+            },
+            {
+                id: 'effect_master',
+                name: 'Effect Master',
+                description: 'Own 5 different click effects',
+                requirement: () => {
+                    const effects = Array.from(ownedItems).filter(id => shopItems.find(item => item.id === id && item.category === 'effects'));
+                    return effects.length >= 5;
+                },
+                reward: { type: 'clicker', name: 'Effect Generator', power: 55, description: 'Creates spectacular visual displays' },
+                completed: false
+            },
+            {
+                id: 'auto_army',
+                name: 'Auto Army',
+                description: 'Own 10 auto-clickers from the shop',
+                requirement: () => {
+                    const autoItems = Array.from(ownedItems).filter(id => shopItems.find(item => item.id === id && item.category === 'auto'));
+                    return autoItems.length >= 10;
+                },
+                reward: { type: 'clicker', name: 'Army Commander', power: 80, description: 'Commands legions of auto-clickers' },
+                completed: false
+            },
+            {
+                id: 'upgrade_enthusiast',
+                name: 'Upgrade Enthusiast',
+                description: 'Own 10 upgrades',
+                requirement: () => {
+                    const upgrades = Array.from(ownedItems).filter(id => shopItems.find(item => item.id === id && item.category === 'upgrades'));
+                    return upgrades.length >= 10;
+                },
+                reward: { type: 'clicker', name: 'Enhancement Engine', power: 70, description: 'Continuously improves itself' },
+                completed: false
+            },
+            {
+                id: 'secret_admin',
+                name: 'Secret Administrator',
+                description: 'Access the classified admin panel',
+                requirement: () => {
+                    // This would track if they've accessed the admin panel
+                    return false; // Will be set when they access it
+                },
+                reward: { type: 'clicker', name: 'Admin Override', power: 200, description: 'Has administrative privileges' },
+                completed: false
+            },
+            {
+                id: 'infinite_power',
+                name: 'Infinite Power',
+                description: 'Activate the infinite multiplier',
+                requirement: () => {
+                    // Check if infinite multiplier is active
+                    return Array.from(activeEffects.values()).some(effect => effect.value >= 999999999);
+                },
+                reward: { type: 'clicker', name: 'Infinity Engine', power: 2000, description: 'Transcends all limitations' },
+                completed: false
+            }
+        ];
 
         // Generate 200 secrets with various key combinations
         const secrets = [
@@ -375,8 +1382,10 @@
         function handleKeyDown(event) {
             const key = event.key;
             
-            // Handle shift sequence for press-hold mode
+            // Track shift key for secret admin sequence
             if (key === 'Shift') {
+                shiftHeld = true;
+                
                 const now = Date.now();
                 if (now - lastCapsLockTime < 1000) {
                     capsLockCount++;
@@ -392,6 +1401,31 @@
                 }
             }
             
+            // Check for secret admin sequence (Up, Left, Right, Down arrow keys)
+            if (['ArrowUp', 'ArrowLeft', 'ArrowRight', 'ArrowDown'].includes(key)) {
+                secretAdminSequence.push(key);
+                
+                // Check if sequence matches target
+                let matches = true;
+                for (let i = 0; i < secretAdminSequence.length; i++) {
+                    if (secretAdminSequence[i] !== secretAdminTarget[i]) {
+                        matches = false;
+                        break;
+                    }
+                }
+                
+                if (!matches) {
+                    secretAdminSequence = [key]; // Reset and start with current key
+                }
+                
+                if (secretAdminSequence.length === 4 && 
+                    secretAdminSequence.join('') === secretAdminTarget.join('')) {
+                    showCodeEntryModal();
+                    secretAdminSequence = [];
+                    return;
+                }
+            }
+            
             // Reset shift count on other keys
             if (key !== 'Shift') {
                 capsLockCount = 0;
@@ -399,8 +1433,14 @@
             
             // Check if press-hold mode is active
             if (pressHoldMode && Date.now() < pressHoldEndTime) {
-                // In press-hold mode, allow key repeat
-                if (!pressedKeys.has(key)) {
+                // In press-hold mode, allow key repeat (but never for Enter)
+                if (!pressedKeys.has(key) && key !== 'Enter') {
+                    pressedKeys.add(key);
+                } else if (key === 'Enter') {
+                    // Always prevent Enter key repeat, even in press-hold mode
+                    if (pressedKeys.has(key)) {
+                        return;
+                    }
                     pressedKeys.add(key);
                 }
             } else {
@@ -457,8 +1497,31 @@
             }
             
             // Any key press triggers a click (except special keys)
-            if (key !== 'Escape' && key !== 'F12' && !key.startsWith('F') && key !== 'Tab') {
-                handleClick();
+            if (key !== 'Escape' && key !== 'F12' && !key.startsWith('F') && key !== 'Tab' && key !== 'Enter') {
+                // Count this as a click for shop unlock purposes
+                totalClicks++;
+                console.log(`Key press counted as click. Total clicks: ${totalClicks}`);
+                
+                // Also trigger the normal click for points
+                const points = Math.floor(1 * multiplier);
+                score += points;
+                updateDisplay();
+                
+                // Add click animation
+                const button = document.getElementById('clickButton');
+                button.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    button.style.transform = 'scale(1)';
+                }, 100);
+                
+                // Add screen shake effect
+                document.body.style.animation = 'screenShake 0.2s ease-out';
+                setTimeout(() => {
+                    document.body.style.animation = '';
+                }, 200);
+                
+                // Trigger theme-specific click effect for keyboard presses too
+                triggerClickEffect();
             }
             
             currentKeys.add(key.toLowerCase());
@@ -467,6 +1530,7 @@
 
         function handleKeyUp(event) {
             const key = event.key;
+            
             pressedKeys.delete(key); // Remove from pressed keys tracking
             currentKeys.delete(key.toLowerCase());
         }
@@ -483,6 +1547,15 @@
             setTimeout(() => {
                 button.style.transform = 'scale(1)';
             }, 100);
+            
+            // Add screen shake effect
+            document.body.style.animation = 'screenShake 0.2s ease-out';
+            setTimeout(() => {
+                document.body.style.animation = '';
+            }, 200);
+            
+            // Trigger theme-specific click effect
+            triggerClickEffect();
         }
 
         function checkSecrets() {
@@ -631,6 +1704,1042 @@
             document.getElementById('multiplier').textContent = `Multiplier: ${multiplier.toFixed(1)}x`;
             document.getElementById('secretsFound').textContent = unlockedSecrets.size;
             document.getElementById('totalClicks').textContent = totalClicks;
+            
+            // Update progress bar
+            const progress = Math.min(totalClicks / 5000, 1) * 100;
+            document.getElementById('progressFill').style.width = `${progress}%`;
+            
+            // Check for new achievements
+            checkAchievements();
+            
+            // Debug: Show shop unlock status
+            console.log(`Total clicks: ${totalClicks}, Shop unlocked: ${shopUnlocked}`);
+            
+            // Shop is now unlocked from the start
+        }
+
+        function checkAchievements() {
+            achievementList.forEach(achievement => {
+                if (!achievements.has(achievement.id) && achievement.requirement()) {
+                    unlockAchievement(achievement);
+                }
+            });
+        }
+
+        function unlockAchievement(achievement) {
+            achievements.add(achievement.id);
+            achievement.completed = true;
+            
+            // Add the exclusive clicker
+            if (achievement.reward.type === 'clicker') {
+                const clickerId = `achievement_${achievement.id}`;
+                achievementClickers.set(clickerId, achievement.reward);
+                autoClickers += achievement.reward.power;
+                updateAutoClicker();
+            }
+            
+            // Show achievement notification
+            const notification = document.getElementById('notification');
+            notification.innerHTML = `
+                <div style="color: #ffd700; font-weight: bold; text-shadow: 0 0 15px #ffd700;">🏆 ACHIEVEMENT UNLOCKED!</div>
+                <div style="color: #fff; font-size: 1.1rem; margin: 0.5rem 0;">${achievement.name}</div>
+                <div style="color: #aaa; font-size: 0.9rem;">${achievement.description}</div>
+                <div style="color: #00ff00; font-weight: bold; margin-top: 0.5rem;">REWARD: ${achievement.reward.name}</div>
+                <div style="color: #00ff00; font-size: 0.8rem;">+${achievement.reward.power} clicks/sec</div>
+            `;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 6000);
+        }
+
+        function unlockShop() {
+            shopUnlocked = true;
+            document.getElementById('shopToggle').style.display = 'block';
+            generateShop();
+            
+            // Show notification
+            const notification = document.getElementById('notification');
+            notification.innerHTML = `
+                <div style="color: #00ff00; font-weight: bold;">SHOP UNLOCKED!</div>
+                <div>You've reached 5000 clicks!</div>
+                <div>Check out the new shop on the right!</div>
+            `;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 5000);
+        }
+
+        function generateShop() {
+            const shopContent = document.getElementById('shopContent');
+            const categories = {
+                'skins': 'THEMES',
+                'effects': 'CLICK EFFECTS', 
+                'auto': 'AUTO CLICKERS',
+                'upgrades': 'UPGRADES'
+            };
+            
+            let html = '';
+            
+            Object.entries(categories).forEach(([categoryId, categoryName]) => {
+                const items = shopItems.filter(item => item.category === categoryId);
+                
+                html += `
+                    <div class="shop-category">
+                        <div class="category-title">${categoryName}</div>
+                `;
+                
+                items.forEach(item => {
+                    const isOwned = ownedItems.has(item.id);
+                    const isEquipped = equippedItems.get(item.category) === item.id;
+                    const canAfford = score >= item.price;
+                    
+                    let itemClass = 'shop-item';
+                    let priceText = item.price;
+                    
+                    if (isOwned) {
+                        itemClass += ' owned';
+                        priceText = 'OWNED';
+                    }
+                    if (isEquipped) {
+                        itemClass += ' equipped';
+                        priceText = 'EQUIPPED';
+                    }
+                    if (!canAfford && !isOwned) {
+                        itemClass += ' unaffordable';
+                    }
+                    
+                    html += `
+                        <div class="${itemClass}" onclick="buyItem('${item.id}')">
+                            <div class="item-info">
+                                <div class="item-name">${item.name}</div>
+                                <div class="item-description">${item.description}</div>
+                            </div>
+                            <div class="item-price">${priceText}</div>
+                        </div>
+                    `;
+                });
+                
+                html += '</div>';
+            });
+            
+            shopContent.innerHTML = html;
+        }
+
+        function buyItem(itemId) {
+            const item = shopItems.find(i => i.id === itemId);
+            if (!item) return;
+            
+            const isOwned = ownedItems.has(itemId);
+            
+            if (isOwned) {
+                // Equip/unequip item
+                if (equippedItems.get(item.category) === itemId) {
+                    equippedItems.delete(item.category);
+                } else {
+                    equippedItems.set(item.category, itemId);
+                    applyItem(item);
+                }
+            } else if (score >= item.price) {
+                // Buy item
+                score -= item.price;
+                ownedItems.add(itemId);
+                equippedItems.set(item.category, itemId);
+                applyItem(item);
+                
+                // Show purchase notification
+                const notification = document.getElementById('notification');
+                notification.innerHTML = `
+                    <div style="color: #00ff00; font-weight: bold;">PURCHASED!</div>
+                    <div>${item.name}</div>
+                    <div>-${item.price} points</div>
+                `;
+                notification.classList.add('show');
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
+            }
+            
+            updateDisplay();
+            generateShop();
+        }
+
+        function applyItem(item) {
+            if (item.type === 'auto_clicker') {
+                autoClickers += item.power;
+                updateAutoClicker();
+            } else if (item.type === 'theme') {
+                applyTheme(item.id);
+            }
+            // Other item effects would be implemented here
+        }
+
+        function applyTheme(themeId) {
+            // Remove existing theme styles
+            const existingTheme = document.getElementById('themeStyles');
+            if (existingTheme) {
+                existingTheme.remove();
+            }
+
+            // Create new theme styles
+            const style = document.createElement('style');
+            style.id = 'themeStyles';
+            
+            switch(themeId) {
+                case 'neon_theme':
+                    style.innerHTML = `
+                        body { background: linear-gradient(45deg, #0a0a0a, #1a0a1a); }
+                        .score { color: #00ffff; text-shadow: 0 0 30px #00ffff; }
+                        .click-button { border-color: #ff00ff; color: #ff00ff; box-shadow: 0 0 20px #ff00ff; }
+                        .click-button:hover { background: #ff00ff; color: #000; }
+                        .multiplier { color: #00ff00; text-shadow: 0 0 15px #00ff00; }
+                        .secrets-button, .shop-toggle { border-color: #00ffff; color: #00ffff; }
+                        .secrets-button:hover, .shop-toggle:hover { background: #00ffff; color: #000; }
+                    `;
+                    break;
+                case 'retro_theme':
+                    style.innerHTML = `
+                        body { background: linear-gradient(45deg, #2d1b69, #11001c); }
+                        .score { color: #ff6ec7; text-shadow: 0 0 30px #ff6ec7; }
+                        .click-button { border-color: #ff6ec7; color: #ff6ec7; box-shadow: 0 0 20px #ff6ec7; }
+                        .click-button:hover { background: #ff6ec7; color: #000; }
+                        .multiplier { color: #9d4edd; text-shadow: 0 0 15px #9d4edd; }
+                        .secrets-button, .shop-toggle { border-color: #ff6ec7; color: #ff6ec7; }
+                        .secrets-button:hover, .shop-toggle:hover { background: #ff6ec7; color: #000; }
+                    `;
+                    break;
+                case 'matrix_theme':
+                    style.innerHTML = `
+                        body { background: #000; }
+                        .score { color: #00ff00; text-shadow: 0 0 30px #00ff00; font-family: 'Courier New', monospace; }
+                        .click-button { border-color: #00ff00; color: #00ff00; box-shadow: 0 0 20px #00ff00; }
+                        .click-button:hover { background: #00ff00; color: #000; }
+                        .multiplier { color: #00aa00; text-shadow: 0 0 15px #00aa00; }
+                        .secrets-button, .shop-toggle { border-color: #00ff00; color: #00ff00; }
+                        .secrets-button:hover, .shop-toggle:hover { background: #00ff00; color: #000; }
+                        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+                                      background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, #00ff0020 2px, #00ff0020 4px);
+                                      pointer-events: none; z-index: -1; }
+                    `;
+                    break;
+                case 'fire_theme':
+                    style.innerHTML = `
+                        body { background: linear-gradient(45deg, #1a0000, #330000, #1a0000); }
+                        .score { color: #ff4500; text-shadow: 0 0 30px #ff4500; }
+                        .click-button { border-color: #ff6600; color: #ff6600; box-shadow: 0 0 20px #ff6600; }
+                        .click-button:hover { background: #ff6600; color: #000; }
+                        .multiplier { color: #ff8c00; text-shadow: 0 0 15px #ff8c00; }
+                        .secrets-button, .shop-toggle { border-color: #ff4500; color: #ff4500; }
+                        .secrets-button:hover, .shop-toggle:hover { background: #ff4500; color: #000; }
+                    `;
+                    break;
+                case 'ice_theme':
+                    style.innerHTML = `
+                        body { background: linear-gradient(45deg, #001122, #003366, #001122); }
+                        .score { color: #87ceeb; text-shadow: 0 0 30px #87ceeb; }
+                        .click-button { border-color: #00bfff; color: #00bfff; box-shadow: 0 0 20px #00bfff; }
+                        .click-button:hover { background: #00bfff; color: #000; }
+                        .multiplier { color: #b0e0e6; text-shadow: 0 0 15px #b0e0e6; }
+                        .secrets-button, .shop-toggle { border-color: #87ceeb; color: #87ceeb; }
+                        .secrets-button:hover, .shop-toggle:hover { background: #87ceeb; color: #000; }
+                    `;
+                    break;
+                case 'space_theme':
+                    style.innerHTML = `
+                        body { background: radial-gradient(circle, #000428, #004e92, #000428); }
+                        .score { color: #ffffff; text-shadow: 0 0 30px #ffffff; }
+                        .click-button { border-color: #4169e1; color: #4169e1; box-shadow: 0 0 20px #4169e1; }
+                        .click-button:hover { background: #4169e1; color: #fff; }
+                        .multiplier { color: #dda0dd; text-shadow: 0 0 15px #dda0dd; }
+                        .secrets-button, .shop-toggle { border-color: #4169e1; color: #4169e1; }
+                        .secrets-button:hover, .shop-toggle:hover { background: #4169e1; color: #fff; }
+                        body::before { content: '⭐'; position: fixed; top: 10%; left: 20%; color: white; font-size: 20px; animation: twinkle 2s infinite; }
+                        body::after { content: '✦'; position: fixed; top: 30%; right: 15%; color: white; font-size: 15px; animation: twinkle 3s infinite; }
+                        @keyframes twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+                    `;
+                    break;
+                case 'gold_theme':
+                    style.innerHTML = `
+                        body { background: linear-gradient(45deg, #1a1a00, #333300, #1a1a00); }
+                        .score { color: #ffd700; text-shadow: 0 0 30px #ffd700; }
+                        .click-button { border-color: #ffb347; color: #ffb347; box-shadow: 0 0 20px #ffb347; }
+                        .click-button:hover { background: #ffb347; color: #000; }
+                        .multiplier { color: #daa520; text-shadow: 0 0 15px #daa520; }
+                        .secrets-button, .shop-toggle { border-color: #ffd700; color: #ffd700; }
+                        .secrets-button:hover, .shop-toggle:hover { background: #ffd700; color: #000; }
+                    `;
+                    break;
+                case 'rainbow_theme':
+                    style.innerHTML = `
+                        body { background: linear-gradient(45deg, #ff0000, #ff8000, #ffff00, #00ff00, #0080ff, #8000ff, #ff0080); 
+                               background-size: 400% 400%; animation: rainbowBg 3s ease infinite; }
+                        .score { animation: rainbow 2s linear infinite; }
+                        .click-button { animation: rainbowBorder 2s linear infinite; }
+                        .multiplier { animation: rainbow 2s linear infinite; }
+                        .secrets-button, .shop-toggle { animation: rainbowBorder 2s linear infinite; }
+                        @keyframes rainbowBg { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+                        @keyframes rainbow { 0% { color: #ff0000; text-shadow: 0 0 20px #ff0000; } 16.66% { color: #ff8000; text-shadow: 0 0 20px #ff8000; } 33.33% { color: #ffff00; text-shadow: 0 0 20px #ffff00; } 50% { color: #00ff00; text-shadow: 0 0 20px #00ff00; } 66.66% { color: #0080ff; text-shadow: 0 0 20px #0080ff; } 83.33% { color: #8000ff; text-shadow: 0 0 20px #8000ff; } 100% { color: #ff0000; text-shadow: 0 0 20px #ff0000; } }
+                        @keyframes rainbowBorder { 0% { border-color: #ff0000; box-shadow: 0 0 20px #ff0000; } 16.66% { border-color: #ff8000; box-shadow: 0 0 20px #ff8000; } 33.33% { border-color: #ffff00; box-shadow: 0 0 20px #ffff00; } 50% { border-color: #00ff00; box-shadow: 0 0 20px #00ff00; } 66.66% { border-color: #0080ff; box-shadow: 0 0 20px #0080ff; } 83.33% { border-color: #8000ff; box-shadow: 0 0 20px #8000ff; } 100% { border-color: #ff0000; box-shadow: 0 0 20px #ff0000; } }
+                    `;
+                    break;
+                case 'cyber_theme':
+                    style.innerHTML = `
+                        body { background: linear-gradient(45deg, #0a0a0a, #1a001a, #001a1a); }
+                        .score { color: #00ffff; text-shadow: 0 0 30px #00ffff; }
+                        .click-button { border-color: #ff00ff; color: #ff00ff; box-shadow: 0 0 20px #ff00ff; }
+                        .click-button:hover { background: #ff00ff; color: #000; }
+                        .multiplier { color: #00ff80; text-shadow: 0 0 15px #00ff80; }
+                        .secrets-button, .shop-toggle { border-color: #00ffff; color: #00ffff; }
+                        .secrets-button:hover, .shop-toggle:hover { background: #00ffff; color: #000; }
+                    `;
+                    break;
+                case 'nature_theme':
+                    style.innerHTML = `
+                        body { background: linear-gradient(45deg, #0d2818, #1a4d2e, #0d2818); }
+                        .score { color: #90ee90; text-shadow: 0 0 30px #90ee90; }
+                        .click-button { border-color: #32cd32; color: #32cd32; box-shadow: 0 0 20px #32cd32; }
+                        .click-button:hover { background: #32cd32; color: #000; }
+                        .multiplier { color: #98fb98; text-shadow: 0 0 15px #98fb98; }
+                        .secrets-button, .shop-toggle { border-color: #32cd32; color: #32cd32; }
+                        .secrets-button:hover, .shop-toggle:hover { background: #32cd32; color: #000; }
+                    `;
+                    break;
+                case 'ocean_theme':
+                    style.innerHTML = `
+                        body { background: linear-gradient(45deg, #001f3f, #004080, #001f3f); }
+                        .score { color: #40e0d0; text-shadow: 0 0 30px #40e0d0; }
+                        .click-button { border-color: #00ced1; color: #00ced1; box-shadow: 0 0 20px #00ced1; }
+                        .click-button:hover { background: #00ced1; color: #000; }
+                        .multiplier { color: #afeeee; text-shadow: 0 0 15px #afeeee; }
+                        .secrets-button, .shop-toggle { border-color: #40e0d0; color: #40e0d0; }
+                        .secrets-button:hover, .shop-toggle:hover { background: #40e0d0; color: #000; }
+                    `;
+                    break;
+                case 'lava_theme':
+                    style.innerHTML = `
+                        body { background: linear-gradient(45deg, #2d0000, #4d1a00, #2d0000); }
+                        .score { color: #ff4500; text-shadow: 0 0 30px #ff4500; }
+                        .click-button { border-color: #ff6347; color: #ff6347; box-shadow: 0 0 20px #ff6347; }
+                        .click-button:hover { background: #ff6347; color: #000; }
+                        .multiplier { color: #ff7f50; text-shadow: 0 0 15px #ff7f50; }
+                        .secrets-button, .shop-toggle { border-color: #ff4500; color: #ff4500; }
+                        .secrets-button:hover, .shop-toggle:hover { background: #ff4500; color: #000; }
+                    `;
+                    break;
+                case 'crystal_theme':
+                    style.innerHTML = `
+                        body { background: linear-gradient(45deg, #1a0033, #330066, #1a0033); }
+                        .score { color: #da70d6; text-shadow: 0 0 30px #da70d6; }
+                        .click-button { border-color: #9370db; color: #9370db; box-shadow: 0 0 20px #9370db; }
+                        .click-button:hover { background: #9370db; color: #000; }
+                        .multiplier { color: #dda0dd; text-shadow: 0 0 15px #dda0dd; }
+                        .secrets-button, .shop-toggle { border-color: #da70d6; color: #da70d6; }
+                        .secrets-button:hover, .shop-toggle:hover { background: #da70d6; color: #000; }
+                    `;
+                    break;
+                case 'shadow_theme':
+                    style.innerHTML = `
+                        body { background: linear-gradient(45deg, #0d0d0d, #1a0d1a, #0d0d0d); }
+                        .score { color: #8a2be2; text-shadow: 0 0 30px #8a2be2; }
+                        .click-button { border-color: #4b0082; color: #4b0082; box-shadow: 0 0 20px #4b0082; }
+                        .click-button:hover { background: #4b0082; color: #fff; }
+                        .multiplier { color: #9932cc; text-shadow: 0 0 15px #9932cc; }
+                        .secrets-button, .shop-toggle { border-color: #8a2be2; color: #8a2be2; }
+                        .secrets-button:hover, .shop-toggle:hover { background: #8a2be2; color: #000; }
+                    `;
+                    break;
+                case 'light_theme':
+                    style.innerHTML = `
+                        body { background: linear-gradient(45deg, #f0f8ff, #ffffff, #f0f8ff); color: #000; }
+                        .score { color: #ffd700; text-shadow: 0 0 30px #ffd700; }
+                        .click-button { border-color: #ffd700; color: #ffd700; box-shadow: 0 0 20px #ffd700; }
+                        .click-button:hover { background: #ffd700; color: #000; }
+                        .multiplier { color: #ff8c00; text-shadow: 0 0 15px #ff8c00; }
+                        .secrets-button, .shop-toggle { border-color: #ffd700; color: #ffd700; }
+                        .secrets-button:hover, .shop-toggle:hover { background: #ffd700; color: #000; }
+                        .stats { color: #333; }
+                    `;
+                    break;
+                case 'toxic_theme':
+                    style.innerHTML = `
+                        body { background: linear-gradient(45deg, #0d1a0d, #1a331a, #0d1a0d); }
+                        .score { color: #32ff32; text-shadow: 0 0 30px #32ff32; }
+                        .click-button { border-color: #00ff00; color: #00ff00; box-shadow: 0 0 20px #00ff00; }
+                        .click-button:hover { background: #00ff00; color: #000; }
+                        .multiplier { color: #7fff00; text-shadow: 0 0 15px #7fff00; }
+                        .secrets-button, .shop-toggle { border-color: #32ff32; color: #32ff32; }
+                        .secrets-button:hover, .shop-toggle:hover { background: #32ff32; color: #000; }
+                    `;
+                    break;
+                case 'galaxy_theme':
+                    style.innerHTML = `
+                        body { background: radial-gradient(ellipse at center, #1e3c72, #2a5298, #000428); }
+                        .score { color: #e6e6fa; text-shadow: 0 0 30px #e6e6fa; }
+                        .click-button { border-color: #9370db; color: #9370db; box-shadow: 0 0 20px #9370db; }
+                        .click-button:hover { background: #9370db; color: #fff; }
+                        .multiplier { color: #dda0dd; text-shadow: 0 0 15px #dda0dd; }
+                        .secrets-button, .shop-toggle { border-color: #e6e6fa; color: #e6e6fa; }
+                        .secrets-button:hover, .shop-toggle:hover { background: #e6e6fa; color: #000; }
+                    `;
+                    break;
+                case 'blood_theme':
+                    style.innerHTML = `
+                        body { background: linear-gradient(45deg, #1a0000, #330000, #4d0000); }
+                        .score { color: #dc143c; text-shadow: 0 0 30px #dc143c; }
+                        .click-button { border-color: #8b0000; color: #8b0000; box-shadow: 0 0 20px #8b0000; }
+                        .click-button:hover { background: #8b0000; color: #fff; }
+                        .multiplier { color: #ff6347; text-shadow: 0 0 15px #ff6347; }
+                        .secrets-button, .shop-toggle { border-color: #dc143c; color: #dc143c; }
+                        .secrets-button:hover, .shop-toggle:hover { background: #dc143c; color: #000; }
+                    `;
+                    break;
+                case 'electric_theme':
+                    style.innerHTML = `
+                        body { background: linear-gradient(45deg, #000033, #000066, #000033); }
+                        .score { color: #00ffff; text-shadow: 0 0 30px #00ffff; }
+                        .click-button { border-color: #ffff00; color: #ffff00; box-shadow: 0 0 20px #ffff00; }
+                        .click-button:hover { background: #ffff00; color: #000; }
+                        .multiplier { color: #87ceeb; text-shadow: 0 0 15px #87ceeb; }
+                        .secrets-button, .shop-toggle { border-color: #00ffff; color: #00ffff; }
+                        .secrets-button:hover, .shop-toggle:hover { background: #00ffff; color: #000; }
+                    `;
+                    break;
+                case 'void_theme':
+                    style.innerHTML = `
+                        body { background: radial-gradient(circle, #000000, #1a1a1a, #000000); }
+                        .score { color: #800080; text-shadow: 0 0 30px #800080; }
+                        .click-button { border-color: #4b0082; color: #4b0082; box-shadow: 0 0 20px #4b0082; }
+                        .click-button:hover { background: #4b0082; color: #fff; }
+                        .multiplier { color: #9932cc; text-shadow: 0 0 15px #9932cc; }
+                        .secrets-button, .shop-toggle { border-color: #800080; color: #800080; }
+                        .secrets-button:hover, .shop-toggle:hover { background: #800080; color: #fff; }
+                    `;
+                    break;
+                case 'prism_theme':
+                    style.innerHTML = `
+                        body { background: linear-gradient(45deg, #ffffff, #ff0080, #8000ff, #0080ff, #00ff80, #ff8000); 
+                               background-size: 300% 300%; animation: prismShift 4s ease infinite; }
+                        .score { color: #ffffff; text-shadow: 0 0 30px #ffffff; }
+                        .click-button { border-color: #ffffff; color: #ffffff; box-shadow: 0 0 20px #ffffff; }
+                        .click-button:hover { background: #ffffff; color: #000; }
+                        .multiplier { color: #f0f0f0; text-shadow: 0 0 15px #f0f0f0; }
+                        .secrets-button, .shop-toggle { border-color: #ffffff; color: #ffffff; }
+                        .secrets-button:hover, .shop-toggle:hover { background: #ffffff; color: #000; }
+                        @keyframes prismShift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+                    `;
+                    break;
+                case 'quantum_theme':
+                    style.innerHTML = `
+                        body { background: radial-gradient(circle, #001122, #112233, #223344); }
+                        .score { color: #00ffff; text-shadow: 0 0 30px #00ffff; }
+                        .click-button { border-color: #ff00ff; color: #ff00ff; box-shadow: 0 0 20px #ff00ff; }
+                        .click-button:hover { background: #ff00ff; color: #000; }
+                        .multiplier { color: #80ff80; text-shadow: 0 0 15px #80ff80; }
+                        .secrets-button, .shop-toggle { border-color: #00ffff; color: #00ffff; }
+                        .secrets-button:hover, .shop-toggle:hover { background: #00ffff; color: #000; }
+                        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+                                      background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,255,255,0.1) 10px, rgba(0,255,255,0.1) 20px);
+                                      pointer-events: none; z-index: -1; animation: quantumFlux 2s linear infinite; }
+                        @keyframes quantumFlux { 0% { transform: translateX(0); } 100% { transform: translateX(20px); } }
+                    `;
+                    break;
+                case 'dream_theme':
+                    style.innerHTML = `
+                        body { background: linear-gradient(45deg, #4a0e4e, #81007f, #4a0e4e); }
+                        .score { color: #ff69b4; text-shadow: 0 0 30px #ff69b4; }
+                        .click-button { border-color: #da70d6; color: #da70d6; box-shadow: 0 0 20px #da70d6; }
+                        .click-button:hover { background: #da70d6; color: #000; }
+                        .multiplier { color: #dda0dd; text-shadow: 0 0 15px #dda0dd; }
+                        .secrets-button, .shop-toggle { border-color: #ff69b4; color: #ff69b4; }
+                        .secrets-button:hover, .shop-toggle:hover { background: #ff69b4; color: #000; }
+                        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+                                      background: radial-gradient(circle at 20% 30%, rgba(255,105,180,0.2), transparent),
+                                                  radial-gradient(circle at 80% 70%, rgba(218,112,214,0.2), transparent);
+                                      pointer-events: none; z-index: -1; animation: dreamFloat 6s ease-in-out infinite; }
+                        @keyframes dreamFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+                    `;
+                    break;
+                case 'ancient_theme':
+                    style.innerHTML = `
+                        body { background: linear-gradient(45deg, #2d1b00, #4d3300, #2d1b00); }
+                        .score { color: #daa520; text-shadow: 0 0 30px #daa520; }
+                        .click-button { border-color: #cd853f; color: #cd853f; box-shadow: 0 0 20px #cd853f; }
+                        .click-button:hover { background: #cd853f; color: #000; }
+                        .multiplier { color: #f4a460; text-shadow: 0 0 15px #f4a460; }
+                        .secrets-button, .shop-toggle { border-color: #daa520; color: #daa520; }
+                        .secrets-button:hover, .shop-toggle:hover { background: #daa520; color: #000; }
+                        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+                                      background-image: repeating-linear-gradient(90deg, transparent, transparent 50px, rgba(218,165,32,0.1) 50px, rgba(218,165,32,0.1) 52px);
+                                      pointer-events: none; z-index: -1; }
+                    `;
+                    break;
+                case 'cosmic_theme':
+                    style.innerHTML = `
+                        body { background: radial-gradient(ellipse at center, #000428, #004e92, #000000); }
+                        .score { color: #ffffff; text-shadow: 0 0 30px #ffffff, 0 0 60px #ffffff; }
+                        .click-button { border-color: #ffffff; color: #ffffff; box-shadow: 0 0 30px #ffffff; }
+                        .click-button:hover { background: #ffffff; color: #000; }
+                        .multiplier { color: #e6e6fa; text-shadow: 0 0 15px #e6e6fa; }
+                        .secrets-button, .shop-toggle { border-color: #ffffff; color: #ffffff; }
+                        .secrets-button:hover, .shop-toggle:hover { background: #ffffff; color: #000; }
+                        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+                                      background: radial-gradient(2px 2px at 20px 30px, #ffffff, transparent),
+                                                  radial-gradient(2px 2px at 40px 70px, #ffffff, transparent),
+                                                  radial-gradient(1px 1px at 90px 40px, #ffffff, transparent),
+                                                  radial-gradient(1px 1px at 130px 80px, #ffffff, transparent);
+                                      pointer-events: none; z-index: -1; animation: cosmicPulse 8s ease-in-out infinite; }
+                        @keyframes cosmicPulse { 0%, 100% { opacity: 0.8; } 50% { opacity: 1; } }
+                    `;
+                    break;
+                default:
+                    // Default theme (reset to original)
+                    style.innerHTML = `
+                        body { background-color: #000; color: #fff; }
+                        .score { color: #fff; text-shadow: none; }
+                        .click-button { border-color: #fff; color: #fff; box-shadow: none; }
+                        .click-button:hover { background: #fff; color: #000; }
+                        .multiplier { color: #fff; text-shadow: none; }
+                        .secrets-button, .shop-toggle { border-color: #fff; color: #fff; }
+                        .secrets-button:hover, .shop-toggle:hover { background: #fff; color: #000; }
+                    `;
+            }
+            
+            document.head.appendChild(style);
+        }
+
+        function updateAutoClicker() {
+            if (autoClickerInterval) {
+                clearInterval(autoClickerInterval);
+            }
+            
+            if (autoClickers > 0) {
+                autoClickerInterval = setInterval(() => {
+                    for (let i = 0; i < autoClickers; i++) {
+                        handleClick();
+                    }
+                }, 1000);
+            }
+        }
+
+        function triggerClickEffect() {
+            const currentTheme = equippedItems.get('skins');
+            const currentEffect = equippedItems.get('effects');
+            
+            // Apply theme-specific click effects
+            if (currentTheme) {
+                applyThemeClickEffect(currentTheme);
+            }
+            
+            // Apply purchased click effects
+            if (currentEffect) {
+                applyPurchasedClickEffect(currentEffect);
+            }
+        }
+
+        function applyThemeClickEffect(themeId) {
+            switch(themeId) {
+                case 'space_theme':
+                    createStarEffect();
+                    break;
+                case 'fire_theme':
+                    createFireEffect();
+                    break;
+                case 'ice_theme':
+                    createIceEffect();
+                    break;
+                case 'matrix_theme':
+                    createMatrixEffect();
+                    break;
+                case 'neon_theme':
+                    createNeonEffect();
+                    break;
+                case 'nature_theme':
+                    createLeafEffect();
+                    break;
+                case 'ocean_theme':
+                    createBubbleEffect();
+                    break;
+                case 'lava_theme':
+                    createLavaEffect();
+                    break;
+                case 'electric_theme':
+                    createLightningEffect();
+                    break;
+                case 'rainbow_theme':
+                    createRainbowEffect();
+                    break;
+                case 'cyber_theme':
+                    createCyberEffect();
+                    break;
+                case 'gold_theme':
+                    createGoldEffect();
+                    break;
+                case 'crystal_theme':
+                    createCrystalEffect();
+                    break;
+                case 'shadow_theme':
+                    createShadowEffect();
+                    break;
+                case 'light_theme':
+                    createLightEffect();
+                    break;
+                case 'toxic_theme':
+                    createToxicEffect();
+                    break;
+
+                case 'blood_theme':
+                    createBloodEffect();
+                    break;
+                case 'void_theme':
+                    createVoidEffect();
+                    break;
+            }
+        }
+
+        function createStarEffect() {
+            const star = document.createElement('div');
+            star.innerHTML = '*';
+            star.style.position = 'fixed';
+            star.style.left = Math.random() * window.innerWidth + 'px';
+            star.style.top = Math.random() * window.innerHeight + 'px';
+            star.style.fontSize = '30px';
+            star.style.color = '#ffffff';
+            star.style.fontWeight = 'bold';
+            star.style.textShadow = '0 0 10px #ffffff';
+            star.style.pointerEvents = 'none';
+            star.style.zIndex = '9999';
+            star.style.animation = 'starTwinkle 5s ease-out forwards';
+            
+            document.body.appendChild(star);
+            
+            setTimeout(() => {
+                if (star.parentNode) {
+                    star.parentNode.removeChild(star);
+                }
+            }, 5000);
+        }
+
+        function createFireEffect() {
+            const flame = document.createElement('div');
+            flame.innerHTML = '^';
+            flame.style.position = 'fixed';
+            flame.style.left = Math.random() * window.innerWidth + 'px';
+            flame.style.top = window.innerHeight + 'px';
+            flame.style.fontSize = '25px';
+            flame.style.color = '#ff4500';
+            flame.style.fontWeight = 'bold';
+            flame.style.textShadow = '0 0 15px #ff4500';
+            flame.style.pointerEvents = 'none';
+            flame.style.zIndex = '9999';
+            flame.style.animation = 'fireRise 3s ease-out forwards';
+            
+            document.body.appendChild(flame);
+            
+            setTimeout(() => {
+                if (flame.parentNode) {
+                    flame.parentNode.removeChild(flame);
+                }
+            }, 3000);
+        }
+
+        function createIceEffect() {
+            const ice = document.createElement('div');
+            ice.innerHTML = '+';
+            ice.style.position = 'fixed';
+            ice.style.left = Math.random() * window.innerWidth + 'px';
+            ice.style.top = '-50px';
+            ice.style.fontSize = '20px';
+            ice.style.color = '#87ceeb';
+            ice.style.fontWeight = 'bold';
+            ice.style.textShadow = '0 0 10px #87ceeb';
+            ice.style.pointerEvents = 'none';
+            ice.style.zIndex = '9999';
+            ice.style.animation = 'iceFall 4s linear forwards';
+            
+            document.body.appendChild(ice);
+            
+            setTimeout(() => {
+                if (ice.parentNode) {
+                    ice.parentNode.removeChild(ice);
+                }
+            }, 4000);
+        }
+
+        function createMatrixEffect() {
+            const code = document.createElement('div');
+            const chars = '01';
+            code.innerHTML = chars[Math.floor(Math.random() * chars.length)];
+            code.style.position = 'fixed';
+            code.style.left = Math.random() * window.innerWidth + 'px';
+            code.style.top = '-20px';
+            code.style.fontSize = '18px';
+            code.style.color = '#00ff00';
+            code.style.fontFamily = 'Courier New, monospace';
+            code.style.pointerEvents = 'none';
+            code.style.zIndex = '9999';
+            code.style.textShadow = '0 0 10px #00ff00';
+            code.style.animation = 'matrixFall 3s linear forwards';
+            
+            document.body.appendChild(code);
+            
+            setTimeout(() => {
+                if (code.parentNode) {
+                    code.parentNode.removeChild(code);
+                }
+            }, 3000);
+        }
+
+        function createNeonEffect() {
+            const spark = document.createElement('div');
+            spark.innerHTML = '*';
+            spark.style.position = 'fixed';
+            spark.style.left = Math.random() * window.innerWidth + 'px';
+            spark.style.top = Math.random() * window.innerHeight + 'px';
+            spark.style.fontSize = '25px';
+            spark.style.color = '#00ffff';
+            spark.style.fontWeight = 'bold';
+            spark.style.textShadow = '0 0 20px #00ffff';
+            spark.style.pointerEvents = 'none';
+            spark.style.zIndex = '9999';
+            spark.style.animation = 'neonSpark 2s ease-out forwards';
+            
+            document.body.appendChild(spark);
+            
+            setTimeout(() => {
+                if (spark.parentNode) {
+                    spark.parentNode.removeChild(spark);
+                }
+            }, 2000);
+        }
+
+        function createLeafEffect() {
+            const leaf = document.createElement('div');
+            leaf.innerHTML = '~';
+            leaf.style.position = 'fixed';
+            leaf.style.left = Math.random() * window.innerWidth + 'px';
+            leaf.style.top = '-50px';
+            leaf.style.fontSize = '20px';
+            leaf.style.color = '#32cd32';
+            leaf.style.fontWeight = 'bold';
+            leaf.style.textShadow = '0 0 10px #32cd32';
+            leaf.style.pointerEvents = 'none';
+            leaf.style.zIndex = '9999';
+            leaf.style.animation = 'leafFloat 6s ease-in-out forwards';
+            
+            document.body.appendChild(leaf);
+            
+            setTimeout(() => {
+                if (leaf.parentNode) {
+                    leaf.parentNode.removeChild(leaf);
+                }
+            }, 6000);
+        }
+
+        function createBubbleEffect() {
+            const bubble = document.createElement('div');
+            bubble.style.position = 'fixed';
+            bubble.style.left = Math.random() * window.innerWidth + 'px';
+            bubble.style.top = window.innerHeight + 'px';
+            bubble.style.width = (Math.random() * 20 + 10) + 'px';
+            bubble.style.height = bubble.style.width;
+            bubble.style.background = 'rgba(64, 224, 208, 0.3)';
+            bubble.style.borderRadius = '50%';
+            bubble.style.border = '2px solid #40e0d0';
+            bubble.style.pointerEvents = 'none';
+            bubble.style.zIndex = '9999';
+            bubble.style.animation = 'bubbleRise 5s ease-out forwards';
+            
+            document.body.appendChild(bubble);
+            
+            setTimeout(() => {
+                if (bubble.parentNode) {
+                    bubble.parentNode.removeChild(bubble);
+                }
+            }, 5000);
+        }
+
+        function createLavaEffect() {
+            const lava = document.createElement('div');
+            lava.style.position = 'fixed';
+            lava.style.left = Math.random() * window.innerWidth + 'px';
+            lava.style.top = window.innerHeight + 'px';
+            lava.style.width = '8px';
+            lava.style.height = '8px';
+            lava.style.background = '#ff4500';
+            lava.style.borderRadius = '50%';
+            lava.style.pointerEvents = 'none';
+            lava.style.zIndex = '9999';
+            lava.style.boxShadow = '0 0 15px #ff4500';
+            lava.style.animation = 'lavaErupt 3s ease-out forwards';
+            
+            document.body.appendChild(lava);
+            
+            setTimeout(() => {
+                if (lava.parentNode) {
+                    lava.parentNode.removeChild(lava);
+                }
+            }, 3000);
+        }
+
+        function createLightningEffect() {
+            const lightning = document.createElement('div');
+            lightning.innerHTML = '|';
+            lightning.style.position = 'fixed';
+            lightning.style.left = Math.random() * window.innerWidth + 'px';
+            lightning.style.top = Math.random() * window.innerHeight + 'px';
+            lightning.style.fontSize = '30px';
+            lightning.style.color = '#ffff00';
+            lightning.style.fontWeight = 'bold';
+            lightning.style.textShadow = '0 0 20px #ffff00';
+            lightning.style.pointerEvents = 'none';
+            lightning.style.zIndex = '9999';
+            lightning.style.animation = 'lightningFlash 1s ease-out forwards';
+            
+            document.body.appendChild(lightning);
+            
+            setTimeout(() => {
+                if (lightning.parentNode) {
+                    lightning.parentNode.removeChild(lightning);
+                }
+            }, 1000);
+        }
+
+        function createRainbowEffect() {
+            const rainbow = document.createElement('div');
+            rainbow.innerHTML = '=';
+            rainbow.style.position = 'fixed';
+            rainbow.style.left = Math.random() * window.innerWidth + 'px';
+            rainbow.style.top = Math.random() * window.innerHeight + 'px';
+            rainbow.style.fontSize = '25px';
+            rainbow.style.fontWeight = 'bold';
+            rainbow.style.pointerEvents = 'none';
+            rainbow.style.zIndex = '9999';
+            rainbow.style.animation = 'rainbowSpin 3s ease-out forwards';
+            
+            document.body.appendChild(rainbow);
+            
+            setTimeout(() => {
+                if (rainbow.parentNode) {
+                    rainbow.parentNode.removeChild(rainbow);
+                }
+            }, 3000);
+        }
+
+        function createCyberEffect() {
+            const cyber = document.createElement('div');
+            cyber.style.position = 'fixed';
+            cyber.style.left = Math.random() * window.innerWidth + 'px';
+            cyber.style.top = Math.random() * window.innerHeight + 'px';
+            cyber.style.width = '20px';
+            cyber.style.height = '2px';
+            cyber.style.background = '#00ffff';
+            cyber.style.pointerEvents = 'none';
+            cyber.style.zIndex = '9999';
+            cyber.style.boxShadow = '0 0 10px #00ffff';
+            cyber.style.animation = 'cyberGlitch 2s ease-out forwards';
+            
+            document.body.appendChild(cyber);
+            
+            setTimeout(() => {
+                if (cyber.parentNode) {
+                    cyber.parentNode.removeChild(cyber);
+                }
+            }, 2000);
+        }
+
+        function createGoldEffect() {
+            const gold = document.createElement('div');
+            gold.innerHTML = '*';
+            gold.style.position = 'fixed';
+            gold.style.left = Math.random() * window.innerWidth + 'px';
+            gold.style.top = Math.random() * window.innerHeight + 'px';
+            gold.style.fontSize = '20px';
+            gold.style.color = '#ffd700';
+            gold.style.fontWeight = 'bold';
+            gold.style.pointerEvents = 'none';
+            gold.style.zIndex = '9999';
+            gold.style.textShadow = '0 0 15px #ffd700';
+            gold.style.animation = 'goldSparkle 4s ease-out forwards';
+            
+            document.body.appendChild(gold);
+            
+            setTimeout(() => {
+                if (gold.parentNode) {
+                    gold.parentNode.removeChild(gold);
+                }
+            }, 4000);
+        }
+
+        function createCrystalEffect() {
+            const crystal = document.createElement('div');
+            crystal.innerHTML = '<>';
+            crystal.style.position = 'fixed';
+            crystal.style.left = Math.random() * window.innerWidth + 'px';
+            crystal.style.top = Math.random() * window.innerHeight + 'px';
+            crystal.style.fontSize = '22px';
+            crystal.style.color = '#da70d6';
+            crystal.style.fontWeight = 'bold';
+            crystal.style.textShadow = '0 0 15px #da70d6';
+            crystal.style.pointerEvents = 'none';
+            crystal.style.zIndex = '9999';
+            crystal.style.animation = 'crystalShine 3s ease-out forwards';
+            
+            document.body.appendChild(crystal);
+            
+            setTimeout(() => {
+                if (crystal.parentNode) {
+                    crystal.parentNode.removeChild(crystal);
+                }
+            }, 3000);
+        }
+
+        function createShadowEffect() {
+            const shadow = document.createElement('div');
+            shadow.style.position = 'fixed';
+            shadow.style.left = Math.random() * window.innerWidth + 'px';
+            shadow.style.top = Math.random() * window.innerHeight + 'px';
+            shadow.style.width = '30px';
+            shadow.style.height = '30px';
+            shadow.style.background = 'radial-gradient(circle, rgba(139, 0, 139, 0.8), transparent)';
+            shadow.style.borderRadius = '50%';
+            shadow.style.pointerEvents = 'none';
+            shadow.style.zIndex = '9999';
+            shadow.style.animation = 'shadowPulse 2s ease-out forwards';
+            
+            document.body.appendChild(shadow);
+            
+            setTimeout(() => {
+                if (shadow.parentNode) {
+                    shadow.parentNode.removeChild(shadow);
+                }
+            }, 2000);
+        }
+
+        function createLightEffect() {
+            const light = document.createElement('div');
+            light.innerHTML = 'o';
+            light.style.position = 'fixed';
+            light.style.left = Math.random() * window.innerWidth + 'px';
+            light.style.top = Math.random() * window.innerHeight + 'px';
+            light.style.fontSize = '25px';
+            light.style.color = '#ffd700';
+            light.style.fontWeight = 'bold';
+            light.style.textShadow = '0 0 25px #ffd700';
+            light.style.pointerEvents = 'none';
+            light.style.zIndex = '9999';
+            light.style.animation = 'lightBeam 3s ease-out forwards';
+            
+            document.body.appendChild(light);
+            
+            setTimeout(() => {
+                if (light.parentNode) {
+                    light.parentNode.removeChild(light);
+                }
+            }, 3000);
+        }
+
+        function createToxicEffect() {
+            const toxic = document.createElement('div');
+            toxic.innerHTML = '@';
+            toxic.style.position = 'fixed';
+            toxic.style.left = Math.random() * window.innerWidth + 'px';
+            toxic.style.top = Math.random() * window.innerHeight + 'px';
+            toxic.style.fontSize = '20px';
+            toxic.style.color = '#32ff32';
+            toxic.style.fontWeight = 'bold';
+            toxic.style.textShadow = '0 0 15px #32ff32';
+            toxic.style.pointerEvents = 'none';
+            toxic.style.zIndex = '9999';
+            toxic.style.animation = 'toxicGlow 4s ease-out forwards';
+            
+            document.body.appendChild(toxic);
+            
+            setTimeout(() => {
+                if (toxic.parentNode) {
+                    toxic.parentNode.removeChild(toxic);
+                }
+            }, 4000);
+        }
+
+
+
+        function createBloodEffect() {
+            const blood = document.createElement('div');
+            blood.style.position = 'fixed';
+            blood.style.left = Math.random() * window.innerWidth + 'px';
+            blood.style.top = '-10px';
+            blood.style.width = '6px';
+            blood.style.height = '6px';
+            blood.style.background = '#dc143c';
+            blood.style.borderRadius = '50%';
+            blood.style.pointerEvents = 'none';
+            blood.style.zIndex = '9999';
+            blood.style.boxShadow = '0 0 10px #dc143c';
+            blood.style.animation = 'bloodDrip 3s linear forwards';
+            
+            document.body.appendChild(blood);
+            
+            setTimeout(() => {
+                if (blood.parentNode) {
+                    blood.parentNode.removeChild(blood);
+                }
+            }, 3000);
+        }
+
+        function createVoidEffect() {
+            const voidEffect = document.createElement('div');
+            voidEffect.style.position = 'fixed';
+            voidEffect.style.left = Math.random() * window.innerWidth + 'px';
+            voidEffect.style.top = Math.random() * window.innerHeight + 'px';
+            voidEffect.style.width = '40px';
+            voidEffect.style.height = '40px';
+            voidEffect.style.background = 'radial-gradient(circle, #000000, rgba(128, 0, 128, 0.5), transparent)';
+            voidEffect.style.borderRadius = '50%';
+            voidEffect.style.pointerEvents = 'none';
+            voidEffect.style.zIndex = '9999';
+            voidEffect.style.animation = 'voidCollapse 3s ease-in forwards';
+            
+            document.body.appendChild(voidEffect);
+            
+            setTimeout(() => {
+                if (voidEffect.parentNode) {
+                    voidEffect.parentNode.removeChild(voidEffect);
+                }
+            }, 3000);
+        }
+
+        function applyPurchasedClickEffect(effectId) {
+            // This would handle purchased click effects from the shop
+            // For now, we'll just add a simple effect
+            const effect = document.createElement('div');
+            effect.innerHTML = 'X';
+            effect.style.position = 'fixed';
+            effect.style.left = Math.random() * window.innerWidth + 'px';
+            effect.style.top = Math.random() * window.innerHeight + 'px';
+            effect.style.fontSize = '20px';
+            effect.style.color = '#ff6600';
+            effect.style.fontWeight = 'bold';
+            effect.style.textShadow = '0 0 15px #ff6600';
+            effect.style.pointerEvents = 'none';
+            effect.style.zIndex = '9999';
+            effect.style.animation = 'effectBurst 2s ease-out forwards';
+            
+            document.body.appendChild(effect);
+            
+            setTimeout(() => {
+                if (effect.parentNode) {
+                    effect.parentNode.removeChild(effect);
+                }
+            }, 2000);
+        }
+
+        function toggleShop() {
+            const shop = document.getElementById('shopContainer');
+            shop.classList.toggle('open');
         }
 
         function showNotification(secret) {
@@ -707,16 +2816,542 @@
             document.getElementById('adminModal').style.display = 'none';
         }
 
-        // Close modal on escape key
+        function showCodeEntryModal() {
+            const modal = document.getElementById('codeEntryModal');
+            modal.style.display = 'block';
+            
+            // Focus on input and clear it
+            const input = document.getElementById('codeInput');
+            input.value = '';
+            input.focus();
+            
+            // Show notification
+            const notification = document.getElementById('notification');
+            notification.innerHTML = `
+                <div style="color: #ffff00; font-weight: bold;">SECURITY SEQUENCE DETECTED</div>
+                <div style="color: #fff;">Enter access code to proceed</div>
+            `;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        function closeCodeEntryModal() {
+            document.getElementById('codeEntryModal').style.display = 'none';
+        }
+
+        function closeSecretAdminModal() {
+            document.getElementById('secretAdminModal').style.display = 'none';
+        }
+
+        function checkCode() {
+            const input = document.getElementById('codeInput');
+            const code = input.value;
+            
+            if (code === '5411') {
+                // Correct code - show admin panel
+                closeCodeEntryModal();
+                showSecretAdminModal();
+            } else {
+                // Wrong code - show error
+                input.style.borderColor = '#ff0000';
+                input.style.boxShadow = '0 0 10px #ff0000';
+                
+                const notification = document.getElementById('notification');
+                notification.innerHTML = `
+                    <div style="color: #ff0000; font-weight: bold;">ACCESS DENIED</div>
+                    <div style="color: #fff;">Invalid code entered</div>
+                `;
+                notification.classList.add('show');
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    input.style.borderColor = '#fff';
+                    input.style.boxShadow = 'none';
+                    input.value = '';
+                }, 2000);
+            }
+        }
+
+        function showSecretAdminModal() {
+            const modal = document.getElementById('secretAdminModal');
+            modal.style.display = 'block';
+            
+            // Mark secret admin achievement as accessible
+            const adminAchievement = achievementList.find(a => a.id === 'secret_admin');
+            if (adminAchievement) {
+                adminAchievement.requirement = () => true; // Now accessible
+            }
+            
+            // Show dramatic notification
+            const notification = document.getElementById('notification');
+            notification.innerHTML = `
+                <div style="color: #ff0000; font-weight: bold; text-shadow: 0 0 10px #ff0000;">CLASSIFIED ACCESS GRANTED</div>
+                <div style="color: #ffff00;">SECURITY LEVEL: MAXIMUM</div>
+                <div style="color: #fff;">Welcome, Administrator</div>
+            `;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 4000);
+        }
+
+        function openSecretsDatabase() {
+            // Close the classified access modal
+            document.getElementById('secretAdminModal').style.display = 'none';
+            
+            // Open the admin secrets modal
+            showAdminModal();
+        }
+
+        function debugUnlockShop() {
+            totalClicks = 5000;
+            updateDisplay();
+            
+            const notification = document.getElementById('notification');
+            notification.innerHTML = `
+                <div style="color: #ff0000; font-weight: bold;">DEBUG MODE</div>
+                <div>Set clicks to 5000 for testing</div>
+            `;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        function showAchievementsModal() {
+            const modal = document.getElementById('achievementsModal');
+            const achievementsList = document.getElementById('achievementsList');
+            
+            let html = '';
+            
+            achievementList.forEach(achievement => {
+                const isCompleted = achievements.has(achievement.id);
+                const statusClass = isCompleted ? 'secret-unlocked' : 'secret-locked';
+                const statusIcon = isCompleted ? '🏆' : '🔒';
+                const progressText = isCompleted ? 'COMPLETED' : 'LOCKED';
+                
+                html += `
+                    <div class="secret-item ${statusClass}" style="display: flex; align-items: center; padding: 1rem; margin-bottom: 0.5rem;">
+                        <div style="font-size: 1.5rem; margin-right: 1rem;">${statusIcon}</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: bold; font-size: 1.1rem; margin-bottom: 0.3rem;">${achievement.name}</div>
+                            <div style="font-size: 0.9rem; color: #aaa; margin-bottom: 0.3rem;">${achievement.description}</div>
+                            <div style="font-size: 0.8rem; color: ${isCompleted ? '#00ff00' : '#666'};">
+                                REWARD: ${achievement.reward.name} (+${achievement.reward.power} clicks/sec)
+                            </div>
+                            <div style="font-size: 0.7rem; color: #888; margin-top: 0.2rem;">${achievement.reward.description}</div>
+                        </div>
+                        <div style="font-weight: bold; color: ${isCompleted ? '#00ff00' : '#666'};">
+                            ${progressText}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            // Add summary at the top
+            const completedCount = achievements.size;
+            const totalCount = achievementList.length;
+            const totalClickerPower = Array.from(achievementClickers.values()).reduce((sum, clicker) => sum + clicker.power, 0);
+            
+            html = `
+                <div style="text-align: center; margin-bottom: 2rem; padding: 1rem; border: 2px solid #333; background: rgba(255,255,255,0.05);">
+                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">ACHIEVEMENT PROGRESS</div>
+                    <div style="font-size: 1rem; color: #ffd700;">${completedCount} / ${totalCount} Completed</div>
+                    <div style="font-size: 0.9rem; color: #00ff00; margin-top: 0.5rem;">Total Achievement Clickers: +${totalClickerPower} clicks/sec</div>
+                </div>
+            ` + html;
+            
+            achievementsList.innerHTML = html;
+            modal.style.display = 'block';
+        }
+
+        function closeAchievementsModal() {
+            document.getElementById('achievementsModal').style.display = 'none';
+        }
+
+        function showCodesModal() {
+            const modal = document.getElementById('codesModal');
+            updateRedeemedCodesList();
+            modal.style.display = 'block';
+            
+            // Focus on input and clear it
+            const input = document.getElementById('codeRedemptionInput');
+            input.value = '';
+            input.focus();
+        }
+
+        function closeCodesModal() {
+            document.getElementById('codesModal').style.display = 'none';
+        }
+
+        function redeemCode() {
+            const input = document.getElementById('codeRedemptionInput');
+            const code = input.value.toUpperCase().trim();
+            
+            if (!code) {
+                showCodeError('Please enter a code');
+                return;
+            }
+            
+            // Get current active codes (refresh in case week changed)
+            const currentCodes = getAllActiveCodes();
+            
+            // Check if code exists
+            if (!currentCodes[code]) {
+                showCodeError('Invalid code');
+                return;
+            }
+            
+            // Check if already redeemed
+            if (redeemedCodes.has(code)) {
+                showCodeError('Code already redeemed');
+                return;
+            }
+            
+            // Redeem the code
+            const codeData = currentCodes[code];
+            redeemedCodes.add(code);
+            
+            // Apply the reward
+            applyCodeReward(codeData);
+            
+            // Show success message
+            showCodeSuccess(codeData);
+            
+            // Clear input and update list
+            input.value = '';
+            updateRedeemedCodesList();
+            updateDisplay();
+        }
+
+        function showCodesListModal() {
+            const modal = document.getElementById('codesListModal');
+            const content = document.getElementById('codesListContent');
+            
+            // Get current active codes
+            const currentCodes = getAllActiveCodes();
+            const permanentCodesObj = permanentCodes;
+            const weeklyCodesObj = getCurrentWeeklyCodes();
+            
+            // Get current week number for display
+            const now = new Date();
+            const startOfYear = new Date(now.getFullYear(), 0, 1);
+            const weekNumber = (Math.floor((now - startOfYear) / (7 * 24 * 60 * 60 * 1000)) % 5) + 1;
+            
+            let html = '';
+            
+            // Permanent codes section
+            html += `
+                <div style="margin-bottom: 2rem;">
+                    <div style="font-size: 1.2rem; color: #00ff00; text-align: center; margin-bottom: 1rem; border-bottom: 2px solid #00ff00; padding-bottom: 0.5rem;">
+                        🔒 PERMANENT CODES (Always Available)
+                    </div>
+            `;
+            
+            Object.entries(permanentCodesObj).forEach(([code, data]) => {
+                const isRedeemed = redeemedCodes.has(code);
+                const statusColor = isRedeemed ? '#666' : '#00ff00';
+                const statusText = isRedeemed ? 'REDEEMED' : 'AVAILABLE';
+                const statusIcon = isRedeemed ? '✓' : '🔓';
+                
+                html += `
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.8rem; margin-bottom: 0.5rem; border: 2px solid ${statusColor}; background: rgba(0, 255, 0, 0.05);">
+                        <div style="flex: 1;">
+                            <div style="font-weight: bold; font-size: 1.1rem; color: #fff; font-family: 'Courier New', monospace;">${code}</div>
+                            <div style="font-size: 0.9rem; color: #ffd700; margin: 0.2rem 0;">${data.name}</div>
+                            <div style="font-size: 0.8rem; color: #aaa;">${data.description}</div>
+                        </div>
+                        <div style="text-align: center; margin-left: 1rem;">
+                            <div style="font-size: 1.2rem;">${statusIcon}</div>
+                            <div style="font-size: 0.7rem; color: ${statusColor}; font-weight: bold;">${statusText}</div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            
+            // Weekly codes section
+            html += `
+                <div style="margin-bottom: 2rem;">
+                    <div style="font-size: 1.2rem; color: #ff6b00; text-align: center; margin-bottom: 1rem; border-bottom: 2px solid #ff6b00; padding-bottom: 0.5rem;">
+                        ⏰ WEEKLY CODES - Week ${weekNumber} (Changes Every Monday)
+                    </div>
+            `;
+            
+            Object.entries(weeklyCodesObj).forEach(([code, data]) => {
+                const isRedeemed = redeemedCodes.has(code);
+                const statusColor = isRedeemed ? '#666' : '#ff6b00';
+                const statusText = isRedeemed ? 'REDEEMED' : 'AVAILABLE';
+                const statusIcon = isRedeemed ? '✓' : '⏰';
+                
+                html += `
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.8rem; margin-bottom: 0.5rem; border: 2px solid ${statusColor}; background: rgba(255, 107, 0, 0.05);">
+                        <div style="flex: 1;">
+                            <div style="font-weight: bold; font-size: 1.1rem; color: #fff; font-family: 'Courier New', monospace;">${code}</div>
+                            <div style="font-size: 0.9rem; color: #ffd700; margin: 0.2rem 0;">${data.name}</div>
+                            <div style="font-size: 0.8rem; color: #aaa;">${data.description}</div>
+                        </div>
+                        <div style="text-align: center; margin-left: 1rem;">
+                            <div style="font-size: 1.2rem;">${statusIcon}</div>
+                            <div style="font-size: 0.7rem; color: ${statusColor}; font-weight: bold;">${statusText}</div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            
+            // Summary
+            const totalCodes = Object.keys(currentCodes).length;
+            const redeemedCount = Array.from(redeemedCodes).filter(code => currentCodes[code]).length;
+            
+            html += `
+                <div style="text-align: center; padding: 1rem; border: 2px solid #ffd700; background: rgba(255, 215, 0, 0.1); margin-top: 2rem;">
+                    <div style="font-size: 1.1rem; color: #ffd700; margin-bottom: 0.5rem;">CODE SUMMARY</div>
+                    <div style="color: #fff;">Total Active Codes: ${totalCodes}</div>
+                    <div style="color: #00ff00;">Redeemed: ${redeemedCount}</div>
+                    <div style="color: #ff6b00;">Remaining: ${totalCodes - redeemedCount}</div>
+                    <div style="font-size: 0.8rem; color: #aaa; margin-top: 0.5rem;">Weekly codes reset every Monday at midnight</div>
+                </div>
+            `;
+            
+            content.innerHTML = html;
+            modal.style.display = 'block';
+        }
+
+        function closeCodesListModal() {
+            document.getElementById('codesListModal').style.display = 'none';
+        }
+
+        function applyCodeReward(codeData) {
+            switch(codeData.type) {
+                case 'points':
+                    score += codeData.value;
+                    break;
+                    
+                case 'multiplier':
+                    const effectId = `code_multiplier_${Date.now()}`;
+                    activeEffects.set(effectId, {
+                        type: 'multiplier',
+                        value: codeData.value,
+                        endTime: Date.now() + codeData.duration
+                    });
+                    
+                    setTimeout(() => {
+                        activeEffects.delete(effectId);
+                        updateMultiplier();
+                    }, codeData.duration);
+                    break;
+                    
+                case 'auto_clicker':
+                    autoClickers += codeData.value;
+                    updateAutoClicker();
+                    break;
+                    
+                case 'rainbow':
+                    activateRainbowMode(codeData.value);
+                    break;
+                    
+                case 'special':
+                    if (codeData.value === 'unlock_all_secrets') {
+                        // Unlock 25 random secrets
+                        const lockedSecrets = [];
+                        for (let i = 0; i < secrets.length; i++) {
+                            if (!unlockedSecrets.has(i)) {
+                                lockedSecrets.push(i);
+                            }
+                        }
+                        
+                        // Shuffle and take up to 25
+                        for (let i = lockedSecrets.length - 1; i > 0; i--) {
+                            const j = Math.floor(Math.random() * (i + 1));
+                            [lockedSecrets[i], lockedSecrets[j]] = [lockedSecrets[j], lockedSecrets[i]];
+                        }
+                        
+                        const secretsToUnlock = lockedSecrets.slice(0, 25);
+                        secretsToUnlock.forEach(secretIndex => {
+                            unlockedSecrets.add(secretIndex);
+                        });
+                    }
+                    break;
+            }
+            
+            updateMultiplier();
+        }
+
+        function showCodeSuccess(codeData) {
+            const notification = document.getElementById('notification');
+            notification.innerHTML = `
+                <div style="color: #00ff00; font-weight: bold; text-shadow: 0 0 15px #00ff00;">✓ CODE REDEEMED!</div>
+                <div style="color: #fff; font-size: 1.1rem; margin: 0.5rem 0;">${codeData.name}</div>
+                <div style="color: #aaa; font-size: 0.9rem;">${codeData.description}</div>
+            `;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 5000);
+        }
+
+        function showCodeError(message) {
+            const input = document.getElementById('codeRedemptionInput');
+            input.style.borderColor = '#ff0000';
+            input.style.boxShadow = '0 0 10px #ff0000';
+            
+            const notification = document.getElementById('notification');
+            notification.innerHTML = `
+                <div style="color: #ff0000; font-weight: bold;">✗ CODE ERROR</div>
+                <div style="color: #fff;">${message}</div>
+            `;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                input.style.borderColor = '#fff';
+                input.style.boxShadow = 'none';
+            }, 3000);
+        }
+
+        function updateRedeemedCodesList() {
+            const content = document.getElementById('redeemedCodesContent');
+            
+            if (redeemedCodes.size === 0) {
+                content.innerHTML = '<div style="color: #666;">No codes redeemed yet</div>';
+                return;
+            }
+            
+            let html = '';
+            redeemedCodes.forEach(code => {
+                const codeData = exclusiveCodes[code];
+                html += `
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; margin-bottom: 0.5rem; border: 1px solid #333; background: rgba(0, 255, 0, 0.1);">
+                        <div>
+                            <div style="font-weight: bold; color: #00ff00;">${code}</div>
+                            <div style="font-size: 0.8rem; color: #aaa;">${codeData.name}</div>
+                        </div>
+                        <div style="font-size: 0.8rem; color: #00ff00;">✓ REDEEMED</div>
+                    </div>
+                `;
+            });
+            
+            content.innerHTML = html;
+        }
+
+        function activateInfiniteMultiplier() {
+            // Set infinite multiplier
+            const effectId = `infinite_multiplier`;
+            activeEffects.set(effectId, {
+                type: 'multiplier',
+                value: 999999999,
+                endTime: Date.now() + (365 * 24 * 60 * 60 * 1000) // 1 year
+            });
+            
+            updateMultiplier();
+            updateDisplay();
+            
+            // Hide the button
+            const button = document.getElementById('infiniteMultiplierBtn');
+            button.style.display = 'none';
+            
+            // Show success message
+            const modal = document.getElementById('secretAdminModal');
+            const content = modal.querySelector('.secrets-content');
+            content.innerHTML = `
+                <div style="text-align: center; padding-top: 5rem;">
+                    <div style="color: #00ff00; font-size: 2rem; text-shadow: 0 0 20px #00ff00; margin-bottom: 2rem;">INFINITE MULTIPLIER ACTIVATED</div>
+                    <div style="color: #ffff00; font-size: 1.2rem; margin-bottom: 3rem;">Reality has been altered...</div>
+                    <div style="color: #fff; opacity: 0.7;">Returning to main screen...</div>
+                </div>
+            `;
+            
+            // Return to main screen after 1 second
+            setTimeout(() => {
+                modal.style.display = 'none';
+                
+                // Reset the modal content for next time
+                content.innerHTML = `
+                    <div style="text-align: center; padding-top: 5rem;">
+                        <div class="secrets-header" style="color: #ff0000; text-shadow: 0 0 20px #ff0000;">CLASSIFIED ACCESS</div>
+                        <div style="margin: 3rem 0; font-size: 1.2rem; color: #ffff00;">UNAUTHORIZED PERSONNEL WILL BE PROSECUTED</div>
+                        <button id="infiniteMultiplierBtn" onclick="activateInfiniteMultiplier()" style="
+                            background: linear-gradient(45deg, #ff0000, #ff6600, #ffff00, #00ff00, #0066ff, #6600ff, #ff0066);
+                            border: 3px solid #fff;
+                            color: #fff;
+                            font-size: 1.5rem;
+                            padding: 1.5rem 3rem;
+                            cursor: pointer;
+                            font-family: 'Courier New', monospace;
+                            font-weight: bold;
+                            text-shadow: 2px 2px 4px #000;
+                            box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+                            animation: pulse 2s infinite;
+                            margin-bottom: 2rem;
+                            display: block;
+                        ">ACTIVATE INFINITE MULTIPLIER</button>
+                        <button onclick="openSecretsDatabase()" style="
+                            background: linear-gradient(45deg, #4b0082, #6a0dad, #8a2be2, #9932cc, #ba55d3);
+                            border: 3px solid #fff;
+                            color: #fff;
+                            font-size: 1.2rem;
+                            padding: 1rem 2rem;
+                            cursor: pointer;
+                            font-family: 'Courier New', monospace;
+                            font-weight: bold;
+                            text-shadow: 2px 2px 4px #000;
+                            box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+                            animation: pulse 2s infinite;
+                            margin-bottom: 1rem;
+                        ">VIEW ALL SECRETS DATABASE</button>
+                        <button onclick="showCodesListModal()" style="
+                            background: linear-gradient(45deg, #ff6b00, #ff8500, #ffa500, #ffb347, #ffd700);
+                            border: 3px solid #fff;
+                            color: #000;
+                            font-size: 1.2rem;
+                            padding: 1rem 2rem;
+                            cursor: pointer;
+                            font-family: 'Courier New', monospace;
+                            font-weight: bold;
+                            text-shadow: 1px 1px 2px #fff;
+                            box-shadow: 0 0 20px rgba(255, 165, 0, 0.5);
+                            animation: pulse 2s infinite;
+                        ">VIEW CURRENT CODES LIST</button>
+                    </div>
+                `;
+            }, 1000);
+        }
+
+        // Close modal on escape key and handle enter in code input
         document.addEventListener('keydown', (event) => {
             if (event.key === 'Escape') {
                 closeSecretsModal();
                 closeAdminModal();
+                closeAchievementsModal();
+                closeCodesModal();
+                closeCodesListModal();
+                closeSecretAdminModal();
+                closeCodeEntryModal();
+            }
+            
+            // Handle Enter key in code input
+            if (event.key === 'Enter' && document.getElementById('codeEntryModal').style.display === 'block') {
+                checkCode();
+            }
+            
+            // Handle Enter key in code redemption input
+            if (event.key === 'Enter' && document.getElementById('codesModal').style.display === 'block') {
+                redeemCode();
             }
         });
 
-        // Initialize display
+        // Initialize display and shop
         updateDisplay();
+        generateShop();
 
         // Clean up expired effects periodically
         setInterval(() => {
@@ -730,5 +3365,5 @@
             updateDisplay();
         }, 1000);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9940159fa5572367',t:'MTc2MTM3ODIyMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9944f65c748276ae',t:'MTc2MTQyOTM3MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
