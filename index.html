@@ -141,6 +141,24 @@
             100% { transform: scale(0); opacity: 0; }
         }
 
+        @keyframes autoClickRipple {
+            0% { 
+                transform: scale(0); 
+                opacity: 1; 
+                border-width: 2px;
+            }
+            50% { 
+                transform: scale(2); 
+                opacity: 0.6; 
+                border-width: 1px;
+            }
+            100% { 
+                transform: scale(4); 
+                opacity: 0; 
+                border-width: 0px;
+            }
+        }
+
         @keyframes effectBurst {
             0% { transform: scale(0); opacity: 1; }
             50% { transform: scale(1.5); opacity: 0.8; }
@@ -325,7 +343,6 @@
             width: 380px;
             height: 100%;
             background: rgba(0, 0, 0, 0.95);
-            border-left: 2px solid #fff;
             padding: 1rem;
             overflow-y: auto;
             transition: right 0.5s ease;
@@ -486,9 +503,54 @@
             background: #fff;
             color: #000;
         }
+
+        .settings-button {
+            position: fixed;
+            top: 220px;
+            left: 20px;
+            background: transparent;
+            border: 2px solid #fff;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            display: block;
+            transition: all 0.2s ease;
+        }
+
+        .settings-button:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        .rebirth-button {
+            position: fixed;
+            top: 270px;
+            left: 20px;
+            background: transparent;
+            border: 2px solid #ffd700;
+            color: #ffd700;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            display: block;
+            transition: all 0.2s ease;
+            text-shadow: 0 0 10px #ffd700;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .rebirth-button:hover {
+            background: #ffd700;
+            color: #000;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+        }
+
+
     </style>
 
-<meta name="NetsparkQuiltingResult" total-length="169970" removed="0" rules-found="w2655,w3390,w4748,w4749,w3012,w2577,w4308,w6565,w7502,w73,w837,w5579,w5580,w11562,w3180,w6893,w3538,w6563,w6785,w4754,w10795,w6284,w3194,w6863,w8767,w9901,w11756,w332,w6223" />
+<meta name="NetsparkQuiltingResult" total-length="204167" removed="0" rules-found="w2655,w3390,w4748,w4749,w3012,w2577,w4308,w6565,w7502,w73,w837,w5579,w5580,w11562,w3180,w6893,w3538,w6563,w6785,w4754,w10795,w6284,w3194,w6863,w8767,w9901,w11756,w332,w6223" />
 </head>
 <body>
     <div class="progress-bar">
@@ -500,6 +562,7 @@
         <button class="click-button" id="clickButton">CLICK</button>
         <div class="multiplier" id="multiplier">Multiplier: 1x</div>
         <div class="stats">
+            <div>Rebirth Level: <span id="displayRebirthLevel" style="color: #ffd700;">0</span></div>
             <div>Secrets Found: <span id="secretsFound">0</span>/200</div>
             <div>Total Clicks: <span id="totalClicks">0</span></div>
         </div>
@@ -511,6 +574,9 @@
     <button class="shop-toggle" id="shopToggle" onclick="toggleShop()">SHOP</button>
     <button class="achievements-button" onclick="showAchievementsModal()">ACHIEVEMENTS</button>
     <button class="codes-button" onclick="showCodesModal()">CODES</button>
+    <button class="settings-button" onclick="showSettingsModal()">SETTINGS</button>
+    <button class="rebirth-button" onclick="showRebirthModal()">REBIRTH</button>
+
 
     <div class="shop-container" id="shopContainer">
         <div class="shop-header">
@@ -683,8 +749,165 @@
                 box-shadow: 0 0 20px rgba(255, 165, 0, 0.5);
                 animation: pulse 2s infinite;
             ">VIEW CURRENT CODES LIST</button>
+            <button id="pressHoldToggleBtn" onclick="togglePressHoldMode()" style="
+                background: linear-gradient(45deg, #00ff00, #32ff32, #00ff00);
+                border: 3px solid #fff;
+                color: #000;
+                font-size: 1.2rem;
+                padding: 1rem 2rem;
+                cursor: pointer;
+                font-family: 'Courier New', monospace;
+                font-weight: bold;
+                text-shadow: 1px 1px 2px #fff;
+                box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+                animation: pulse 2s infinite;
+                margin-top: 1rem;
+            ">TOGGLE PRESS & HOLD MODE</button>
+            <div id="pressHoldStatus" style="
+                margin-top: 1rem;
+                font-size: 1rem;
+                color: #ffff00;
+                text-align: center;
+            ">Press & Hold Mode: OFF</div>
         </div>
     </div>
+
+    <div class="secrets-modal" id="settingsModal">
+        <button class="close-button" onclick="closeSettingsModal()">CLOSE</button>
+        <div class="secrets-content">
+            <div class="secrets-header">SETTINGS</div>
+            <div style="margin: 2rem 0;">
+                <div style="font-size: 1.1rem; color: #fff; margin-bottom: 1rem; border-bottom: 1px solid #333; padding-bottom: 0.5rem;">AUTO-CLICKER VISUALS</div>
+                
+                <div style="margin-bottom: 2rem; padding: 1rem; border: 2px solid #333; background: rgba(255,255,255,0.05);">
+                    <div style="font-size: 1rem; color: #fff; margin-bottom: 1rem;">Maximum Visual Auto-Clickers</div>
+                    <div style="color: #aaa; font-size: 0.9rem; margin-bottom: 1rem;">Controls how many auto-clicker cursors are shown on screen. The actual clicking power remains the same regardless of this setting.</div>
+                    
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <button onclick="changeMaxVisualClickers(-1)" style="
+                            background: transparent;
+                            border: 2px solid #fff;
+                            color: #fff;
+                            width: 40px;
+                            height: 40px;
+                            cursor: pointer;
+                            font-family: 'Courier New', monospace;
+                            font-size: 1.2rem;
+                            font-weight: bold;
+                        ">-</button>
+                        
+                        <div style="flex: 1; text-align: center;">
+                            <div style="font-size: 1.5rem; color: #00ff00; font-weight: bold;" id="maxVisualClickersDisplay">6</div>
+                            <div style="font-size: 0.8rem; color: #aaa;">cursors</div>
+                        </div>
+                        
+                        <button onclick="changeMaxVisualClickers(1)" style="
+                            background: transparent;
+                            border: 2px solid #fff;
+                            color: #fff;
+                            width: 40px;
+                            height: 40px;
+                            cursor: pointer;
+                            font-family: 'Courier New', monospace;
+                            font-size: 1.2rem;
+                            font-weight: bold;
+                        ">+</button>
+                    </div>
+                    
+                    <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                        <button onclick="setMaxVisualClickers(0)" style="
+                            background: transparent;
+                            border: 1px solid #666;
+                            color: #666;
+                            padding: 0.3rem 0.8rem;
+                            cursor: pointer;
+                            font-family: 'Courier New', monospace;
+                            font-size: 0.8rem;
+                        ">0</button>
+                        <button onclick="setMaxVisualClickers(3)" style="
+                            background: transparent;
+                            border: 1px solid #666;
+                            color: #666;
+                            padding: 0.3rem 0.8rem;
+                            cursor: pointer;
+                            font-family: 'Courier New', monospace;
+                            font-size: 0.8rem;
+                        ">3</button>
+                        <button onclick="setMaxVisualClickers(6)" style="
+                            background: transparent;
+                            border: 1px solid #666;
+                            color: #666;
+                            padding: 0.3rem 0.8rem;
+                            cursor: pointer;
+                            font-family: 'Courier New', monospace;
+                            font-size: 0.8rem;
+                        ">6</button>
+                        <button onclick="setMaxVisualClickers(10)" style="
+                            background: transparent;
+                            border: 1px solid #666;
+                            color: #666;
+                            padding: 0.3rem 0.8rem;
+                            cursor: pointer;
+                            font-family: 'Courier New', monospace;
+                            font-size: 0.8rem;
+                        ">10</button>
+                        <button onclick="setMaxVisualClickers(20)" style="
+                            background: transparent;
+                            border: 1px solid #666;
+                            color: #666;
+                            padding: 0.3rem 0.8rem;
+                            cursor: pointer;
+                            font-family: 'Courier New', monospace;
+                            font-size: 0.8rem;
+                        ">20</button>
+                    </div>
+                    
+                    <div style="font-size: 0.8rem; color: #888;">
+                        Current Auto-Clickers: <span id="currentAutoClickersCount" style="color: #00ff00;">0</span> | 
+                        Visual Clickers: <span id="currentVisualClickersCount" style="color: #00ff00;">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="secrets-modal" id="rebirthModal">
+        <button class="close-button" onclick="closeRebirthModal()">CLOSE</button>
+        <div class="secrets-content">
+            <div class="secrets-header" style="color: #ffd700; text-shadow: 0 0 20px #ffd700;">REBIRTH SYSTEM</div>
+            <div style="text-align: center; margin: 2rem 0;">
+                <div style="font-size: 1.2rem; color: #fff; margin-bottom: 1rem;">Current Rebirth Level: <span id="rebirthLevel" style="color: #ffd700;">0</span></div>
+                <div style="font-size: 1rem; color: #aaa; margin-bottom: 2rem;">Rebirth Points: <span id="rebirthPoints" style="color: #ffd700;">0</span></div>
+                
+                <div id="rebirthRequirement" style="margin: 2rem 0; padding: 1rem; border: 2px solid #ffd700; background: rgba(255, 215, 0, 0.1);">
+                    <div style="color: #ffd700; font-weight: bold; margin-bottom: 0.5rem;">REBIRTH REQUIREMENTS</div>
+                    <div style="color: #fff;">Reach 10,000,000 points to unlock rebirth</div>
+                </div>
+                
+                <button id="rebirthBtn" onclick="performRebirth()" style="
+                    background: linear-gradient(45deg, #ffd700, #ffed4e, #fff700, #ffd700);
+                    border: 3px solid #fff;
+                    color: #000;
+                    font-size: 1.3rem;
+                    padding: 1rem 2rem;
+                    cursor: pointer;
+                    font-family: 'Courier New', monospace;
+                    font-weight: bold;
+                    text-shadow: 1px 1px 2px #fff;
+                    box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+                    margin-bottom: 2rem;
+                    display: none;
+                ">REBIRTH NOW</button>
+            </div>
+            
+            <div id="rebirthUpgrades" style="margin-top: 2rem;">
+                <div style="font-size: 1.1rem; color: #ffd700; text-align: center; margin-bottom: 1rem; border-bottom: 1px solid #ffd700; padding-bottom: 0.5rem;">REBIRTH UPGRADES</div>
+                <div id="rebirthUpgradesList"></div>
+            </div>
+        </div>
+    </div>
+
+
 
     <script>
         let score = 0;
@@ -700,6 +923,7 @@
         let lastCapsLockTime = 0;
         let pressHoldMode = false;
         let pressHoldEndTime = 0;
+        let permanentPressHoldMode = false;
         let adminTildeCount = 0;
         let lastAdminTildeTime = 0;
         let secretAdminSequence = [];
@@ -713,7 +937,11 @@
         let achievements = new Set();
         let achievementClickers = new Map();
         let redeemedCodes = new Set();
-
+        let rebirthLevel = 0;
+        let rebirthPoints = 0;
+        let rebirthUpgrades = new Map();
+        let baseMultiplier = 1;
+        let maxVisualClickers = 6;
         // Permanent exclusive codes
         const permanentCodes = {
             'CLICK2024': {
@@ -864,6 +1092,84 @@
 
         // Get the current exclusive codes (this replaces the old exclusiveCodes)
         const exclusiveCodes = getAllActiveCodes();
+
+
+
+        // Rebirth upgrade definitions
+        const rebirthUpgradeList = [
+            {
+                id: 'click_power',
+                name: 'Click Power',
+                description: 'Increase base click value',
+                baseCost: 1,
+                maxLevel: 50,
+                effect: (level) => level * 0.5, // +0.5 per click per level
+                type: 'additive'
+            },
+            {
+                id: 'multiplier_boost',
+                name: 'Multiplier Boost',
+                description: 'Permanent multiplier increase',
+                baseCost: 2,
+                maxLevel: 25,
+                effect: (level) => 1 + (level * 0.1), // +10% multiplier per level
+                type: 'multiplier'
+            },
+            {
+                id: 'auto_efficiency',
+                name: 'Auto Efficiency',
+                description: 'Auto-clickers work faster',
+                baseCost: 3,
+                maxLevel: 20,
+                effect: (level) => level * 0.2, // +20% auto-clicker speed per level
+                type: 'auto_boost'
+            },
+            {
+                id: 'secret_finder',
+                name: 'Secret Finder',
+                description: 'Higher chance to discover secrets',
+                baseCost: 5,
+                maxLevel: 10,
+                effect: (level) => level * 0.1, // +10% secret discovery per level
+                type: 'secret_boost'
+            },
+            {
+                id: 'rebirth_gain',
+                name: 'Rebirth Gain',
+                description: 'Earn more rebirth points',
+                baseCost: 10,
+                maxLevel: 15,
+                effect: (level) => 1 + (level * 0.25), // +25% rebirth points per level
+                type: 'rebirth_multiplier'
+            },
+            {
+                id: 'shop_discount',
+                name: 'Shop Discount',
+                description: 'Reduce shop item costs',
+                baseCost: 8,
+                maxLevel: 10,
+                effect: (level) => level * 0.05, // 5% discount per level
+                type: 'discount'
+            },
+            {
+                id: 'code_power',
+                name: 'Code Power',
+                description: 'Exclusive codes give more rewards',
+                baseCost: 15,
+                maxLevel: 8,
+                effect: (level) => 1 + (level * 0.5), // +50% code rewards per level
+                type: 'code_boost'
+            },
+            {
+                id: 'rainbow_duration',
+                name: 'Rainbow Duration',
+                description: 'Rainbow effects last longer',
+                baseCost: 12,
+                maxLevel: 5,
+                effect: (level) => 1 + (level * 0.3), // +30% duration per level
+                type: 'rainbow_boost'
+            }
+        ];
 
         // Shop items (100 total)
         const shopItems = [
@@ -1382,6 +1688,12 @@
         function handleKeyDown(event) {
             const key = event.key;
             
+            // Block Enter key completely
+            if (key === 'Enter') {
+                event.preventDefault();
+                return;
+            }
+            
             // Track shift key for secret admin sequence
             if (key === 'Shift') {
                 shiftHeld = true;
@@ -1431,8 +1743,10 @@
                 capsLockCount = 0;
             }
             
-            // Check if press-hold mode is active
-            if (pressHoldMode && Date.now() < pressHoldEndTime) {
+            // Check if press-hold mode is active (either temporary or permanent)
+            const isInPressHoldMode = permanentPressHoldMode || (pressHoldMode && Date.now() < pressHoldEndTime);
+            
+            if (isInPressHoldMode) {
                 // In press-hold mode, allow key repeat (but never for Enter)
                 if (!pressedKeys.has(key) && key !== 'Enter') {
                     pressedKeys.add(key);
@@ -1450,7 +1764,7 @@
                 }
                 pressedKeys.add(key);
                 
-                // Turn off press-hold mode if expired
+                // Turn off temporary press-hold mode if expired
                 if (pressHoldMode && Date.now() >= pressHoldEndTime) {
                     pressHoldMode = false;
                 }
@@ -1536,7 +1850,9 @@
         }
 
         function handleClick() {
-            const points = Math.floor(1 * multiplier);
+            const baseClick = 1 + getRebirthUpgradeEffect('click_power');
+            let points = Math.floor(baseClick * multiplier);
+            
             score += points;
             totalClicks++;
             updateDisplay();
@@ -1633,10 +1949,66 @@
             
             // Remove visual indicator after 1 minute
             setTimeout(() => {
-                button.style.boxShadow = 'none';
-                button.style.borderColor = '#fff';
+                if (!permanentPressHoldMode) {
+                    button.style.boxShadow = 'none';
+                    button.style.borderColor = '#fff';
+                }
                 pressHoldMode = false;
             }, 60000);
+        }
+
+        function togglePressHoldMode() {
+            permanentPressHoldMode = !permanentPressHoldMode;
+            
+            const button = document.getElementById('clickButton');
+            const statusElement = document.getElementById('pressHoldStatus');
+            const toggleBtn = document.getElementById('pressHoldToggleBtn');
+            
+            if (permanentPressHoldMode) {
+                // Enable permanent press & hold mode
+                button.style.boxShadow = '0 0 30px #00ff00';
+                button.style.borderColor = '#00ff00';
+                statusElement.textContent = 'Press & Hold Mode: ON (PERMANENT)';
+                statusElement.style.color = '#00ff00';
+                toggleBtn.innerHTML = 'DISABLE PRESS & HOLD MODE';
+                toggleBtn.style.background = 'linear-gradient(45deg, #ff0000, #ff3232, #ff0000)';
+                toggleBtn.style.boxShadow = '0 0 20px rgba(255, 0, 0, 0.5)';
+                
+                // Show notification
+                const notification = document.getElementById('notification');
+                notification.innerHTML = `
+                    <div style="color: #00ff00; font-weight: bold;">PERMANENT PRESS & HOLD ENABLED!</div>
+                    <div style="color: #fff;">Hold any key to click rapidly</div>
+                    <div style="color: #aaa; font-size: 0.8rem;">Toggle off from admin panel to disable</div>
+                `;
+                notification.classList.add('show');
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 5000);
+                
+            } else {
+                // Disable permanent press & hold mode
+                button.style.boxShadow = 'none';
+                button.style.borderColor = '#fff';
+                statusElement.textContent = 'Press & Hold Mode: OFF';
+                statusElement.style.color = '#ffff00';
+                toggleBtn.innerHTML = 'TOGGLE PRESS & HOLD MODE';
+                toggleBtn.style.background = 'linear-gradient(45deg, #00ff00, #32ff32, #00ff00)';
+                toggleBtn.style.boxShadow = '0 0 20px rgba(0, 255, 0, 0.5)';
+                
+                // Show notification
+                const notification = document.getElementById('notification');
+                notification.innerHTML = `
+                    <div style="color: #ff6600; font-weight: bold;">PRESS & HOLD MODE DISABLED</div>
+                    <div style="color: #fff;">Returned to normal clicking mode</div>
+                `;
+                notification.classList.add('show');
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
+            }
         }
 
         function activateRainbowMode(duration) {
@@ -1691,6 +2063,10 @@
 
         function updateMultiplier() {
             let totalMultiplier = 1;
+            
+            // Apply rebirth multiplier bonus
+            totalMultiplier *= getRebirthUpgradeEffect('multiplier_boost');
+            
             activeEffects.forEach(effect => {
                 if (effect.type === 'multiplier' && Date.now() < effect.endTime) {
                     totalMultiplier *= effect.value;
@@ -1702,6 +2078,7 @@
         function updateDisplay() {
             document.getElementById('score').textContent = Math.floor(score);
             document.getElementById('multiplier').textContent = `Multiplier: ${multiplier.toFixed(1)}x`;
+            document.getElementById('displayRebirthLevel').textContent = rebirthLevel;
             document.getElementById('secretsFound').textContent = unlockedSecrets.size;
             document.getElementById('totalClicks').textContent = totalClicks;
             
@@ -2211,17 +2588,125 @@
             document.head.appendChild(style);
         }
 
+        // Auto-clicker visualization system
+        let autoClickerPointers = [];
+        let autoClickerContainer = null;
+
+        function createAutoClickerContainer() {
+            if (!autoClickerContainer) {
+                autoClickerContainer = document.createElement('div');
+                autoClickerContainer.id = 'autoClickerContainer';
+                autoClickerContainer.style.position = 'fixed';
+                autoClickerContainer.style.top = '0';
+                autoClickerContainer.style.left = '0';
+                autoClickerContainer.style.width = '100%';
+                autoClickerContainer.style.height = '100%';
+                autoClickerContainer.style.pointerEvents = 'none';
+                autoClickerContainer.style.zIndex = '9998';
+                document.body.appendChild(autoClickerContainer);
+            }
+        }
+
+        function createMousePointer(id) {
+            const pointer = document.createElement('div');
+            pointer.id = `autoClicker_${id}`;
+            pointer.style.position = 'absolute';
+            pointer.style.width = '12px';
+            pointer.style.height = '12px';
+            pointer.style.borderRadius = '50%';
+            pointer.style.transition = 'all 1s ease-out';
+            pointer.style.zIndex = '9999';
+            pointer.style.cursor = 'none';
+            
+            // Different colors for different pointers
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ffa500', '#ff69b4'];
+            const color = colors[id % colors.length];
+            pointer.style.backgroundColor = color;
+            pointer.style.boxShadow = `0 0 10px ${color}`;
+            
+            // Start at random position on the button
+            const button = document.getElementById('clickButton');
+            const buttonRect = button.getBoundingClientRect();
+            const startX = buttonRect.left + Math.random() * (buttonRect.width - 12);
+            const startY = buttonRect.top + Math.random() * (buttonRect.height - 12);
+            
+            pointer.style.left = startX + 'px';
+            pointer.style.top = startY + 'px';
+            
+            return pointer;
+        }
+
+        function movePointerToRandomPosition(pointer) {
+            const button = document.getElementById('clickButton');
+            const buttonRect = button.getBoundingClientRect();
+            
+            // Calculate random position within the button bounds
+            const newX = buttonRect.left + Math.random() * (buttonRect.width - 12);
+            const newY = buttonRect.top + Math.random() * (buttonRect.height - 12);
+            
+            pointer.style.left = newX + 'px';
+            pointer.style.top = newY + 'px';
+            
+            // Simple pointer animation
+            pointer.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                pointer.style.transform = 'scale(1)';
+            }, 200);
+        }
+
+        // Ripple effect removed - auto-clickers now move silently
+
         function updateAutoClicker() {
             if (autoClickerInterval) {
                 clearInterval(autoClickerInterval);
             }
             
+            // Create container if it doesn't exist
+            createAutoClickerContainer();
+            
+            // Update visual pointers count based on settings
+            const targetPointers = Math.min(autoClickers, maxVisualClickers);
+            
+            // Remove excess pointers
+            while (autoClickerPointers.length > targetPointers) {
+                const pointer = autoClickerPointers.pop();
+                if (pointer.parentNode) {
+                    pointer.parentNode.removeChild(pointer);
+                }
+            }
+            
+            // Add new pointers
+            while (autoClickerPointers.length < targetPointers) {
+                const pointer = createMousePointer(autoClickerPointers.length);
+                autoClickerContainer.appendChild(pointer);
+                autoClickerPointers.push(pointer);
+            }
+            
+            // Update settings display if modal is open
+            updateSettingsDisplay();
+            
             if (autoClickers > 0) {
                 autoClickerInterval = setInterval(() => {
+                    // Move all visible pointers and create click effects
+                    autoClickerPointers.forEach((pointer, index) => {
+                        setTimeout(() => {
+                            movePointerToRandomPosition(pointer);
+                        }, index * 50); // Stagger the movements slightly
+                    });
+                    
+                    // Perform the actual clicks (full power regardless of visual count)
                     for (let i = 0; i < autoClickers; i++) {
                         handleClick();
                     }
                 }, 1000);
+            } else {
+                // Remove all pointers when no auto-clickers
+                autoClickerPointers.forEach(pointer => {
+                    if (pointer.parentNode) {
+                        pointer.parentNode.removeChild(pointer);
+                    }
+                });
+                autoClickerPointers = [];
             }
         }
 
@@ -2739,7 +3224,16 @@
 
         function toggleShop() {
             const shop = document.getElementById('shopContainer');
+            const isOpening = !shop.classList.contains('open');
+            
             shop.classList.toggle('open');
+            
+            // Hide auto-clickers when opening shop, show when closing
+            if (isOpening) {
+                hideAutoClickers();
+            } else {
+                showAutoClickers();
+            }
         }
 
         function showNotification(secret) {
@@ -2759,6 +3253,9 @@
         function showSecretsModal() {
             const modal = document.getElementById('secretsModal');
             const secretsList = document.getElementById('secretsList');
+            
+            // Hide auto-clickers
+            hideAutoClickers();
             
             let html = '';
             
@@ -2785,13 +3282,30 @@
             modal.style.display = 'block';
         }
 
+        function hideAutoClickers() {
+            if (autoClickerContainer) {
+                autoClickerContainer.style.display = 'none';
+            }
+        }
+
+        function showAutoClickers() {
+            if (autoClickerContainer) {
+                autoClickerContainer.style.display = 'block';
+            }
+        }
+
         function closeSecretsModal() {
             document.getElementById('secretsModal').style.display = 'none';
+            // Show auto-clickers again
+            showAutoClickers();
         }
 
         function showAdminModal() {
             const modal = document.getElementById('adminModal');
             const adminSecretsList = document.getElementById('adminSecretsList');
+            
+            // Hide auto-clickers
+            hideAutoClickers();
             
             let html = '';
             secrets.forEach((secret, index) => {
@@ -2814,10 +3328,16 @@
 
         function closeAdminModal() {
             document.getElementById('adminModal').style.display = 'none';
+            // Show auto-clickers again
+            showAutoClickers();
         }
 
         function showCodeEntryModal() {
             const modal = document.getElementById('codeEntryModal');
+            
+            // Hide auto-clickers
+            hideAutoClickers();
+            
             modal.style.display = 'block';
             
             // Focus on input and clear it
@@ -2840,10 +3360,14 @@
 
         function closeCodeEntryModal() {
             document.getElementById('codeEntryModal').style.display = 'none';
+            // Show auto-clickers again
+            showAutoClickers();
         }
 
         function closeSecretAdminModal() {
             document.getElementById('secretAdminModal').style.display = 'none';
+            // Show auto-clickers again
+            showAutoClickers();
         }
 
         function checkCode() {
@@ -2877,6 +3401,10 @@
 
         function showSecretAdminModal() {
             const modal = document.getElementById('secretAdminModal');
+            
+            // Hide auto-clickers
+            hideAutoClickers();
+            
             modal.style.display = 'block';
             
             // Mark secret admin achievement as accessible
@@ -2927,6 +3455,9 @@
             const modal = document.getElementById('achievementsModal');
             const achievementsList = document.getElementById('achievementsList');
             
+            // Hide auto-clickers
+            hideAutoClickers();
+            
             let html = '';
             
             achievementList.forEach(achievement => {
@@ -2972,10 +3503,16 @@
 
         function closeAchievementsModal() {
             document.getElementById('achievementsModal').style.display = 'none';
+            // Show auto-clickers again
+            showAutoClickers();
         }
 
         function showCodesModal() {
             const modal = document.getElementById('codesModal');
+            
+            // Hide auto-clickers
+            hideAutoClickers();
+            
             updateRedeemedCodesList();
             modal.style.display = 'block';
             
@@ -2987,6 +3524,8 @@
 
         function closeCodesModal() {
             document.getElementById('codesModal').style.display = 'none';
+            // Show auto-clickers again
+            showAutoClickers();
         }
 
         function redeemCode() {
@@ -3032,6 +3571,9 @@
         function showCodesListModal() {
             const modal = document.getElementById('codesListModal');
             const content = document.getElementById('codesListContent');
+            
+            // Hide auto-clickers
+            hideAutoClickers();
             
             // Get current active codes
             const currentCodes = getAllActiveCodes();
@@ -3127,6 +3669,8 @@
 
         function closeCodesListModal() {
             document.getElementById('codesListModal').style.display = 'none';
+            // Show auto-clickers again
+            showAutoClickers();
         }
 
         function applyCodeReward(codeData) {
@@ -3326,7 +3870,264 @@
             }, 1000);
         }
 
-        // Close modal on escape key and handle enter in code input
+        function showRebirthModal() {
+            const modal = document.getElementById('rebirthModal');
+            
+            // Hide auto-clickers
+            hideAutoClickers();
+            
+            updateRebirthDisplay();
+            generateRebirthUpgrades();
+            modal.style.display = 'block';
+        }
+
+        function showSettingsModal() {
+            const modal = document.getElementById('settingsModal');
+            
+            // Hide auto-clickers
+            hideAutoClickers();
+            
+            updateSettingsDisplay();
+            modal.style.display = 'block';
+        }
+
+        function closeSettingsModal() {
+            document.getElementById('settingsModal').style.display = 'none';
+            // Show auto-clickers again
+            showAutoClickers();
+        }
+
+        function updateSettingsDisplay() {
+            const maxDisplay = document.getElementById('maxVisualClickersDisplay');
+            const currentAutoCount = document.getElementById('currentAutoClickersCount');
+            const currentVisualCount = document.getElementById('currentVisualClickersCount');
+            
+            if (maxDisplay) maxDisplay.textContent = maxVisualClickers;
+            if (currentAutoCount) currentAutoCount.textContent = autoClickers;
+            if (currentVisualCount) currentVisualCount.textContent = Math.min(autoClickers, maxVisualClickers);
+        }
+
+        function changeMaxVisualClickers(delta) {
+            maxVisualClickers = Math.max(0, Math.min(50, maxVisualClickers + delta));
+            updateSettingsDisplay();
+            updateAutoClicker();
+        }
+
+        function setMaxVisualClickers(value) {
+            maxVisualClickers = Math.max(0, Math.min(50, value));
+            updateSettingsDisplay();
+            updateAutoClicker();
+        }
+
+        function closeRebirthModal() {
+            document.getElementById('rebirthModal').style.display = 'none';
+            // Show auto-clickers again
+            showAutoClickers();
+        }
+
+        function updateRebirthDisplay() {
+            document.getElementById('rebirthLevel').textContent = rebirthLevel;
+            document.getElementById('rebirthPoints').textContent = rebirthPoints;
+            
+            const canRebirth = score >= 10000000; // 10 million points
+            const rebirthBtn = document.getElementById('rebirthBtn');
+            const requirement = document.getElementById('rebirthRequirement');
+            
+            if (canRebirth) {
+                rebirthBtn.style.display = 'block';
+                const pointsToGain = Math.floor(score / 1000000); // 1 rebirth point per million
+                requirement.innerHTML = `
+                    <div style="color: #00ff00; font-weight: bold; margin-bottom: 0.5rem;">REBIRTH AVAILABLE!</div>
+                    <div style="color: #fff;">You will gain ${pointsToGain} rebirth points</div>
+                    <div style="color: #ffd700; font-size: 0.9rem; margin-top: 0.5rem;">This will reset your progress but grant permanent bonuses</div>
+                `;
+            } else {
+                rebirthBtn.style.display = 'none';
+                const needed = 10000000 - score;
+                requirement.innerHTML = `
+                    <div style="color: #ffd700; font-weight: bold; margin-bottom: 0.5rem;">REBIRTH REQUIREMENTS</div>
+                    <div style="color: #fff;">Need ${needed.toLocaleString()} more points to rebirth</div>
+                `;
+            }
+        }
+
+        function generateRebirthUpgrades() {
+            const upgradesList = document.getElementById('rebirthUpgradesList');
+            let html = '';
+            
+            rebirthUpgradeList.forEach(upgrade => {
+                const currentLevel = rebirthUpgrades.get(upgrade.id) || 0;
+                const cost = Math.floor(upgrade.baseCost * Math.pow(1.5, currentLevel));
+                const canAfford = rebirthPoints >= cost;
+                const isMaxLevel = currentLevel >= upgrade.maxLevel;
+                
+                let buttonClass = 'shop-item';
+                let buttonText = `UPGRADE (${cost} RP)`;
+                
+                if (isMaxLevel) {
+                    buttonClass += ' owned';
+                    buttonText = 'MAX LEVEL';
+                } else if (!canAfford) {
+                    buttonClass += ' unaffordable';
+                }
+                
+                html += `
+                    <div class="${buttonClass}" onclick="buyRebirthUpgrade('${upgrade.id}')" style="margin-bottom: 0.5rem;">
+                        <div class="item-info">
+                            <div class="item-name">${upgrade.name} (Level ${currentLevel}/${upgrade.maxLevel})</div>
+                            <div class="item-description">${upgrade.description}</div>
+                            <div style="font-size: 0.7rem; color: #00ff00; margin-top: 0.2rem;">
+                                Current Effect: ${getUpgradeEffectText(upgrade, currentLevel)}
+                            </div>
+                        </div>
+                        <div class="item-price">${buttonText}</div>
+                    </div>
+                `;
+            });
+            
+            upgradesList.innerHTML = html;
+        }
+
+        function getUpgradeEffectText(upgrade, level) {
+            if (level === 0) return 'None';
+            
+            switch(upgrade.type) {
+                case 'additive':
+                    return `+${upgrade.effect(level)} per click`;
+                case 'multiplier':
+                    return `${(upgrade.effect(level) * 100).toFixed(0)}% multiplier`;
+                case 'auto_boost':
+                    return `+${(upgrade.effect(level) * 100).toFixed(0)}% auto speed`;
+                case 'secret_boost':
+                    return `+${(upgrade.effect(level) * 100).toFixed(0)}% secret chance`;
+                case 'rebirth_multiplier':
+                    return `${(upgrade.effect(level) * 100).toFixed(0)}% rebirth gain`;
+                case 'discount':
+                    return `${(upgrade.effect(level) * 100).toFixed(0)}% shop discount`;
+                case 'code_boost':
+                    return `${(upgrade.effect(level) * 100).toFixed(0)}% code rewards`;
+                case 'rainbow_boost':
+                    return `${(upgrade.effect(level) * 100).toFixed(0)}% rainbow duration`;
+                default:
+                    return 'Unknown';
+            }
+        }
+
+        function buyRebirthUpgrade(upgradeId) {
+            const upgrade = rebirthUpgradeList.find(u => u.id === upgradeId);
+            if (!upgrade) return;
+            
+            const currentLevel = rebirthUpgrades.get(upgradeId) || 0;
+            const cost = Math.floor(upgrade.baseCost * Math.pow(1.5, currentLevel));
+            
+            if (currentLevel >= upgrade.maxLevel || rebirthPoints < cost) return;
+            
+            rebirthPoints -= cost;
+            rebirthUpgrades.set(upgradeId, currentLevel + 1);
+            
+            // Apply the upgrade effect
+            applyRebirthUpgrade(upgrade, currentLevel + 1);
+            
+            updateRebirthDisplay();
+            generateRebirthUpgrades();
+            updateDisplay();
+            
+            // Show notification
+            const notification = document.getElementById('notification');
+            notification.innerHTML = `
+                <div style="color: #ffd700; font-weight: bold;">REBIRTH UPGRADE!</div>
+                <div>${upgrade.name} Level ${currentLevel + 1}</div>
+                <div style="font-size: 0.8rem; color: #aaa;">${upgrade.description}</div>
+            `;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        function applyRebirthUpgrade(upgrade, level) {
+            // Rebirth upgrades are applied in the calculation functions
+            // This function could be used for immediate effects if needed
+            if (upgrade.type === 'multiplier') {
+                updateMultiplier();
+            }
+        }
+
+        function performRebirth() {
+            if (score < 10000000) return;
+            
+            // Calculate rebirth points to gain
+            const pointsToGain = Math.floor(score / 1000000);
+            const rebirthMultiplier = getRebirthUpgradeEffect('rebirth_gain');
+            const actualGain = Math.floor(pointsToGain * rebirthMultiplier);
+            
+            // Reset progress
+            score = 0;
+            totalClicks = 0;
+            multiplier = 1;
+            autoClickers = 0;
+            activeEffects.clear();
+            unlockedSecrets.clear();
+            ownedItems.clear();
+            equippedItems.clear();
+            achievements.clear();
+            achievementClickers.clear();
+            
+            // Keep rebirth upgrades and add new points
+            rebirthLevel++;
+            rebirthPoints += actualGain;
+            
+            // Clear auto-clicker interval and visual pointers
+            if (autoClickerInterval) {
+                clearInterval(autoClickerInterval);
+                autoClickerInterval = null;
+            }
+            
+            // Remove all auto-clicker pointers
+            autoClickerPointers.forEach(pointer => {
+                if (pointer.parentNode) {
+                    pointer.parentNode.removeChild(pointer);
+                }
+            });
+            autoClickerPointers = [];
+            
+            // Reset theme to default
+            const existingTheme = document.getElementById('themeStyles');
+            if (existingTheme) {
+                existingTheme.remove();
+            }
+            
+            // Update displays
+            updateDisplay();
+            generateShop();
+            closeRebirthModal();
+            
+            // Show rebirth notification
+            const notification = document.getElementById('notification');
+            notification.innerHTML = `
+                <div style="color: #ffd700; font-weight: bold; font-size: 1.2rem; text-shadow: 0 0 20px #ffd700;">🌟 REBIRTH ${rebirthLevel}! 🌟</div>
+                <div style="color: #fff; margin: 0.5rem 0;">Gained ${actualGain} Rebirth Points</div>
+                <div style="color: #aaa; font-size: 0.9rem;">Your journey begins anew with permanent bonuses</div>
+            `;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 6000);
+        }
+
+        function getRebirthUpgradeEffect(upgradeId) {
+            const upgrade = rebirthUpgradeList.find(u => u.id === upgradeId);
+            if (!upgrade) return 1;
+            
+            const level = rebirthUpgrades.get(upgradeId) || 0;
+            return upgrade.effect(level);
+        }
+
+
+
+        // Close modal on escape key
         document.addEventListener('keydown', (event) => {
             if (event.key === 'Escape') {
                 closeSecretsModal();
@@ -3336,16 +4137,14 @@
                 closeCodesListModal();
                 closeSecretAdminModal();
                 closeCodeEntryModal();
-            }
-            
-            // Handle Enter key in code input
-            if (event.key === 'Enter' && document.getElementById('codeEntryModal').style.display === 'block') {
-                checkCode();
-            }
-            
-            // Handle Enter key in code redemption input
-            if (event.key === 'Enter' && document.getElementById('codesModal').style.display === 'block') {
-                redeemCode();
+                closeSettingsModal();
+                closeRebirthModal();
+                
+                // Also close shop if open
+                const shop = document.getElementById('shopContainer');
+                if (shop.classList.contains('open')) {
+                    toggleShop();
+                }
             }
         });
 
@@ -3365,5 +4164,5 @@
             updateDisplay();
         }, 1000);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9944f65c748276ae',t:'MTc2MTQyOTM3MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'994d3df6803676ae',t:'MTc2MTUxNjE4OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
