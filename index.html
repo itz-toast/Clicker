@@ -186,6 +186,11 @@
         .game-container {
             text-align: center;
             padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
         }
 
         .score {
@@ -547,24 +552,142 @@
             box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
         }
 
+        /* Loading Screen Styles */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .loading-content {
+            text-align: center;
+            color: #fff;
+            font-family: 'Courier New', monospace;
+        }
+
+        .loading-title {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px #fff;
+            animation: titlePulse 2s ease-in-out infinite;
+        }
+
+        .loading-progress {
+            width: 400px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            margin: 1rem auto;
+            overflow: hidden;
+        }
+
+        .loading-progress-fill {
+            height: 100%;
+            background: #00ff00;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .loading-percentage {
+            font-size: 1.2rem;
+            color: #fff;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 10px #fff;
+        }
+
+        .loading-dots {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .loading-dots span {
+            animation: dotBounce 1.4s ease-in-out infinite both;
+        }
+
+        .loading-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .loading-dots span:nth-child(2) { animation-delay: -0.16s; }
+        .loading-dots span:nth-child(3) { animation-delay: 0s; }
+
+        .loading-tip {
+            font-size: 1.2rem;
+            color: #aaa;
+            opacity: 0.8;
+            animation: tipFade 3s ease-in-out infinite;
+        }
+
+        @keyframes titlePulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+        }
+
+        @keyframes dotBounce {
+            0%, 80%, 100% { 
+                transform: scale(0);
+                opacity: 0.5;
+            } 
+            40% { 
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes tipFade {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+
+
+        .game-content {
+            width: 100%;
+            height: 100%;
+        }
+
 
     </style>
 
-<meta name="NetsparkQuiltingResult" total-length="204167" removed="0" rules-found="w2655,w3390,w4748,w4749,w3012,w2577,w4308,w6565,w7502,w73,w837,w5579,w5580,w11562,w3180,w6893,w3538,w6563,w6785,w4754,w10795,w6284,w3194,w6863,w8767,w9901,w11756,w332,w6223" />
+<meta name="NetsparkQuiltingResult" total-length="225504" removed="0" rules-found="w2655,w3390,w4748,w4749,w3012,w2577,w4308,w6565,w7502,w73,w837,w5579,w5580,w11562,w3180,w6893,w3538,w6563,w6785,w4754,w10795,w6284,w3194,w6863,w8767,w9901,w11756,w332,w6223,w5418,w8897,w13537,w6784,r973s-30p1,w7422,w2952,w29977,w3174,w13784,w3071,w10191,w3879,w1749,w4348,w9725" />
 </head>
 <body>
     <div class="progress-bar">
         <div class="progress-fill" id="progressFill"></div>
     </div>
 
-    <div class="game-container">
-        <div class="score" id="score">0</div>
-        <button class="click-button" id="clickButton">CLICK</button>
-        <div class="multiplier" id="multiplier">Multiplier: 1x</div>
-        <div class="stats">
-            <div>Rebirth Level: <span id="displayRebirthLevel" style="color: #ffd700;">0</span></div>
-            <div>Secrets Found: <span id="secretsFound">0</span>/200</div>
-            <div>Total Clicks: <span id="totalClicks">0</span></div>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-title">SECRET CLICKER</div>
+            <div class="loading-progress">
+                <div class="loading-progress-fill" id="loadingProgressFill"></div>
+            </div>
+            <div class="loading-percentage" id="loadingPercentage">0%</div>
+            <div class="loading-dots">
+                <span>.</span><span>.</span><span>.</span>
+            </div>
+            <div class="loading-tip" id="loadingTip">Loading...</div>
+        </div>
+    </div>
+
+    <!-- Main Game -->
+    <div id="gameContent" class="game-content" style="display: none;">
+        <div class="game-container">
+            <div class="score" id="score">0</div>
+            <button class="click-button" id="clickButton">CLICK</button>
+            <div class="multiplier" id="multiplier">Multiplier: 1x</div>
+            <div class="stats">
+                <div>Rebirth Level: <span id="displayRebirthLevel" style="color: #ffd700;">0</span></div>
+                <div>Secrets Found: <span id="secretsFound">0</span>/200</div>
+                <div>Total Clicks: <span id="totalClicks">0</span></div>
+            </div>
         </div>
     </div>
 
@@ -4148,21 +4271,472 @@
             }
         });
 
-        // Initialize display and shop
-        updateDisplay();
-        generateShop();
+        // Loading screen tips
+        const loadingTips = [
+            // Game-related tips
+            "eat a potato!",
+            "find codes hidden around the school!",
+            "try pressing random keys...",
+            "the shop unlocks after clicking!",
+            "secrets are everywhere!",
+            "rainbow mode is spectacular!",
+            "auto-clickers work while you sleep!",
+            "achievements give exclusive rewards!",
+            "rebirth makes you stronger!",
+            "press ~ six times then shift...",
+            "arrow keys hide secrets!",
+            "hold shift 25 times for magic!",
+            "codes expire every week!",
+            "themes change everything!",
+            "multipliers stack together!",
+            "click effects are beautiful!",
+            "admin panels exist...",
+            "infinite power awaits!",
+            "reality can be hacked!",
+            
+            // Completely random and absurd tips
+            "bananas are technically berries!",
+            "octopi have three hearts!",
+            "honey never spoils!",
+            "sharks are older than trees!",
+            "wombat poop is cube-shaped!",
+            "flamingos are pink from shrimp!",
+            "a group of owls is a parliament!",
+            "butterflies taste with their feet!",
+            "elephants can't jump!",
+            "penguins have knees!",
+            "cats can't taste sweetness!",
+            "goldfish have 3-second memories... NOT!",
+            "lobsters were once prison food!",
+            "carrots used to be purple!",
+            "bubble wrap was invented as wallpaper!",
+            "the moon is moving away from Earth!",
+            "there are more trees than stars!",
+            "your nose is always visible!",
+            "you can't hum while holding your nose!",
+            "try not to think about breathing!",
+            "you just lost the game!",
+            "mitochondria is the powerhouse of the cell!",
+            "pineapple on pizza is controversial!",
+            "socks disappear in the dryer!",
+            "left socks are more likely to vanish!",
+            "toast always lands butter-side down!",
+            "Murphy's law is always in effect!",
+            "the cake is a lie!",
+            "there is no spoon!",
+            "42 is the answer to everything!",
+            "don't panic and carry a towel!",
+            "resistance is futile!",
+            "winter is coming!",
+            "may the force be with you!",
+            "live long and prosper!",
+            "I'll be back!",
+            "nobody expects the Spanish Inquisition!",
+            "it's dangerous to go alone!",
+            "the princess is in another castle!",
+            "would you kindly?",
+            "a man chooses, a slave obeys!",
+            "war never changes!",
+            "kept you waiting, huh?",
+            "snake? SNAKE?! SNAAAAKE!!!",
+            "all your base are belong to us!",
+            "do a barrel roll!",
+            "it's-a me, Mario!",
+            "gotta go fast!",
+            "finish him!",
+            "fatality!",
+            "flawless victory!",
+            "get over here!",
+            "hadouken!",
+            "shoryuken!",
+            "combo breaker!",
+            "ultra combo!",
+            "perfect!",
+            "excellent!",
+            "outstanding!",
+            "magnificent!",
+            "incredible!",
+            "unbelievable!",
+            "impossible!",
+            "legendary!",
+            "godlike!",
+            "beyond godlike!",
+            
+            // Philosophical and deep thoughts
+            "if a tree falls in a forest...",
+            "what came first, chicken or egg?",
+            "is cereal soup?",
+            "are hot dogs sandwiches?",
+            "is water wet?",
+            "can you cry underwater?",
+            "why do we park in driveways?",
+            "why do we drive on parkways?",
+            "why is it called rush hour?",
+            "nothing moves during rush hour!",
+            "why do we say 'after dark'?",
+            "it's after light, not dark!",
+            "why do we call it a building?",
+            "it's already built!",
+            "why is abbreviated such a long word?",
+            "why isn't phonetic spelled phonetically?",
+            "if you're waiting for the waiter...",
+            "aren't you the waiter?",
+            "why do we wash bath towels?",
+            "aren't we clean when we use them?",
+            "why do we put suits in garment bags?",
+            "and put garments in suitcases?",
+            "if money doesn't grow on trees...",
+            "why do banks have branches?",
+            "why do we call it rush hour...",
+            "when nobody's moving?",
+            
+            // Internet culture and memes
+            "this is fine!",
+            "such wow, much amaze!",
+            "all the things!",
+            "one does not simply...",
+            "brace yourselves!",
+            "winter is coming... again!",
+            "I don't always test my code...",
+            "but when I do, I do it in production!",
+            "it's not a bug, it's a feature!",
+            "works on my machine!",
+            "have you tried turning it off and on?",
+            "404: humor not found!",
+            "loading... please wait...",
+            "buffering... 99%...",
+            "connection lost!",
+            "server not responding!",
+            "fatal error: success!",
+            "warning: coffee levels low!",
+            "error: keyboard not found!",
+            "press any key to continue...",
+            "any key? where's the any key?",
+            "ctrl+alt+delete your problems!",
+            "have you backed up your data?",
+            "the cloud is just someone else's computer!",
+            "there's an app for that!",
+            "did you google it?",
+            "let me google that for you!",
+            "wikipedia says...",
+            "according to reddit...",
+            "as seen on TikTok!",
+            "going viral!",
+            "trending now!",
+            "breaking news!",
+            "this just in!",
+            "stay tuned!",
+            "we'll be right back!",
+            "technical difficulties!",
+            "please stand by!",
+            
+            // Food and cooking
+            "ramen is a food group!",
+            "pizza is a vegetable!",
+            "chocolate is a fruit!",
+            "coffee is a bean soup!",
+            "tea is just leaf water!",
+            "milk is cow juice!",
+            "cheese is spoiled milk!",
+            "wine is grape juice!",
+            "bread is just wheat paste!",
+            "pasta is Italian bread!",
+            "sushi is fancy fish!",
+            "salad is rabbit food!",
+            "soup is hot water with stuff!",
+            "ice cream is frozen milk!",
+            "cake is sweet bread!",
+            "cookies are flat cakes!",
+            "donuts are sweet bagels!",
+            "bagels are bread circles!",
+            "pretzels are twisted bread!",
+            "crackers are crunchy bread!",
+            "chips are thin potatoes!",
+            "fries are long potatoes!",
+            "mashed potatoes are potato soup!",
+            "baked potatoes are hot potatoes!",
+            "sweet potatoes aren't potatoes!",
+            "peanuts aren't nuts!",
+            "strawberries aren't berries!",
+            "rhubarb is a vegetable!",
+            "tomatoes are fruits!",
+            "avocados are berries!",
+            
+            // Weather and nature
+            "it's raining cats and dogs!",
+            "but no actual pets are falling!",
+            "snow is just frozen rain!",
+            "rain is just melted snow!",
+            "clouds are sky cotton!",
+            "thunder is sky bowling!",
+            "lightning is sky electricity!",
+            "rainbows are sky prisms!",
+            "wind is invisible air rivers!",
+            "fog is ground clouds!",
+            "dew is morning tears!",
+            "frost is ice makeup!",
+            "hail is angry ice!",
+            "tornadoes are spinning air!",
+            "hurricanes are big tornadoes!",
+            "earthquakes are ground hiccups!",
+            "volcanoes are earth pimples!",
+            "mountains are big hills!",
+            "hills are small mountains!",
+            "valleys are reverse mountains!",
+            "rivers are water roads!",
+            "lakes are water parks!",
+            "oceans are big lakes!",
+            "beaches are sand carpets!",
+            "deserts are sand oceans!",
+            "forests are tree cities!",
+            "jungles are wild forests!",
+            "grasslands are green carpets!",
+            "tundra is frozen grassland!",
+            "ice caps are frozen oceans!",
+            
+            // Time and space
+            "time is an illusion!",
+            "lunchtime doubly so!",
+            "space is big!",
+            "really big!",
+            "you just won't believe how big!",
+            "the universe is expanding!",
+            "but into what?",
+            "black holes aren't holes!",
+            "white holes might exist!",
+            "wormholes are theoretical!",
+            "time travel is complicated!",
+            "parallel universes are possible!",
+            "quantum mechanics is weird!",
+            "Schrödinger's cat is confused!",
+            "Einstein was relatively smart!",
+            "Newton had gravity!",
+            "Galileo saw stars!",
+            "Copernicus was revolutionary!",
+            "Kepler had laws!",
+            "Hubble had a telescope!",
+            "NASA goes to space!",
+            "SpaceX goes to Mars!",
+            "Mars needs women!",
+            "Venus is hot!",
+            "Mercury is fast!",
+            "Jupiter is big!",
+            "Saturn has rings!",
+            "Uranus is sideways!",
+            "Neptune is blue!",
+            "Pluto is still a planet in our hearts!",
+            
+            // Technology and gadgets
+            "smartphones are smarter than us!",
+            "tablets are big phones!",
+            "laptops are portable desktops!",
+            "desktops sit on desks!",
+            "keyboards have keys but no locks!",
+            "mice don't squeak!",
+            "monitors watch you!",
+            "speakers talk to you!",
+            "headphones are ear hugs!",
+            "earbuds are tiny speakers!",
+            "microphones hear everything!",
+            "cameras capture souls!",
+            "printers never work!",
+            "scanners see through things!",
+            "routers route things!",
+            "modems moderate things!",
+            "cables connect things!",
+            "wireless isn't wireless!",
+            "Bluetooth isn't blue!",
+            "WiFi isn't hi-fi!",
+            "USB isn't a bus!",
+            "RAM isn't a sheep!",
+            "ROM isn't Roman!",
+            "CPU thinks fast!",
+            "GPU draws pretty!",
+            "SSD is solid!",
+            "HDD spins around!",
+            "CD is compact!",
+            "DVD is digital!",
+            "Blu-ray is blue!",
+            
+            // Colors and art
+            "red is the color of passion!",
+            "blue is the color of sadness!",
+            "green is the color of envy!",
+            "yellow is the color of happiness!",
+            "orange is the color of energy!",
+            "purple is the color of royalty!",
+            "pink is the color of love!",
+            "black is the absence of color!",
+            "white is all colors combined!",
+            "gray is indecisive!",
+            "brown is the color of earth!",
+            "beige is boring brown!",
+            "turquoise is fancy blue!",
+            "magenta isn't real!",
+            "cyan is printer blue!",
+            "chartreuse is electric green!",
+            "vermillion is fancy red!",
+            "ochre is ancient yellow!",
+            "umber is dark brown!",
+            "sienna is burnt orange!",
+            "art is subjective!",
+            "beauty is in the eye of the beholder!",
+            "one person's trash is another's treasure!",
+            "abstract art is confusing!",
+            "modern art is questionable!",
+            "classical art is timeless!",
+            "digital art is pixels!",
+            "pixel art is nostalgic!",
+            "vector art is mathematical!",
+            "3D art has depth!",
+            
+            // Music and sounds
+            "music is organized noise!",
+            "noise is disorganized music!",
+            "silence is the absence of sound!",
+            "sound is vibrating air!",
+            "bass drops are gravity!",
+            "treble is high pitched!",
+            "middle C is in the middle!",
+            "octaves repeat themselves!",
+            "scales go up and down!",
+            "chords are multiple notes!",
+            "melodies are note sequences!",
+            "harmonies are note combinations!",
+            "rhythm is time patterns!",
+            "tempo is speed!",
+            "volume is loudness!",
+            "pitch is frequency!",
+            "timbre is tone color!",
+            "dynamics are loud and soft!",
+            "crescendo gets louder!",
+            "diminuendo gets softer!",
+            "staccato is short and sharp!",
+            "legato is smooth and connected!",
+            "forte is loud!",
+            "piano is soft!",
+            "fortissimo is very loud!",
+            "pianissimo is very soft!",
+            "allegro is fast!",
+            "andante is walking pace!",
+            "adagio is slow!",
+            "presto is very fast!",
+            
+            // Final random thoughts
+            "rubber ducks debug code!",
+            "duct tape fixes everything!",
+            "WD-40 unsticks everything!",
+            "if it's stuck, use WD-40!",
+            "if it moves and shouldn't, use duct tape!",
+            "percussive maintenance works!",
+            "have you tried hitting it?",
+            "when in doubt, reboot!",
+            "save early, save often!",
+            "backup your backups!",
+            "test in production!",
+            "it works on my machine!",
+            "that's not a bug, it's a feature!",
+            "user error detected!",
+            "PEBKAC: problem exists between keyboard and chair!",
+            "ID-10-T error!",
+            "layer 8 problem!",
+            "carbon-based error!",
+            "wetware malfunction!",
+            "biological interface issue!",
+            "organic component failure!",
+            "human.exe has stopped working!",
+            "brain.dll not found!",
+            "common sense not installed!",
+            "logic.exe corrupted!",
+            "patience.exe not responding!",
+            "motivation.bat deleted!",
+            "energy.sys low!",
+            "coffee.exe required!",
+            "sleep.mode activated!",
+            "dream.sequence loading...",
+            "reality.check failed!",
+            "sanity.dll missing!",
+            "chaos.exe running!",
+            "randomness.generator active!",
+            "entropy increasing!",
+            "order decreasing!",
+            "universe.heat_death approaching!",
+            "but first, click some buttons!"
+        ];
 
-        // Clean up expired effects periodically
-        setInterval(() => {
-            const now = Date.now();
-            activeEffects.forEach((effect, id) => {
-                if (effect.type === 'multiplier' && now >= effect.endTime) {
-                    activeEffects.delete(id);
+        // Loading screen functionality
+        function showLoadingScreen() {
+            const loadingTip = document.getElementById('loadingTip');
+            const loadingPercentage = document.getElementById('loadingPercentage');
+            const loadingProgressFill = document.getElementById('loadingProgressFill');
+            
+            let progress = 0;
+            const totalTime = 8000; // 8 seconds total loading time
+            const updateInterval = 100; // Update every 100ms
+            const tipChangeInterval = 1500; // Change tip every 1.5 seconds
+            
+            // Set initial tip
+            const randomTip = loadingTips[Math.floor(Math.random() * loadingTips.length)];
+            loadingTip.textContent = randomTip;
+            
+            // Progress bar animation
+            const progressInterval = setInterval(() => {
+                progress += (updateInterval / totalTime) * 100;
+                
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(progressInterval);
+                    
+                    // Complete loading
+                    setTimeout(() => {
+                        clearInterval(tipInterval);
+                        const loadingScreen = document.getElementById('loadingScreen');
+                        const gameContent = document.getElementById('gameContent');
+                        
+                        loadingScreen.style.opacity = '0';
+                        setTimeout(() => {
+                            loadingScreen.style.display = 'none';
+                            gameContent.style.display = 'block';
+                            
+                            // Initialize game after loading
+                            initializeGame();
+                        }, 500);
+                    }, 500);
                 }
-            });
-            updateMultiplier();
+                
+                // Update progress display
+                loadingPercentage.textContent = Math.floor(progress) + '%';
+                loadingProgressFill.style.width = progress + '%';
+            }, updateInterval);
+            
+            // Change tip periodically
+            const tipInterval = setInterval(() => {
+                const newTip = loadingTips[Math.floor(Math.random() * loadingTips.length)];
+                loadingTip.textContent = newTip;
+            }, tipChangeInterval);
+        }
+
+        // Initialize game function
+        function initializeGame() {
+            // Initialize display and shop
             updateDisplay();
-        }, 1000);
+            generateShop();
+
+            // Clean up expired effects periodically
+            setInterval(() => {
+                const now = Date.now();
+                activeEffects.forEach((effect, id) => {
+                    if (effect.type === 'multiplier' && now >= effect.endTime) {
+                        activeEffects.delete(id);
+                    }
+                });
+                updateMultiplier();
+                updateDisplay();
+            }, 1000);
+        }
+
+        // Start loading screen when page loads
+        showLoadingScreen();
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'994d3df6803676ae',t:'MTc2MTUxNjE4OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'994e1bfa2525f16e',t:'MTc2MTUyNTI4My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
